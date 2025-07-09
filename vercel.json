@@ -1,5 +1,6 @@
 {
-  "cron": [
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "crons": [
     {
       "path": "/api/youtube-refresh?distance=3km",
       "schedule": "0 3 * * *"
