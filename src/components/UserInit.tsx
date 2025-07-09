@@ -1,7 +1,7 @@
 'use client';
 import { useUserStore } from '@/stores/useUserStore';
 import { getPublicUserInfo } from '@/utils/supabase/user';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 const UserInit = () => {
   const { setNickname, setProfileImgUrl } = useUserStore();

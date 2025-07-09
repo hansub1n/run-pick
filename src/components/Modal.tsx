@@ -1,6 +1,5 @@
 'use client';
 import { useModalStore } from '@/stores/useModalStore';
-import { getScrollbarWidth } from '@/utils/getScrollbarWidth';
 import React, { useEffect } from 'react';
 import { IoCloseOutline } from 'react-icons/io5';
 

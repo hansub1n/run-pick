@@ -59,7 +59,7 @@ export const fetchVideosFromYoutube = async (distance: string) => {
 
   const videoIdsSet = new Set();
 
-  allItems.forEach((item: any) => {
+  allItems.forEach((item) => {
     if (item.id?.videoId) videoIdsSet.add(item.id.videoId);
   });
   const videoIds = Array.from(videoIdsSet).join(',');

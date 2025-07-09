@@ -1,7 +1,6 @@
 'use client';
 import { FaPersonRunning, FaStar } from 'react-icons/fa6';
 import Card from '../Card';
-import VideoCard from './VideoCard';
 import { useRouter } from 'next/navigation';
 import { Distance, Videos } from '@/types/videos.types';
 import { useVideoList } from '@/hooks/queries/useVideoList';
@@ -17,12 +16,6 @@ const VideoList = ({ distance }: VideoListProps) => {
 
   return (
     <>
-      {/* <VideoCard />
-      <VideoCard />
-      <VideoCard />
-      <VideoCard />
-      <VideoCard /> */}
-
       {videoList.map((video) => (
         <Card
           key={video.id}

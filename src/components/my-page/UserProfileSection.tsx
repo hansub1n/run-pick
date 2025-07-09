@@ -8,7 +8,7 @@ import EditProfile from '../modal/EditProfile';
 
 const UserProfileSection = () => {
   const { open } = useModalStore();
-  const { nickname, profileImgUrl, setNickname, setProfileImgUrl } = useUserStore();
+  const { nickname, profileImgUrl } = useUserStore();
 
   return (
     <>

@@ -1,5 +1,4 @@
 import { Level } from '@/types/challenges.types';
-import ChallengeCard from './ChallengeCard';
 import Card from '../Card';
 import { FaStamp } from 'react-icons/fa6';
 import { useChallengeList } from '@/hooks/queries/useChallengeList';

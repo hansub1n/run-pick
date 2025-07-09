@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from './queryKeys';
-import { Distance, Videos } from '@/types/videos.types';
+import { Distance } from '@/types/videos.types';
 
 const fetchVideosFromAPI = async (distance: Distance) => {
   const res = await fetch(`/api/videos?distance=${distance}`);
