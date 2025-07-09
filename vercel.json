@@ -1,0 +1,16 @@
+{
+  "cron": [
+    {
+      "path": "/api/youtube-refresh?distance=3km",
+      "schedule": "0 3 * * *"
+    },
+    {
+      "path": "/api/youtube-refresh?distance=5km",
+      "schedule": "0 3 * * *"
+    },
+    {
+      "path": "/api/youtube-refresh?distance=10km",
+      "schedule": "0 3 * * *"
+    }
+  ]
+}
