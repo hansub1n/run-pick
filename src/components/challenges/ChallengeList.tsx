@@ -15,7 +15,7 @@ const ChallengeList = ({ level }: ChallengeListProps) => {
         challenge.level === level ? (
           <Card
             key={challenge.id}
-            image={challenge.image_url}
+            imageUrl={challenge.image_url}
             title={challenge.title}
             subtitle={challenge.description}
             statIcons={[

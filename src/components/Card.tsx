@@ -1,4 +1,3 @@
-import { ThumbnailDetail } from '@/types/videos.types';
 import Image from 'next/image';
 
 type StatIcon = {
@@ -8,7 +7,7 @@ type StatIcon = {
 };
 
 type Cardprops = {
-  image: string | ThumbnailDetail;
+  imageUrl: string;
   title: string;
   subtitle?: string | (() => string);
   statIcons: StatIcon[];
@@ -16,7 +15,7 @@ type Cardprops = {
   children?: React.ReactNode;
 };
 
-const Card = ({ image, title, subtitle, statIcons, onClick, children }: Cardprops) => {
+const Card = ({ imageUrl, title, subtitle, statIcons, onClick, children }: Cardprops) => {
   return (
     <div
       className='cursor-pointer min-h-[100px] py-[17px] border-b border-[#D9D9D9] flex gap-[16px]'
@@ -24,7 +23,7 @@ const Card = ({ image, title, subtitle, statIcons, onClick, children }: Cardprop
     >
       <div className='relative min-w-[104px] min-h-[65px]'>
         <Image
-          src={typeof image === 'object' ? image.url : image}
+          src={imageUrl}
           alt={`${title} 이미지`}
           fill
           className='object-cover rounded-[10px]'

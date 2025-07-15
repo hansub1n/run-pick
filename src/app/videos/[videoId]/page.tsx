@@ -1,12 +1,25 @@
+'use client';
 import VideoActionButtons from '@/components/videos/[videoId]/VideoActionButtons';
 import VideoRelatedPosts from '@/components/videos/[videoId]/VideoRelatedPosts';
+import { useParams } from 'next/navigation';
 
 const VideoDetailPage = () => {
+  const { videoId } = useParams();
+
   return (
     <div className='w-[294px] pt-[23px] flex flex-col gap-[24px]'>
       <div>
-        <div className='w-full h-[155px] rounded-[10px] bg-[#D9D9D9]' />
-        <VideoActionButtons />
+        <iframe
+          width='100%'
+          height='165'
+          src={`https://www.youtube.com/embed/${videoId}`}
+          title='YouTube video player'
+          frameBorder='0'
+          allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+          allowFullScreen
+          className='rounded-[10px]'
+        />
+        <VideoActionButtons videoId={videoId} />
       </div>
       <VideoRelatedPosts />
     </div>

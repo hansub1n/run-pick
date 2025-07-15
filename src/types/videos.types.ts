@@ -1,8 +1,6 @@
 export type Distance = '3km' | '5km' | '10km';
 
-export type Videos = Video[];
-
-export type Video = {
+export type YoutubeVideo = {
   id: string;
   snippet: {
     channelId: string;
@@ -21,3 +19,13 @@ export type Video = {
 };
 
 export type ThumbnailDetail = { url: string; width: number; height: number };
+
+export type DBVideo = {
+  id: number;
+  youtube_video_id: string;
+  title: string;
+  thumbnail_url: string;
+  distance_category: number;
+  duration: string;
+  favorite_count: number;
+};
