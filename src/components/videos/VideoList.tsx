@@ -30,7 +30,7 @@ const VideoList = ({ distance }: VideoListProps) => {
           subtitle={() => formatVideoDuration(video.duration)}
           statIcons={[
             { icon: <FaStar />, label: video.favorite_count },
-            { icon: <FaPersonRunning />, label: 2580 },
+            { icon: <FaPersonRunning />, label: video.proof_count },
           ]}
           onClick={() => onClickHandler(video)}
         />

@@ -28,4 +28,5 @@ export type DBVideo = {
   distance_category: number;
   duration: string;
   favorite_count: number;
+  proof_count: number;
 };

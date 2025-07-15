@@ -6,23 +6,23 @@ export const upsertVideos = async (videos: YoutubeVideo[], distance: string) => 
   const distanceValue = convertDistanceToNumber(distance);
   const client = await createClient();
 
-  for (const video of videos) {
+  const videoUpsertPromises = videos.map(async (video) => {
     if (
       !video.id ||
       !video.snippet?.title ||
       !video.snippet?.thumbnails?.medium?.url ||
       !video.contentDetails?.duration
     ) {
-      console.warn('[업서트 스킵] 영상 데이터 누락:', {
+      console.warn('[upsert] 영상 데이터 누락:', {
         id: video.id,
         title: video.snippet?.title,
         thumbnails: video.snippet?.thumbnails,
         duration: video.contentDetails?.duration,
       });
-      continue;
+      return;
     }
 
-    await client.from('videos').upsert(
+    const { error } = await client.from('videos').upsert(
       {
         youtube_video_id: video.id,
         title: video.snippet.title,
@@ -33,5 +33,11 @@ export const upsertVideos = async (videos: YoutubeVideo[], distance: string) => 
       },
       { onConflict: 'youtube_video_id' },
     );
-  }
+
+    if (error) {
+      console.error('DB upsert error:', error);
+    }
+  });
+
+  await Promise.all(videoUpsertPromises);
 };
