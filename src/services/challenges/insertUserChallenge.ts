@@ -42,5 +42,6 @@ export const insertUserChallenge = async (challengeId: number) => {
     console.error('DB insert error:', error);
     return;
   }
-  // TODO: 주간 챌린지 성공적으로 등록되었습니다 토스트 추가
+
+  alert('챌린지가 성공적으로 등록되었습니다!');
 };
