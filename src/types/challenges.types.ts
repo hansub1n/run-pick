@@ -1,4 +1,5 @@
-export type Challenges = {
+export type Challenge = {
+  id: number;
   title: string;
   description: string;
   level: Level;
@@ -6,7 +7,9 @@ export type Challenges = {
   target: number;
   duration_days: number;
   image_url: string;
-}[];
+};
+
+export type Challenges = Challenge[];
 
 export type Level = '기본' | '도전' | '열정';
 

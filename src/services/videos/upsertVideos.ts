@@ -36,6 +36,7 @@ export const upsertVideos = async (videos: YoutubeVideo[], distance: string) => 
 
     if (error) {
       console.error('DB upsert error:', error);
+      return;
     }
   });
 

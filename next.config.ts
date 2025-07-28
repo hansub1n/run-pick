@@ -12,6 +12,11 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'img.youtube.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'yxidgnwdpxfizivnsqwy.supabase.co',
+        pathname: '/storage/v1/object/sign/challenge/**',
+      },
     ],
   },
 };
