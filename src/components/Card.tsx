@@ -38,9 +38,10 @@ const Card = ({ imageUrl, title, subtitle, statIcons, onClick, children }: Cardp
           {statIcons.map((statIcon, index) => (
             <h3
               key={`statIcon-${index}`}
+              onClick={statIcon.onClick}
               className='flex items-center gap-[2px]'
             >
-              <span onClick={statIcon.onClick}>{statIcon.icon}</span>
+              <span>{statIcon.icon}</span>
               <span>{statIcon.label}</span>
             </h3>
           ))}
