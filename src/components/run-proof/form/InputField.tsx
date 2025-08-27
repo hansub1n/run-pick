@@ -51,6 +51,18 @@ const InputField = ({ content, distance_km, duration, onChange }: InputFieldprop
             onChange={onChange}
             className='h-[45px] rounded-[10px] border px-[5px] w-[80px]'
           />
+          :
+          <input
+            type='number'
+            min={0}
+            max={59}
+            maxLength={2}
+            name='seconds'
+            value={duration.seconds}
+            placeholder='초'
+            onChange={onChange}
+            className='h-[45px] rounded-[10px] border px-[5px] w-[80px]'
+          />
         </div>
       </div>
       <div className='flex flex-col gap-[6px]'>

@@ -4,12 +4,13 @@ import { getPublicUserInfo } from '@/utils/supabase/user';
 import { useEffect } from 'react';
 
 const UserInit = () => {
-  const { setNickname, setProfileImgUrl } = useUserStore();
+  const { setId, setNickname, setProfileImgUrl } = useUserStore();
 
   useEffect(() => {
     const fetchUser = async () => {
       const userInfo = await getPublicUserInfo();
       if (!userInfo) return;
+      setId(userInfo.id);
       setNickname(userInfo.nickname);
       setProfileImgUrl(userInfo.profile_img_url);
     };

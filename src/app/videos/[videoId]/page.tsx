@@ -7,7 +7,7 @@ const VideoDetailPage = () => {
   const { videoId } = useParams();
 
   return (
-    <div className='w-[294px] pt-[23px] flex flex-col gap-[24px]'>
+    <div className='pt-[23px] flex flex-col gap-[24px]'>
       <div>
         <iframe
           width='100%'
@@ -21,7 +21,7 @@ const VideoDetailPage = () => {
         />
         <VideoActionButtons videoId={videoId} />
       </div>
-      <VideoRelatedPosts />
+      <VideoRelatedPosts videoId={videoId} />
     </div>
   );
 };

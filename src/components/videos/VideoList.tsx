@@ -15,6 +15,7 @@ const VideoList = ({ distance }: VideoListProps) => {
   const { setVideoDetail } = useVideoDetailStore();
   const router = useRouter();
   const videoList: DBVideo[] = useVideoList(distance) ?? [];
+
   const onClickHandler = (video: DBVideo) => {
     setVideoDetail(video);
     router.push(`/videos/${video.youtube_video_id}`);

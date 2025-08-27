@@ -4,6 +4,7 @@ import InputField from '@/components/run-proof/form/InputField';
 import PhotoUploadField from '@/components/run-proof/form/PhotoUploadField';
 import { insertRunProofForm } from '@/services/run-proof/insertRunProofForm';
 import { useVideoDetailStore } from '@/stores/useVideoDetailStore';
+import { useRouter } from 'next/navigation';
 import { useCallback, useState } from 'react';
 
 export type RunProofForm = {
@@ -17,17 +18,19 @@ export type RunProofForm = {
 export type Duration = {
   hours: number;
   minutes: number;
+  seconds: number;
 };
 
 export type Condition = '상쾌' | '무난' | '피곤' | '녹초';
 
 // TODO: 편집 시 초기 데이터 삽입
 const RunProofForm = () => {
+  const router = useRouter();
   const { videoDetail } = useVideoDetailStore();
   const initialForm: RunProofForm = {
     content: '',
     distance_km: 0,
-    duration: { hours: 0, minutes: 0 },
+    duration: { hours: 0, minutes: 0, seconds: 0 },
     image_url: '',
     condition: '상쾌',
   };
@@ -39,12 +42,15 @@ const RunProofForm = () => {
     console.log(runProofForm);
 
     insertRunProofForm({ videoDetail, runProofForm });
+
+    router.refresh();
+    router.push('/');
   };
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
-    if (name === 'hours' || name === 'minutes') {
+    if (name === 'hours' || name === 'minutes' || name === 'seconds') {
       setRunProofFrom((prev) => ({
         ...prev,
         duration: {
@@ -75,7 +81,6 @@ const RunProofForm = () => {
       <section className='flex flex-col gap-[13px]'>
         <PhotoUploadField
           videoDetail={videoDetail}
-          image_url={runProofForm.image_url}
           onChange={onChangeHandler}
         />
         <InputField
