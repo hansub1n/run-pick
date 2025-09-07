@@ -3,7 +3,6 @@ import { useActiveChallenge } from '@/hooks/queries/useActiveChallenge';
 import { useAuthStatus } from '@/hooks/queries/useAuthStatus';
 import { useUserStore } from '@/stores/useUserStore';
 import Link from 'next/link';
-import { useActionState, useEffect } from 'react';
 import { FaChevronRight } from 'react-icons/fa6';
 
 const MotivationSection = () => {
@@ -25,7 +24,7 @@ const MotivationSection = () => {
         <section>
           <div className='flex justify-between items-end'>
             <p className='text-[8px] text-[#4F4F4F] pb-[4px]'>
-              {completionRate}% 달성 ·
+              {completionRate}% 달성 ·{' '}
               {activeChallenge.challenges.type === 'distance'
                 ? `${activeChallenge.progress_km}km`
                 : `${activeChallenge.run_count}회`}

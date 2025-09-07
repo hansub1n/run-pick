@@ -4,21 +4,21 @@ import { FaStamp } from 'react-icons/fa6';
 import { useChallengeList } from '@/hooks/queries/useChallengeList';
 import { useModalStore } from '@/stores/useModalStore';
 import Modal from '../Modal';
-import ChallengeRegisterConfirm from '../modal/ChallengeRegisterConfirm';
 import { useState } from 'react';
+import ConfirmChallengeRegister from '../modal/ConfirmChallengeRegister';
 
 type ChallengeListProps = {
   level: Level;
 };
 
 const ChallengeList = ({ level }: ChallengeListProps) => {
-  const { open, close } = useModalStore();
+  const { activeModal, open, close } = useModalStore();
   const challengeList = useChallengeList(level);
   const [selectedChallenge, setSelectedChallenge] = useState<null | Challenge>(null);
 
   const onClickhandler = (challenge: Challenge) => {
     setSelectedChallenge(challenge);
-    open();
+    open('confirm-challenge-register');
   };
 
   const onClosehandler = () => {
@@ -36,16 +36,19 @@ const ChallengeList = ({ level }: ChallengeListProps) => {
             title={challenge.title}
             subtitle={challenge.description}
             statIcons={[{ icon: <FaStamp />, label: '도전하기', onClick: () => onClickhandler(challenge) }]}
+            isOpenModal={false}
           />
         ) : null,
       )}
 
       {selectedChallenge && (
-        <Modal>
-          <ChallengeRegisterConfirm
-            selectedChallenge={selectedChallenge}
-            onClick={onClosehandler}
-          />
+        <Modal id={'confirm-challenge-register'}>
+          {activeModal === 'confirm-challenge-register' && (
+            <ConfirmChallengeRegister
+              selectedChallenge={selectedChallenge}
+              onClick={onClosehandler}
+            />
+          )}
         </Modal>
       )}
     </div>

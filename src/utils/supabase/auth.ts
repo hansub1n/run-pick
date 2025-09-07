@@ -34,6 +34,5 @@ export const handleSignOut = async (router: AppRouterInstance) => {
   const { error } = await client.auth.signOut();
   if (error) return console.error('Signout failed: ', error);
 
-  router.refresh();
-  router.push('/');
+  router.replace('/');
 };

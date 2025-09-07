@@ -7,7 +7,7 @@ import Modal from '../Modal';
 import EditProfile from '../modal/EditProfile';
 
 const UserProfileSection = () => {
-  const { open } = useModalStore();
+  const { activeModal, open } = useModalStore();
   const { nickname, profileImgUrl } = useUserStore();
 
   return (
@@ -23,15 +23,13 @@ const UserProfileSection = () => {
         </div>
         <h1 className='text-[20px] mb-[4px]'>{nickname}</h1>
         <button
-          onClick={open}
+          onClick={() => open('edit-profile')}
           className='text-[12px] text-[#A4A2A2] px-[9px] border border-[#A4A2A2] rounded-[10px]'
         >
           프로필 수정
         </button>
       </section>
-      <Modal>
-        <EditProfile />
-      </Modal>
+      <Modal id={'edit-profile'}>{activeModal === 'edit-profile' && <EditProfile />}</Modal>
     </>
   );
 };

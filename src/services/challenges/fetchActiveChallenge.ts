@@ -1,4 +1,5 @@
 import { createClient } from '@/utils/supabase/client';
+import { updateUserChallenge } from './updateUserChallenge';
 
 export const fetchActiveChallenge = async (userId: string) => {
   const client = createClient();
@@ -8,10 +9,18 @@ export const fetchActiveChallenge = async (userId: string) => {
     .select('*, challenges(*)')
     .eq('user_id', userId)
     .eq('status', 'in_progress')
-    .single();
+    .maybeSingle();
 
-  if (error) {
+  if (error || !data) {
     console.error('Failed to fetch user_challenge: ', error);
+    return;
+  }
+
+  if (data.end_date) {
+    const today = new Date();
+    const isExpired = today > new Date(data.end_date);
+    if (isExpired) {
+    }
   }
 
   return data;

@@ -6,14 +6,14 @@ import { useModalStore } from '@/stores/useModalStore';
 import TopRunners from '../modal/TopRunners';
 
 const TopRunnersSection = () => {
-  const { open } = useModalStore();
+  const { activeModal, open } = useModalStore();
   return (
     <>
       <section>
         <div>
           <h1 className='flex items-center'>
             <button
-              onClick={open}
+              onClick={() => open('top-runners')}
               className='cursor-pointer flex items-center gap-[2px]'
             >
               이달의 러너 TOP 3
@@ -56,9 +56,7 @@ const TopRunnersSection = () => {
           </section>
         </div>
       </section>
-      <Modal>
-        <TopRunners />
-      </Modal>
+      <Modal id={'top-runners'}>{activeModal === 'top-runners' && <TopRunners />}</Modal>
     </>
   );
 };

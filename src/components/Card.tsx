@@ -13,15 +13,16 @@ type Cardprops = {
   statIcons: StatIcon[];
   onClick?: () => void;
   children?: React.ReactNode;
+  isOpenModal: boolean;
 };
 
-const Card = ({ imageUrl, title, subtitle, statIcons, onClick, children }: Cardprops) => {
+const Card = ({ imageUrl, title, subtitle, statIcons, onClick, children, isOpenModal }: Cardprops) => {
   return (
     <div
       className='cursor-pointer min-h-[100px] py-[17px] border-b border-[#D9D9D9] flex gap-[16px]'
       onClick={onClick}
     >
-      <div className='relative min-w-[104px] min-h-[65px]'>
+      <div className={`relative min-h-[65px] ${isOpenModal ? 'min-w-[84px]' : 'min-w-[104px]'}`}>
         <Image
           src={imageUrl}
           alt={`${title} 이미지`}

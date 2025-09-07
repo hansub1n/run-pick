@@ -4,12 +4,12 @@ import { useModalStore } from '@/stores/useModalStore';
 import { Challenge } from '@/types/challenges.types';
 import { useRouter } from 'next/navigation';
 
-type ChallengeRegisterConfirmProps = {
+type ConfirmChallengeRegisterProps = {
   selectedChallenge: null | Challenge;
   onClick: () => void;
 };
 
-const ChallengeRegisterConfirm = ({ selectedChallenge, onClick }: ChallengeRegisterConfirmProps) => {
+const ConfirmChallengeRegister = ({ selectedChallenge, onClick }: ConfirmChallengeRegisterProps) => {
   const { close } = useModalStore();
   const { isSignedIn } = useAuthStatus();
   const router = useRouter();
@@ -23,6 +23,7 @@ const ChallengeRegisterConfirm = ({ selectedChallenge, onClick }: ChallengeRegis
 
   const onClickHandler = (challengeId: number) => {
     insertUserChallenge(challengeId);
+    router.replace('/');
     close();
   };
 
@@ -49,4 +50,4 @@ const ChallengeRegisterConfirm = ({ selectedChallenge, onClick }: ChallengeRegis
   );
 };
 
-export default ChallengeRegisterConfirm;
+export default ConfirmChallengeRegister;

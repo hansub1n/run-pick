@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from './queryKeys';
-import { fetchActiveChallenge } from '@/services/home/fetchActiveChallenge';
+import { checkAndUpdateChallengeStatus } from '@/services/challenges/checkAndUpdateChallengeStatus';
 
 export const useActiveChallenge = (userId: string) => {
   const { data: activeChallenge } = useQuery({
     queryKey: QUERY_KEYS.activeChallenge(userId),
-    queryFn: () => fetchActiveChallenge(userId),
+    queryFn: () => checkAndUpdateChallengeStatus(userId),
     staleTime: 1000 * 60 * 5,
     enabled: !!userId,
   });
@@ -17,9 +17,9 @@ export const useActiveChallenge = (userId: string) => {
     const target = activeChallenge.challenges.target;
 
     if (type === 'distance') {
-      completionRate = (activeChallenge.progress_km / target) * 100;
+      completionRate = Math.floor((activeChallenge.progress_km / target) * 100);
     } else if (type === 'count') {
-      completionRate = (activeChallenge.run_count / target) * 100;
+      completionRate = Math.floor((activeChallenge.run_count / target) * 100);
     }
 
     if (completionRate !== null) {

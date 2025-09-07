@@ -1,8 +1,12 @@
+'use client';
+import { useTopVideoList } from '@/hooks/queries/useTopVideoList';
+import Image from 'next/image';
 import Link from 'next/link';
 import { FaChevronRight, FaMedal } from 'react-icons/fa6';
 
 const TopVideosSection = () => {
-  //
+  const { topVideoList } = useTopVideoList();
+
   return (
     <section>
       <div>
@@ -18,27 +22,25 @@ const TopVideosSection = () => {
         <p className='text-[7px] text-[#787878]'>5분만 뛰어도 러너는 러너지. 이번 달도 같이 가요!</p>
       </div>
       <section className='flex gap-[7px] pt-[8px]'>
-        <div className='flex flex-col items-center'>
-          <div className='w-[100px] h-[65px] rounded-[5px] bg-[#B5B5B5]' />
-          <h3 className='flex items-center text-[10px] gap-[3px]'>
-            <FaMedal />
-            1004
-          </h3>
-        </div>
-        <div className='flex flex-col items-center'>
-          <div className='w-[100px] h-[65px] rounded-[5px] bg-[#B5B5B5]' />
-          <h3 className='flex items-center text-[10px] gap-[3px]'>
-            <FaMedal />
-            1004
-          </h3>
-        </div>
-        <div className='flex flex-col items-center'>
-          <div className='w-[100px] h-[65px] rounded-[5px] bg-[#B5B5B5]' />
-          <h3 className='flex items-center text-[10px] gap-[3px]'>
-            <FaMedal />
-            1004
-          </h3>
-        </div>
+        {topVideoList?.map((topVideo) => (
+          <div
+            key={topVideo.id}
+            className='flex flex-col items-center'
+          >
+            <div className='relative min-w-[100px] min-h-[65px]'>
+              <Image
+                src={topVideo.thumbnail_url}
+                alt={`${topVideo.title} 이미지`}
+                fill
+                className='object-cover rounded-[10px]'
+              />
+            </div>
+            <h3 className='flex items-center text-[10px] gap-[3px]'>
+              <FaMedal />
+              {topVideo.proof_count}
+            </h3>
+          </div>
+        ))}
       </section>
     </section>
   );

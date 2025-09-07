@@ -17,6 +17,10 @@ const nextConfig: NextConfig = {
         hostname: 'yxidgnwdpxfizivnsqwy.supabase.co',
         pathname: '/storage/v1/object/sign/challenge/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'i.ytimg.com',
+      },
     ],
   },
 };

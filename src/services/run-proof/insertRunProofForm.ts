@@ -4,6 +4,7 @@ import { RunProofForm } from '@/components/run-proof/RunProofForm';
 import { DBVideo } from '@/types/videos.types';
 import { createClient } from '@/utils/supabase/client';
 import { getPublicUserInfo } from '@/utils/supabase/user';
+import { updateUserChallenge } from '../challenges/updateUserChallenge';
 
 type insertRunProofFormProps = {
   videoDetail: DBVideo | null;
@@ -11,10 +12,8 @@ type insertRunProofFormProps = {
 };
 
 export const insertRunProofForm = async ({ videoDetail, runProofForm }: insertRunProofFormProps) => {
-  console.log(videoDetail, runProofForm);
   const client = createClient();
   const userInfo = await getPublicUserInfo();
-  console.log(userInfo);
 
   const { error } = await client.from('running_proof_posts').insert({
     youtube_video_id: videoDetail?.youtube_video_id,
@@ -24,6 +23,7 @@ export const insertRunProofForm = async ({ videoDetail, runProofForm }: insertRu
     duration: runProofForm.duration,
     run_date: new Date(),
     image_url: runProofForm.image_url,
+    condition: runProofForm.condition,
   });
 
   if (error) {
@@ -31,5 +31,6 @@ export const insertRunProofForm = async ({ videoDetail, runProofForm }: insertRu
     return;
   }
 
+  await updateUserChallenge(userInfo.id, runProofForm.distance_km);
   alert('인증글이 성공적으로 등록되었습니다!');
 };

@@ -26,7 +26,7 @@ const VideoList = ({ distance }: VideoListProps) => {
       {videoList.map((video) => (
         <Card
           key={video.id}
-          imageUrl={`https://img.youtube.com/vi/${video.youtube_video_id}/0.jpg`} // TODO: tumbnail_url로 바꿀 것
+          imageUrl={video.thumbnail_url}
           title={video.title}
           subtitle={() => formatVideoDuration(video.duration)}
           statIcons={[
@@ -34,6 +34,7 @@ const VideoList = ({ distance }: VideoListProps) => {
             { icon: <FaPersonRunning />, label: video.proof_count },
           ]}
           onClick={() => onClickHandler(video)}
+          isOpenModal={false}
         />
       ))}
     </>

@@ -22,6 +22,7 @@ const RelatedPostList = ({ videoId }: RelatedPostListsProps) => {
           title={realatedPost.content}
           subtitle={`${realatedPost.duration.hours}시간 ${realatedPost.duration.minutes}분 ${realatedPost.duration.seconds}초`}
           statIcons={[{ icon: <BiSolidLike />, label: 0 }]}
+          isOpenModal={false}
         />
       ))}
     </>

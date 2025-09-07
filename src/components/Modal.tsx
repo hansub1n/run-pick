@@ -5,24 +5,27 @@ import { IoCloseOutline } from 'react-icons/io5';
 
 type ModalProps = {
   children: React.ReactNode;
+  id: string;
 };
-const Modal = ({ children }: ModalProps) => {
-  const { isOpen, close } = useModalStore();
+const Modal = ({ children, id }: ModalProps) => {
+  const { activeModal, close } = useModalStore();
 
   useEffect(() => {
     // TODO: 데스크탑에서 모달 오픈했을 시 스크롤바 너비 생각해야 됨
-    if (isOpen) {
+    if (activeModal) {
       document.body.style.overflow = 'hidden';
       document.body.style.paddingRight = '';
     } else {
       document.body.style.overflow = '';
       document.body.style.paddingRight = '';
     }
-  }, [isOpen]);
+  }, [activeModal]);
+
+  console.log(activeModal);
 
   return (
     <>
-      {isOpen && (
+      {activeModal === id && (
         <>
           <div
             onClick={close}
