@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 
 type StatIcon = {
   icon: React.ReactNode;
@@ -7,8 +7,8 @@ type StatIcon = {
 };
 
 type Cardprops = {
-  imageUrl: string;
-  title: string;
+  imageUrl: string | StaticImageData;
+  title: string | undefined;
   subtitle?: string | (() => string);
   statIcons: StatIcon[];
   onClick?: () => void;

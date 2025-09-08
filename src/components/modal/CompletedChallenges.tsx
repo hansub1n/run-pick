@@ -1,4 +1,5 @@
 import { UserChallenge } from '@/types/userChallenge.type';
+import DefaultChallengeImg from '/public/assets/images/default-challenge-img.webp';
 import Card from '../Card';
 
 type CompletedChallengesProps = {
@@ -12,7 +13,7 @@ const CompletedChallenges = ({ userChallengeList }: CompletedChallengesProps) =>
       {userChallengeList.map((userChallenge) => (
         <Card
           key={userChallenge.id}
-          imageUrl={userChallenge.challenges.image_url}
+          imageUrl={userChallenge.challenges.image_url || DefaultChallengeImg}
           title={userChallenge.challenges.title}
           subtitle={userChallenge.challenges.description}
           statIcons={[]}

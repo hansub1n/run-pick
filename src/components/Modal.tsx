@@ -21,8 +21,6 @@ const Modal = ({ children, id }: ModalProps) => {
     }
   }, [activeModal]);
 
-  console.log(activeModal);
-
   return (
     <>
       {activeModal === id && (

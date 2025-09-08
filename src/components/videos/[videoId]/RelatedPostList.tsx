@@ -11,8 +11,6 @@ type RelatedPostListsProps = {
 const RelatedPostList = ({ videoId }: RelatedPostListsProps) => {
   const realatedPostList = useRelatedPostList(videoId);
 
-  console.log(realatedPostList);
-
   return (
     <>
       {realatedPostList.map((realatedPost) => (

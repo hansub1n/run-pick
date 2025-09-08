@@ -8,6 +8,7 @@ import { FaChevronRight } from 'react-icons/fa6';
 import Modal from '../Modal';
 import CompletedChallenges from '../modal/CompletedChallenges';
 import { UserChallenge } from '@/types/userChallenge.type';
+import DefaultChallengeImg from '/public/assets/images/default-challenge-img.webp';
 
 const CompltedChallengesSection = () => {
   const { activeModal, open } = useModalStore();
@@ -39,7 +40,7 @@ const CompltedChallengesSection = () => {
               >
                 <div className='relative w-[100px] h-[65px] rounded-[5px]'>
                   <Image
-                    src={userChallenge.challenges.image_url}
+                    src={userChallenge.challenges.image_url || DefaultChallengeImg}
                     alt={`${userChallenge.challenges.title} 이미지`}
                     fill
                     className='object-cover'

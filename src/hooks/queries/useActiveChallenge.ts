@@ -12,6 +12,10 @@ export const useActiveChallenge = (userId: string) => {
 
   let completionRate: number | null = null;
 
+  if (Array.isArray(activeChallenge?.challenges)) {
+    activeChallenge.challenges = activeChallenge.challenges[0];
+  }
+
   if (activeChallenge?.challenges) {
     const type = activeChallenge.challenges.type;
     const target = activeChallenge.challenges.target;

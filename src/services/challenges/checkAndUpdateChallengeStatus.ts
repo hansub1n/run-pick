@@ -1,4 +1,4 @@
-import { Challenge, UserChallenge } from '@/types/userChallenge.type';
+import { UserChallenge } from '@/types/userChallenge.type';
 import { createClient } from '@/utils/supabase/client';
 
 export const checkAndUpdateChallengeStatus = async (userId: string) => {
@@ -9,20 +9,23 @@ export const checkAndUpdateChallengeStatus = async (userId: string) => {
     .select(`id, status, end_date, completed_at, challenges(id, type, target), progress_km, run_count`)
     .eq('user_id', userId)
     .eq('status', 'in_progress')
-    .maybeSingle();
+    .maybeSingle<UserChallenge>();
 
   if (fetchError || !data) {
     console.error('Failed to fetch user_challenges: ', fetchError);
     return null;
   }
 
-  const challenge = data.challenges as Challenge;
+  if (Array.isArray(data.challenges)) {
+    data.challenges = data.challenges[0];
+  }
+
   const today = new Date();
   const endDate = new Date(data.end_date);
   const isExpired = today >= endDate;
 
-  const isDistance = challenge.type === 'distance';
-  const target = challenge.target;
+  const isDistance = data.challenges.type === 'distance';
+  const target = data.challenges.target;
 
   const achieved = isDistance ? data.progress_km >= target : data.run_count >= target;
 

@@ -5,7 +5,7 @@ type CondtionButtonsProps = {
   selected: Condition;
   onSelect: (condition: Condition) => void;
 };
-const ConditionButtons = React.memo(({ selected, onSelect }: CondtionButtonsProps) => {
+export const ConditionButtons = React.memo(({ selected, onSelect }: CondtionButtonsProps) => {
   const conditions = [
     {
       id: 0,
@@ -52,4 +52,5 @@ const ConditionButtons = React.memo(({ selected, onSelect }: CondtionButtonsProp
   );
 });
 
+ConditionButtons.displayName = 'ConditionButtons';
 export default ConditionButtons;

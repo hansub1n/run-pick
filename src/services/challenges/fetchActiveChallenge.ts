@@ -1,5 +1,4 @@
 import { createClient } from '@/utils/supabase/client';
-import { updateUserChallenge } from './updateUserChallenge';
 
 export const fetchActiveChallenge = async (userId: string) => {
   const client = createClient();

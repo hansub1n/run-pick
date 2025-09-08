@@ -10,6 +10,10 @@ const MotivationSection = () => {
   const { id, nickname } = useUserStore();
   const { activeChallenge, completionRate } = useActiveChallenge(id);
 
+  if (Array.isArray(activeChallenge?.challenges)) {
+    activeChallenge.challenges = activeChallenge.challenges[0];
+  }
+
   return (
     <div className='h-[135px] px-[17px] py-[15px] rounded-[10px] bg-[#D9D9D9] font-semibold flex flex-col justify-between'>
       <div className='flex flex-col'>

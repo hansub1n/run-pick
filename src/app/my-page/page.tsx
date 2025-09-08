@@ -1,10 +1,8 @@
-import Modal from '@/components/Modal';
 import CompltedChallengesSection from '@/components/my-page/CompltedChallengesSection';
 import FavoriteVideosSection from '@/components/my-page/FavoriteVideosSection';
 import MonthlyStatsSection from '@/components/my-page/MonthlyStatsSection';
 import MyPostsSection from '@/components/my-page/MyPostsSection';
 import UserProfileSection from '@/components/my-page/UserProfileSection';
-import { useModalStore } from '@/stores/useModalStore';
 
 const MyPage = () => {
   return (

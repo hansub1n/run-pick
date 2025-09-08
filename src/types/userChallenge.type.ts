@@ -6,7 +6,7 @@ export type UserChallenge = {
   status: Status;
   progress_km: number;
   run_count: number;
-  completed_at: null | string;
+  completed_at: null | string | Date;
   challenges: Challenge;
 };
 
@@ -16,7 +16,7 @@ export type Challenge = {
   id: number;
   type: ChallengeType;
   target: number;
-  title: string;
-  image_url: string;
-  description: string;
+  title?: string;
+  image_url?: string;
+  description?: string;
 };
