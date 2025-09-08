@@ -62,6 +62,5 @@ export const checkAndUpdateChallengeStatus = async (userId: string) => {
     return updatedData;
   }
 
-  console.log(data);
   return data as UserChallenge;
 };

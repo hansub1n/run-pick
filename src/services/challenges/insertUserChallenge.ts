@@ -7,7 +7,6 @@ export const insertUserChallenge = async (challengeId: number) => {
   const { startDate, endDate } = getStartAndEndDate();
   const client = createClient();
   const userInfo = await getPublicUserInfo();
-  console.log(userInfo);
 
   const { data, error: fetchError } = await client
     .from('user_challenges')
