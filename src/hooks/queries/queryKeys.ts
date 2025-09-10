@@ -10,4 +10,5 @@ export const QUERY_KEYS = {
   activeChallenge: (userId: string) => ['activeChallenge', userId],
   topVideos: () => ['topVideos'],
   userChallenges: (userId: string) => ['userChallenges', userId],
+  userRelatedPosts: (userId: string) => ['userRelatedPosts', userId],
 };

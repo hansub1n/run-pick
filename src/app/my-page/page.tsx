@@ -1,3 +1,4 @@
+'use client';
 import CompltedChallengesSection from '@/components/my-page/CompltedChallengesSection';
 import FavoriteVideosSection from '@/components/my-page/FavoriteVideosSection';
 import MonthlyStatsSection from '@/components/my-page/MonthlyStatsSection';

@@ -1,5 +1,5 @@
+import { Condition } from '@/types/runProofForm.types';
 import React from 'react';
-import { Condition } from '../RunProofForm';
 
 type CondtionButtonsProps = {
   selected: Condition;

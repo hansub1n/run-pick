@@ -12,22 +12,7 @@ import { useModalStore } from '@/stores/useModalStore';
 import { useQueryClient } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/hooks/queries/queryKeys';
 import { useUserStore } from '@/stores/useUserStore';
-
-export type RunProofForm = {
-  content: string;
-  distance_km: number;
-  duration: Duration;
-  image_url: string;
-  condition: Condition;
-};
-
-export type Duration = {
-  hours: number;
-  minutes: number;
-  seconds: number;
-};
-
-export type Condition = '상쾌' | '무난' | '피곤' | '녹초';
+import { Condition, RunProofFormType } from '@/types/runProofForm.types';
 
 // TODO: 편집 시 초기 데이터 삽입
 const RunProofForm = () => {
@@ -37,7 +22,7 @@ const RunProofForm = () => {
   const router = useRouter();
   const { videoDetail } = useVideoDetailStore();
 
-  const initialForm: RunProofForm = {
+  const initialForm: RunProofFormType = {
     content: '',
     distance_km: 0,
     duration: { hours: 0, minutes: 0, seconds: 0 },
@@ -45,7 +30,7 @@ const RunProofForm = () => {
     condition: '상쾌',
   };
 
-  const [runProofForm, setRunProofFrom] = useState<RunProofForm>(initialForm);
+  const [runProofForm, setRunProofFrom] = useState<RunProofFormType>(initialForm);
 
   const onConfirmHandler = async () => {
     await insertRunProofForm({ videoDetail, runProofForm });

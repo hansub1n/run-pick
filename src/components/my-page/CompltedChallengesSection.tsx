@@ -18,16 +18,14 @@ const CompltedChallengesSection = () => {
   return (
     <>
       <section>
-        <div>
-          <h1 className='flex items-center font-[19px]'>
-            <button
-              onClick={() => open('completed-challenges')}
-              className='cursor-pointer flex items-center gap-[2px]'
-            >
-              완료한 챌린지
-              <FaChevronRight />
-            </button>
-          </h1>
+        <div className='flex items-center gap-[2px]'>
+          <h1 className='font-[19px]'>완료한 챌린지</h1>
+          <button
+            onClick={() => open('completed-challenges')}
+            className='cursor-pointer'
+          >
+            <FaChevronRight />
+          </button>
         </div>
         <section className='flex gap-[7px] pt-[8px]'>
           {!userChallengeList ? (
