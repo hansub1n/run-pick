@@ -25,7 +25,7 @@ export const handleKakaoSignIn = async () => {
       },
     });
   } catch (error) {
-    console.error('Google login failed: ', error);
+    console.error('Kakao login failed: ', error);
   }
 };
 

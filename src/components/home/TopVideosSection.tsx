@@ -1,12 +1,23 @@
 'use client';
 import { useTopVideoList } from '@/hooks/queries/useTopVideoList';
+import { useVideoDetailStore } from '@/stores/useVideoDetailStore';
+import { DBVideo } from '@/types/videos.types';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { FaChevronRight, FaMedal } from 'react-icons/fa6';
 
 const TopVideosSection = () => {
   const { topVideoList } = useTopVideoList();
+  const { setVideoDetail } = useVideoDetailStore();
+  const router = useRouter();
 
+  const onClickHandler = (video: DBVideo) => {
+    setVideoDetail(video);
+    router.push(`/videos/${video.youtube_video_id}`);
+  };
+
+  console.log(topVideoList);
   return (
     <section>
       <div>
@@ -27,7 +38,10 @@ const TopVideosSection = () => {
             key={topVideo.id}
             className='flex flex-col items-center'
           >
-            <div className='relative min-w-[100px] min-h-[65px]'>
+            <div
+              className='relative min-w-[100px] min-h-[65px]'
+              onClick={() => onClickHandler(topVideo)}
+            >
               <Image
                 src={topVideo.thumbnail_url}
                 alt={`${topVideo.title} 이미지`}
