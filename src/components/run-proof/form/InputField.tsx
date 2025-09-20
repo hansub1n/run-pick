@@ -1,4 +1,4 @@
-import { Duration } from '../RunProofForm';
+import { Duration } from '@/types/runProofForm.types';
 
 type InputFieldprops = {
   content: string;

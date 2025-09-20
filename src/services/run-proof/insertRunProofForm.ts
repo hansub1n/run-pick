@@ -1,14 +1,14 @@
 'use client';
 
-import { RunProofForm } from '@/components/run-proof/RunProofForm';
 import { DBVideo } from '@/types/videos.types';
 import { createClient } from '@/utils/supabase/client';
 import { getPublicUserInfo } from '@/utils/supabase/user';
 import { updateUserChallenge } from '../challenges/updateUserChallenge';
+import { RunProofFormType } from '@/types/runProofForm.types';
 
 type insertRunProofFormProps = {
   videoDetail: DBVideo | null;
-  runProofForm: RunProofForm;
+  runProofForm: RunProofFormType;
 };
 
 export const insertRunProofForm = async ({ videoDetail, runProofForm }: insertRunProofFormProps) => {
