@@ -12,7 +12,6 @@ const MyPostsSection = () => {
   const { id } = useUserStore();
   const userRelatedPostList = useUserRelatedPostList(id);
 
-  console.log(userRelatedPostList);
   return (
     <>
       <section>

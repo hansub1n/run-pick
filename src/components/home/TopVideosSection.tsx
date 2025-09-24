@@ -17,7 +17,6 @@ const TopVideosSection = () => {
     router.push(`/videos/${video.youtube_video_id}`);
   };
 
-  console.log(topVideoList);
   return (
     <section>
       <div>
