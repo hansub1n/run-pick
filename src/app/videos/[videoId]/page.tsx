@@ -4,7 +4,9 @@ import VideoRelatedPosts from '@/components/videos/[videoId]/VideoRelatedPosts';
 import { useParams } from 'next/navigation';
 
 const VideoDetailPage = () => {
-  const { videoId } = useParams();
+  const params = useParams();
+
+  if (!params?.videoId) return null;
 
   return (
     <div className='pt-[23px] flex flex-col gap-[24px]'>
@@ -12,16 +14,16 @@ const VideoDetailPage = () => {
         <iframe
           width='100%'
           height='165'
-          src={`https://www.youtube.com/embed/${videoId}`}
+          src={`https://www.youtube.com/embed/${params.videoId}`}
           title='YouTube video player'
           frameBorder='0'
           allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
           allowFullScreen
           className='rounded-[10px]'
         />
-        <VideoActionButtons videoId={videoId} />
+        <VideoActionButtons videoId={params.videoId} />
       </div>
-      <VideoRelatedPosts videoId={videoId} />
+      <VideoRelatedPosts videoId={params.videoId} />
     </div>
   );
 };
