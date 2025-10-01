@@ -10,7 +10,7 @@ export const generateCalendarWeeks = (year: number, month: number) => {
 
   const weeks = [];
   let currentWeek = [];
-  let currentDate = new Date(startDate);
+  const currentDate = new Date(startDate);
 
   while (currentDate <= endDate) {
     currentWeek.push(new Date(currentDate));

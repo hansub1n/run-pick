@@ -7,7 +7,7 @@ import { useCalendar } from '@/hooks/useCalendar';
 const MonthlyStatsSection = () => {
   const { id } = useUserStore();
   const { totalDistance, totalRuns, posts } = useMonthlyStats(id);
-  const { year, month, weeks, goToPrevMonth, goToNextMonth, setCurrentDate } = useCalendar();
+  const { year, month, weeks } = useCalendar();
   console.log(weeks);
 
   const formattedMonth = String(month).padStart(2, '0');
