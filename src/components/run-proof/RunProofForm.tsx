@@ -35,9 +35,10 @@ const RunProofForm = () => {
   const onConfirmHandler = async () => {
     await insertRunProofForm({ videoDetail, runProofForm });
 
-    await queryClient.invalidateQueries({
-      queryKey: QUERY_KEYS.activeChallenge(id),
-    });
+    await queryClient.invalidateQueries({ queryKey: QUERY_KEYS.activeChallenge(id) });
+    await queryClient.invalidateQueries({ queryKey: QUERY_KEYS.userChallenges(id) });
+    await queryClient.invalidateQueries({ queryKey: QUERY_KEYS.userRelatedPosts(id) });
+    await queryClient.invalidateQueries({ queryKey: QUERY_KEYS.MonthlyStats(id) });
 
     router.replace('/');
     close();

@@ -1,15 +1,26 @@
 import { useMonthlyStats } from '@/hooks/queries/useMonthlyRunStats';
 import StatCard from './StatCard';
 import { useUserStore } from '@/stores/useUserStore';
+import CalendarGrid from './CalendarGrid';
+import { useCalendar } from '@/hooks/useCalendar';
 
 const MonthlyStatsSection = () => {
   const { id } = useUserStore();
-  const { totalDistance, totalRuns } = useMonthlyStats(id);
+  const { totalDistance, totalRuns, posts } = useMonthlyStats(id);
+  const { year, month, weeks, goToPrevMonth, goToNextMonth, setCurrentDate } = useCalendar();
+  console.log(weeks);
+
+  const formattedMonth = String(month).padStart(2, '0');
   return (
     <section>
       <section className='flex flex-col items-center mb-[6px]'>
-        <h1 className='font-semibold mb-[17px]'>2025년 05월</h1>
-        <div className='w-[313px] h-[181px] rounded-[10px] bg-[#D9D9D9]' />
+        <h1 className='font-semibold mb-[17px]'>
+          {year}년 {formattedMonth}월
+        </h1>
+        <CalendarGrid
+          weeks={weeks}
+          posts={posts}
+        />
       </section>
       <section className='font-semibold flex items-center justify-around text-center mb-[27px]'>
         <StatCard
