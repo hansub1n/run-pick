@@ -1,17 +1,15 @@
 'use client';
 import { getStartAndEndDate } from '@/utils/getStartAndEndDate';
 import { createClient } from '@/utils/supabase/client';
-import { getPublicUserInfo } from '@/utils/supabase/user';
 
-export const insertUserChallenge = async (challengeId: number) => {
+export const insertUserChallenge = async (userId: string, challengeId: number) => {
   const { startDate, endDate } = getStartAndEndDate();
   const client = createClient();
-  const userInfo = await getPublicUserInfo();
 
   const { data, error: fetchError } = await client
     .from('user_challenges')
     .select('id, end_date')
-    .eq('user_id', userInfo.id)
+    .eq('user_id', userId)
     .eq('status', 'in_progress')
     .maybeSingle();
 
@@ -29,7 +27,7 @@ export const insertUserChallenge = async (challengeId: number) => {
 
   const { error } = await client.from('user_challenges').insert({
     challenge_id: challengeId,
-    user_id: userInfo.id,
+    user_id: userId,
     start_date: startDate,
     end_date: endDate,
     status: 'in_progress',

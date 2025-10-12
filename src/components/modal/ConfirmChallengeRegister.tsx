@@ -1,7 +1,10 @@
+import { QUERY_KEYS } from '@/hooks/queries/queryKeys';
 import { useAuthStatus } from '@/hooks/queries/useAuthStatus';
 import { insertUserChallenge } from '@/services/challenges/insertUserChallenge';
 import { useModalStore } from '@/stores/useModalStore';
+import { useUserStore } from '@/stores/useUserStore';
 import { Challenge } from '@/types/challenges.types';
+import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 
 type ConfirmChallengeRegisterProps = {
@@ -10,9 +13,11 @@ type ConfirmChallengeRegisterProps = {
 };
 
 const ConfirmChallengeRegister = ({ selectedChallenge, onClick }: ConfirmChallengeRegisterProps) => {
+  const { id } = useUserStore();
   const { close } = useModalStore();
   const { isSignedIn } = useAuthStatus();
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   if (!isSignedIn) {
     router.replace('/login');
@@ -21,8 +26,9 @@ const ConfirmChallengeRegister = ({ selectedChallenge, onClick }: ConfirmChallen
 
   if (!selectedChallenge) return;
 
-  const onClickHandler = (challengeId: number) => {
-    insertUserChallenge(challengeId);
+  const onClickHandler = async (userId: string, challengeId: number) => {
+    await insertUserChallenge(userId, challengeId);
+    await queryClient.invalidateQueries({ queryKey: QUERY_KEYS.activeChallenge(userId) });
     router.replace('/');
     close();
   };
@@ -40,7 +46,7 @@ const ConfirmChallengeRegister = ({ selectedChallenge, onClick }: ConfirmChallen
           취소
         </button>
         <button
-          onClick={() => onClickHandler(selectedChallenge.id)}
+          onClick={() => onClickHandler(id, selectedChallenge.id)}
           className='px-[35px] py-[7px] bg-[#AFAFAF] rounded-[10px]'
         >
           등록
