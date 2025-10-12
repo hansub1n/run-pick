@@ -8,13 +8,12 @@ const MonthlyStatsSection = () => {
   const { id } = useUserStore();
   const { totalDistance, totalRuns, posts } = useMonthlyStats(id);
   const { year, month, weeks } = useCalendar();
-  console.log(weeks);
 
   const formattedMonth = String(month).padStart(2, '0');
   return (
     <section>
-      <section className='flex flex-col items-center mb-[6px]'>
-        <h1 className='font-semibold mb-[17px]'>
+      <section className='flex flex-col items-center mb-[17px]'>
+        <h1 className='font-semibold text-[17px] mb-[15px]'>
           {year}년 {formattedMonth}월
         </h1>
         <CalendarGrid

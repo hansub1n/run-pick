@@ -7,7 +7,7 @@ import UserProfileSection from '@/components/my-page/UserProfileSection';
 
 const MyPage = () => {
   return (
-    <div className='w-[313px] flex flex-col py-[23px]'>
+    <div className='w-[313px] flex flex-col pt-[30px] pb-[23px]'>
       <UserProfileSection />
       <MonthlyStatsSection />
       <section className='font-semibold flex flex-col gap-[15px]'>

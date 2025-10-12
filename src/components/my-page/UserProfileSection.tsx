@@ -12,7 +12,7 @@ const UserProfileSection = () => {
 
   return (
     <>
-      <section className='flex flex-col items-center font-semibold mb-[33px]'>
+      <section className='flex flex-col items-center font-semibold mb-[20px]'>
         <div className='relative w-[72px] h-[72px] rounded-full overflow-hidden'>
           <Image
             src={profileImgUrl || DefaultProfileImg}
@@ -21,7 +21,7 @@ const UserProfileSection = () => {
             className='object-cover'
           />
         </div>
-        <h1 className='text-[20px] mb-[4px]'>{nickname}</h1>
+        <h1 className='text-[20px] m-[4px]'>{nickname}</h1>
         <button
           onClick={() => open('edit-profile')}
           className='text-[12px] text-[#A4A2A2] px-[9px] border border-[#A4A2A2] rounded-[10px]'
