@@ -1,6 +1,6 @@
 'use client';
 import { useUserStore } from '@/stores/useUserStore';
-import { getPublicUserInfo } from '@/utils/supabase/user';
+import { getPublicUserInfo } from '@/utils/supabase/client';
 import { useEffect } from 'react';
 
 const UserInit = () => {
