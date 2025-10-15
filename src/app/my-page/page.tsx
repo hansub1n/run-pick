@@ -1,29 +1,10 @@
-'use client';
-import MyFriends from '@/components/bottom-sheet/MyFriends';
-import BottomSheet from '@/components/BottomSheet';
-import CompltedChallengesSection from '@/components/my-page/CompltedChallengesSection';
-import FavoriteVideosSection from '@/components/my-page/FavoriteVideosSection';
-import MonthlyStatsSection from '@/components/my-page/MonthlyStatsSection';
-import MyPostsSection from '@/components/my-page/MyPostsSection';
-import UserProfileSection from '@/components/my-page/UserProfileSection';
+import MyPageClient from '@/components/my-page/MyPageClient';
+import { getAuthUserInfo } from '@/utils/supabase/server';
 
-const MyPage = () => {
-  return (
-    <>
-      <div className='w-[313px] flex flex-col pt-[30px] pb-[23px]'>
-        <UserProfileSection />
-        <MonthlyStatsSection />
-        <section className='font-semibold flex flex-col gap-[15px]'>
-          <CompltedChallengesSection />
-          <FavoriteVideosSection />
-          <MyPostsSection />
-        </section>
-      </div>
-      <BottomSheet>
-        <MyFriends />
-      </BottomSheet>
-    </>
-  );
+const MyPage = async () => {
+  const userInfo = await getAuthUserInfo();
+
+  return <MyPageClient userId={userInfo!.id} />;
 };
 
 export default MyPage;
