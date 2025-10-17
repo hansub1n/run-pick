@@ -16,7 +16,7 @@ const FriendAddResult = ({ friendStatus, friendNickname }: FriendAddResultProps)
       {isSuccess ? (
         <>
           <p className='text-[14px] mt-2 leading-[1.5] text-gray-700'>
-            '{friendNickname}'
+            {`'${friendNickname}'`}
             <br />
             {message}
           </p>

@@ -1,5 +1,4 @@
 import { createClient } from '@/utils/supabase/server';
-import { NextResponse } from 'next/server';
 
 export const insertFriend = async (userId: string, friendId: string) => {
   const client = await createClient();
