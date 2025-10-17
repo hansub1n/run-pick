@@ -9,7 +9,7 @@ const UrlCopyButton = ({ userId }: UrlCopyButtonProps) => {
 
     navigator.clipboard
       .writeText(inviteUrl)
-      .then((res) => {
+      .then(() => {
         alert('친구에게 보낼 링크가 복사되었습니다.'); // TODO: alert or 토스트 or 모달 확인 필요
       })
       .catch((error) => console.error('링크 복사 실패: ', error));

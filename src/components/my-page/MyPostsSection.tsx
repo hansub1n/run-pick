@@ -30,12 +30,12 @@ const MyPostsSection = () => {
               key={relatedPost.id}
               className='flex flex-col items-center'
             >
-              <div className='relative w-[100px] h-[65px] rounded-[5px]'>
+              <div className='relative w-[100px] h-[65px]'>
                 <Image
                   src={relatedPost.image_url}
                   alt={`${relatedPost.title} 이미지`}
                   fill
-                  className='object-cover'
+                  className='object-cover rounded-[5px]'
                 />
               </div>
               {/* TODO: 추후에 좋아요 카운팅 */}

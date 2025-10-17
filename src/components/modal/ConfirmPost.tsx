@@ -25,8 +25,6 @@ const ConfirmPost = ({ onConfirm }: ConfirmPostProps) => {
         <br />
         이대로 등록하시겠습니까?
       </p>
-      <p className='text-[10px] text-[#787878] mt-[10px] leading-[1.4]'></p>
-
       <div className='mt-[20px] flex gap-[18px] text-[14px]'>
         <button
           onClick={close}
