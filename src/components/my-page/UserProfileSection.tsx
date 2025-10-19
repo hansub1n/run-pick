@@ -5,10 +5,23 @@ import DefaultProfileImg from '/public/assets/images/default-profile-img.webp';
 import { useModalStore } from '@/stores/useModalStore';
 import Modal from '../Modal';
 import EditProfile from '../modal/EditProfile';
+import EditProfileButton from './EditProfileButton';
+import UnfriendButton from '../my-friend/UnfriendButton';
+import Unfirend from '../modal/Unfirend';
 
-const UserProfileSection = () => {
-  const { activeModal, open } = useModalStore();
-  const { nickname, profileImgUrl } = useUserStore();
+type UserProfileSectionProps = {
+  friendInfo?: {
+    id?: string;
+    profile_img_url?: string;
+    nickname?: string;
+  };
+};
+
+const UserProfileSection = ({ friendInfo }: UserProfileSectionProps) => {
+  const { activeModal } = useModalStore();
+  const { id: myId, nickname: myNickname, profileImgUrl: myProfileImgUrl } = useUserStore();
+  const nickname = friendInfo ? friendInfo.nickname : myNickname;
+  const profileImgUrl = friendInfo ? friendInfo.profile_img_url : myProfileImgUrl;
 
   return (
     <>
@@ -22,14 +35,21 @@ const UserProfileSection = () => {
           />
         </div>
         <h1 className='text-[20px] m-[4px]'>{nickname}</h1>
-        <button
-          onClick={() => open('edit-profile')}
-          className='text-[12px] text-[#A4A2A2] px-[9px] border border-[#A4A2A2] rounded-[10px]'
-        >
-          프로필 수정
-        </button>
+        {friendInfo ? <UnfriendButton /> : <EditProfileButton />}
       </section>
-      <Modal id={'edit-profile'}>{activeModal === 'edit-profile' && <EditProfile />}</Modal>
+      {friendInfo ? (
+        <Modal id={'unfriend'}>
+          {activeModal === 'unfriend' && (
+            <Unfirend
+              myId={myId}
+              friendId={friendInfo.id!}
+              friendNickname={nickname!}
+            />
+          )}
+        </Modal>
+      ) : (
+        <Modal id={'edit-profile'}>{activeModal === 'edit-profile' && <EditProfile />}</Modal>
+      )}
     </>
   );
 };

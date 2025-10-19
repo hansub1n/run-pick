@@ -1,14 +1,23 @@
 import { useModalStore } from '@/stores/useModalStore';
 import { FRIEND_ADD_RESPONSE } from '../my-page/MyPageClient';
+import { useQueryClient } from '@tanstack/react-query';
+import { QUERY_KEYS } from '@/hooks/queries/queryKeys';
 
 type FriendAddResultProps = {
+  userId: string;
   friendStatus: number;
   friendNickname?: string;
 };
 
-const FriendAddResult = ({ friendStatus, friendNickname }: FriendAddResultProps) => {
+const FriendAddResult = ({ userId, friendStatus, friendNickname }: FriendAddResultProps) => {
   const { close } = useModalStore();
   const { success: isSuccess, message } = FRIEND_ADD_RESPONSE[friendStatus];
+  const queryClient = useQueryClient();
+
+  const onClickHandler = () => {
+    queryClient.invalidateQueries({ queryKey: QUERY_KEYS.friends(userId) });
+    close();
+  };
 
   return (
     <div className='flex flex-col items-center font-semibold text-center'>
@@ -28,7 +37,7 @@ const FriendAddResult = ({ friendStatus, friendNickname }: FriendAddResultProps)
         <p className='text-[14px] mt-2 leading-[1.5] text-gray-700'>{message}</p>
       )}
       <button
-        onClick={close}
+        onClick={onClickHandler}
         className='mt-[20px] text-[14px] px-[35px] py-[7px] bg-[#AFAFAF] rounded-[10px]'
       >
         확인

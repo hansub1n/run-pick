@@ -1,18 +1,9 @@
-'use client';
-import { useRouter } from 'next/navigation';
-import { FaChevronLeft } from 'react-icons/fa6';
+import MyFriendHeader from '@/components/my-friend/MyFriendHeader';
 
 export default function MyFriendLayout({ children }: { children: React.ReactNode }) {
-  const router = useRouter();
-  const onClickHanlder = () => router.back();
   return (
     <>
-      <header className='fixed absolute top-0 z-20 w-full h-[55px] px-[13px] flex items-center bg-[#D9D9D9]'>
-        <FaChevronLeft
-          onClick={onClickHanlder}
-          className='w-[24px] h-[24px]'
-        />
-      </header>
+      <MyFriendHeader />
       {children}
     </>
   );

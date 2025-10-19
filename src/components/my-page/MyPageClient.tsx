@@ -10,6 +10,7 @@ import Modal from '../Modal';
 import FriendAddResult from '../modal/FriendAddResult';
 import { useModalStore } from '@/stores/useModalStore';
 import { useEffect } from 'react';
+import { useFriendList } from '@/hooks/queries/useFriendList';
 
 type MyPageClientProps = {
   userId: string;
@@ -42,7 +43,8 @@ export const FRIEND_ADD_RESPONSE: Record<number, { success: boolean; message: st
 
 const MyPageClient = ({ userId, friendStatus, friendNickname }: MyPageClientProps) => {
   const status = friendStatus ? Number(friendStatus) : null;
-  const { open } = useModalStore();
+  const { activeModal, open } = useModalStore();
+  const { sortedFriendList } = useFriendList(userId);
 
   useEffect(() => {
     if (status && status in FRIEND_ADD_RESPONSE) {
@@ -62,15 +64,21 @@ const MyPageClient = ({ userId, friendStatus, friendNickname }: MyPageClientProp
         </section>
       </div>
       <BottomSheet>
-        <MyFriends userId={userId} />
+        <MyFriends
+          userId={userId}
+          friendList={sortedFriendList}
+        />
       </BottomSheet>
 
       {status && status in FRIEND_ADD_RESPONSE && (
         <Modal id={'friend-add-result'}>
-          <FriendAddResult
-            friendStatus={status}
-            friendNickname={friendNickname}
-          />
+          {activeModal === 'friend-add-result' && (
+            <FriendAddResult
+              userId={userId}
+              friendStatus={status}
+              friendNickname={friendNickname}
+            />
+          )}
         </Modal>
       )}
     </>

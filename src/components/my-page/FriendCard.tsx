@@ -1,17 +1,17 @@
+import { Friend } from '@/types/friends.types';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { FaCircleMinus } from 'react-icons/fa6';
 import { GoStar, GoStarFill } from 'react-icons/go';
 
 type FriendCardProps = {
-  id: number;
-  friend_id: string;
-  friend_nickname: string;
-  is_favorite: boolean;
+  isFavorite: boolean;
+  friendInfo: { id: string; nickname: string };
 };
 
-const FriendCard = ({ friend_id, friend_nickname, is_favorite }: FriendCardProps) => {
-  const [isFavorite, setIsFavorite] = useState(is_favorite);
+const FriendCard = ({ isFavorite: initialFavorite, friendInfo }: FriendCardProps) => {
+  const [isFavorite, setIsFavorite] = useState(initialFavorite);
+  const { id, nickname } = friendInfo;
 
   const onClickHandler = () => {
     setIsFavorite((prev) => !prev);
@@ -28,10 +28,10 @@ const FriendCard = ({ friend_id, friend_nickname, is_favorite }: FriendCardProps
       </div>
 
       <Link
-        href={`/my-friend/${friend_id}`}
+        href={`/my-friend/${id}`}
         className='flex-grow'
       >
-        {friend_nickname}
+        {nickname}
       </Link>
       <div>
         <FaCircleMinus className='w-[20px] h-[20px]' />

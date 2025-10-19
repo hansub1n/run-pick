@@ -1,3 +1,4 @@
+'use client';
 import { generateCalendarWeeks } from '@/utils/generateCalendarWeeks';
 import { useState } from 'react';
 

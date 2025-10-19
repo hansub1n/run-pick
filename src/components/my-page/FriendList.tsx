@@ -1,3 +1,4 @@
+import { Friends } from '@/types/friends.types';
 import FriendCard from './FriendCard';
 
 const MOCK_FRIENDS = [
@@ -10,13 +11,18 @@ const MOCK_FRIENDS = [
   { id: 6, friend_id: '6', friend_nickname: '최지혀니', is_favorite: false },
 ]; // TODO: 삭제 할 것
 
-const FriendList = () => {
+type FriendListProps = {
+  friendList: Friends;
+};
+
+const FriendList = ({ friendList }: FriendListProps) => {
   return (
     <div className='flex flex-col w-full pb-[10px] max-h-[346px] overflow-y-auto'>
-      {MOCK_FRIENDS.map((friend) => (
+      {friendList.map((friend) => (
         <FriendCard
           key={friend.id}
-          {...friend}
+          isFavorite={friend.is_favorite}
+          friendInfo={friend.info}
         />
       ))}
     </div>

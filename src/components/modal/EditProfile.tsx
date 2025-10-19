@@ -39,6 +39,7 @@ const EditProfile = () => {
   };
   const onChangeProfileHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+
     setProfile((prev) => ({
       ...prev,
       [name]: value,
@@ -46,6 +47,11 @@ const EditProfile = () => {
   };
 
   const onClickHandler = () => {
+    if (newProfile.nickname === '') {
+      alert('닉네임을 작성해주세요');
+      return;
+    }
+
     setNickname(newProfile.nickname);
     setProfileImgUrl(newProfile.profileImgUrl);
 
@@ -55,8 +61,8 @@ const EditProfile = () => {
   };
 
   return (
-    <div className='flex flex-col items-center font-semibold'>
-      <h1 className='text-[20px] mb-[10px]'>프로필 수정</h1>
+    <div className='flex flex-col items-center'>
+      <h1 className='font-semibold text-[20px] mb-[10px]'>프로필 수정</h1>
       <div className='flex items-center flex-col gap-[7px]'>
         <div className='relative w-[78px]'>
           <div className='relative w-[72px] h-[72px] rounded-full overflow-hidden'>
@@ -83,20 +89,15 @@ const EditProfile = () => {
           type='text'
           name='nickname'
           value={newProfile.nickname}
+          placeholder='새로운 닉네임'
           onChange={onChangeProfileHandler}
-          className='h-[35px] rounded-[10px] border px-[5px]'
+          className='h-[32px] rounded-[10px] border pl-[10px] border-[#787878]'
         />
       </div>
       <div className='mt-[20px] flex gap-[18px] text-[14px]'>
         <button
-          onClick={close}
-          className='px-[35px] py-[7px] bg-[#EAEAEA] rounded-[10px]'
-        >
-          취소
-        </button>
-        <button
           onClick={onClickHandler}
-          className='px-[35px] py-[7px] bg-[#AFAFAF] rounded-[10px]'
+          className='px-[35px] py-[7px] bg-[#AFAFAF] rounded-[10px] font-semibold'
         >
           등록
         </button>
