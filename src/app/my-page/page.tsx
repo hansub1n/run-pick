@@ -1,5 +1,4 @@
 import MyPageClient from '@/components/my-page/MyPageClient';
-import { getAuthUserInfo } from '@/utils/supabase/server';
 
 const MyPage = async ({
   searchParams,
@@ -10,11 +9,9 @@ const MyPage = async ({
     friend_status: undefined,
     friend_nickname: undefined,
   };
-  const userInfo = await getAuthUserInfo();
 
   return (
     <MyPageClient
-      userId={userInfo!.id}
       friendStatus={friend_status}
       friendNickname={friend_nickname}
     />

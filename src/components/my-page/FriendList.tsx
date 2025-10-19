@@ -1,16 +1,6 @@
 import { Friends } from '@/types/friends.types';
 import FriendCard from './FriendCard';
 
-const MOCK_FRIENDS = [
-  { id: 0, friend_id: '0', friend_nickname: '한수빈', is_favorite: false },
-  { id: 1, friend_id: '1', friend_nickname: '최태호', is_favorite: true },
-  { id: 2, friend_id: '2', friend_nickname: '최지현', is_favorite: false },
-  { id: 3, friend_id: '3', friend_nickname: '박미진', is_favorite: false },
-  { id: 4, friend_id: '4', friend_nickname: '신채은', is_favorite: false },
-  { id: 5, friend_id: '5', friend_nickname: '한가영', is_favorite: false },
-  { id: 6, friend_id: '6', friend_nickname: '최지혀니', is_favorite: false },
-]; // TODO: 삭제 할 것
-
 type FriendListProps = {
   friendList: Friends;
 };

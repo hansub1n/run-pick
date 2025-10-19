@@ -1,17 +1,23 @@
 import FriendSearchBar from '../my-page/FriendSearchBar';
 import FriendList from '../my-page/FriendList';
 import { Friends } from '@/types/friends.types';
+import { useFriendList } from '@/hooks/queries/useFriendList';
+import { useUserStore } from '@/stores/useUserStore';
 
-type MyFriendsProps = {
-  userId: string;
-  friendList: Friends;
-};
+const MyFriends = () => {
+  const { id: userId } = useUserStore();
+  const { sortedFriendList: friendList } = useFriendList(userId);
 
-const MyFriends = ({ userId, friendList }: MyFriendsProps) => {
   return (
     <div className='relative flex flex-col items-center px-[23px] gap-[10px]'>
-      <FriendSearchBar userId={userId} />
-      {friendList ? <FriendList friendList={friendList} /> : <p> 친구 목록이 비어있습니다.</p>}
+      <FriendSearchBar />
+      {friendList.length === 0 ? (
+        <p className='w-full px-[6px] py-[15px] text-[14px] text-[#5C5C5C]'>
+          아직 친구가 없어요. 새로운 친구를 추가해보세요!
+        </p>
+      ) : (
+        <FriendList friendList={friendList} />
+      )}
     </div>
   );
 };

@@ -5,17 +5,18 @@ import { FaEdit } from 'react-icons/fa';
 import { ChangeEvent, useState } from 'react';
 import { updateUserProfile } from '@/services/my-page/updateUserProfile';
 import { useModalStore } from '@/stores/useModalStore';
+import DefaultProfileImg from '/public/assets/images/default-profile-img.webp';
 
 const EditProfile = () => {
   const { close } = useModalStore();
   const { id, nickname, setNickname, profileImgUrl, setProfileImgUrl } = useUserStore();
 
-  const initiallProfile = {
+  const initialProfile = {
     profileImgUrl,
     nickname,
   };
 
-  const [newProfile, setProfile] = useState(initiallProfile);
+  const [newProfile, setProfile] = useState(initialProfile);
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -67,7 +68,7 @@ const EditProfile = () => {
         <div className='relative w-[78px]'>
           <div className='relative w-[72px] h-[72px] rounded-full overflow-hidden'>
             <Image
-              src={newProfile.profileImgUrl}
+              src={newProfile.profileImgUrl || DefaultProfileImg}
               alt={`${nickname} 프로필 이미지`}
               fill
               className='object-cover'

@@ -7,10 +7,24 @@ export const insertFriend = async (userId: string, friendId: string) => {
     return { status: 400 };
   }
 
-  const { error } = await client.from('friends').insert([
-    { user_id: userId, friend_id: friendId },
-    { user_id: friendId, friend_id: userId },
-  ]);
+  const { data: exists } = await client
+    .from('friends')
+    .select('id')
+    .eq('user_id', userId)
+    .eq('friend_id', friendId)
+    .maybeSingle();
+
+  if (exists) {
+    return { status: 409 };
+  }
+
+  const { error } = await client.from('friends').upsert(
+    [
+      { user_id: userId, friend_id: friendId },
+      { user_id: friendId, friend_id: userId },
+    ],
+    { onConflict: 'user_id, friend_id' },
+  );
 
   if (error) {
     console.error('DB insert error: ', error);

@@ -1,5 +1,7 @@
+import { QUERY_KEYS } from '@/hooks/queries/queryKeys';
 import { deleteFriend } from '@/services/my-friend/deleteFriend';
 import { useModalStore } from '@/stores/useModalStore';
+import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 
 type UnfriendProps = {
@@ -10,17 +12,19 @@ type UnfriendProps = {
 const Unfirend = ({ myId, friendId, friendNickname }: UnfriendProps) => {
   const { close } = useModalStore();
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const onClickHandler = async () => {
     await deleteFriend(myId, friendId);
-    router.replace('/mypage');
+    await queryClient.invalidateQueries({ queryKey: QUERY_KEYS.friends(myId) });
+    router.replace('/my-page');
     close();
   };
 
   return (
     <div className='flex flex-col items-center font-semibold'>
       <h1 className='text-[20px] mb-[10px]'>친구 끊기</h1>
-      <p className='text-[14px] mt-2 leading-[1.5] text-gray-700'>
+      <p className='text-center text-[14px] mt-2 leading-[1.5] text-gray-700'>
         {`'${friendNickname}'님과의 친구 관계를`}
         <br />
         정말 끊으시겠습니까?

@@ -1,4 +1,4 @@
-import { useQueries, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from './queryKeys';
 import { fetchMyFriendList } from '@/services/my-page/fetchMyFriendList';
 import { Friends } from '@/types/friends.types';

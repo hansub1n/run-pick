@@ -7,7 +7,7 @@ const MyFriendPage = async ({ params }: { params: Promise<{ friend_id: string }>
   const friendInfo = await fetchUserInfo(friend_id);
 
   return (
-    <div className='w-[313px] flex flex-col pt-[30px] pb-[23px]'>
+    <div className='w-[313px] flex flex-col pt-[30px]'>
       <UserProfileSection friendInfo={friendInfo!} />
       <MonthlyStatsSection friendId={friendInfo?.id} />
     </div>

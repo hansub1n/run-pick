@@ -2,20 +2,24 @@ import { useModalStore } from '@/stores/useModalStore';
 import { FRIEND_ADD_RESPONSE } from '../my-page/MyPageClient';
 import { useQueryClient } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/hooks/queries/queryKeys';
+import { useRouter } from 'next/navigation';
+import { useUserStore } from '@/stores/useUserStore';
 
 type FriendAddResultProps = {
-  userId: string;
   friendStatus: number;
   friendNickname?: string;
 };
 
-const FriendAddResult = ({ userId, friendStatus, friendNickname }: FriendAddResultProps) => {
+const FriendAddResult = ({ friendStatus, friendNickname }: FriendAddResultProps) => {
+  const router = useRouter();
+  const { id: userId } = useUserStore();
   const { close } = useModalStore();
   const { success: isSuccess, message } = FRIEND_ADD_RESPONSE[friendStatus];
   const queryClient = useQueryClient();
 
   const onClickHandler = () => {
     queryClient.invalidateQueries({ queryKey: QUERY_KEYS.friends(userId) });
+    router.replace('/my-page');
     close();
   };
 

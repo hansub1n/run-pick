@@ -1,11 +1,10 @@
 import { ImUserPlus } from 'react-icons/im';
 import UrlCopyButton from './UrlCopyButton';
 import { useState } from 'react';
+import { useUserStore } from '@/stores/useUserStore';
 
-type FriendInviteButtonProps = {
-  userId: string;
-};
-const FriendInviteButton = ({ userId }: FriendInviteButtonProps) => {
+const FriendInviteButton = () => {
+  const { id } = useUserStore();
   const [isInviteOpen, setIsInviteOpen] = useState(false);
 
   const onClickHandler = () => {
@@ -13,7 +12,7 @@ const FriendInviteButton = ({ userId }: FriendInviteButtonProps) => {
   };
   return (
     <div>
-      {isInviteOpen && <UrlCopyButton userId={userId} />}
+      {isInviteOpen && <UrlCopyButton userId={id} />}
       <ImUserPlus
         onClick={onClickHandler}
         className='w-[27px] h-[27px]'
