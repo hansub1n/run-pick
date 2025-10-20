@@ -30,19 +30,16 @@ const VideoActionButtons = ({ videoId }: videoActionButtonsProps) => {
     onMutate: async () => {
       await queryClient.cancelQueries({ queryKey: QUERY_KEYS.userFavoriteVideos(userId) });
       const previousVideo = userFavoriteVideoList;
-      console.log('전 데이터 저장', previousVideo);
 
       const newVideoList = isFavorite
         ? previousVideo.filter((video) => video.info.youtube_video_id !== videoId)
         : [...previousVideo, { id: previousVideo.length + 1, info: { ...videoDetail! } }];
 
-      console.log('일단 이거나 봐라', newVideoList);
       await queryClient.setQueryData(QUERY_KEYS.userFavoriteVideos(userId), newVideoList);
       return { previousVideo };
     },
     onError: (error, _, context) => {
       if (context?.previousVideo) {
-        console.log('에러 발생! 이전으로 돌아감', context.previousVideo);
         console.error(error.message);
         queryClient.setQueryData(QUERY_KEYS.userFavoriteVideos(userId), context.previousVideo);
       }
