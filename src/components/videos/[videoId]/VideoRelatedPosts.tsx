@@ -3,7 +3,7 @@ import LoadMoreButton from './LoadMoreButton';
 import RelatedPostList from './RelatedPostList';
 
 type VideoRelatedPostsProps = {
-  videoId: ParamValue;
+  videoId: string;
 };
 
 const VideoRelatedPosts = ({ videoId }: VideoRelatedPostsProps) => {

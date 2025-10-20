@@ -6,7 +6,7 @@ type StatIcon = {
   onClick?: () => void;
 };
 
-type Cardprops = {
+type CardProps = {
   imageUrl: string | StaticImageData;
   title: string | undefined;
   subtitle?: string | (() => string);
@@ -16,7 +16,7 @@ type Cardprops = {
   isOpenModal: boolean;
 };
 
-const Card = ({ imageUrl, title, subtitle, statIcons, onClick, children, isOpenModal }: Cardprops) => {
+const Card = ({ imageUrl, title, subtitle, statIcons, onClick, children, isOpenModal }: CardProps) => {
   return (
     <div
       className='cursor-pointer min-h-[100px] py-[17px] border-b border-[#D9D9D9] flex gap-[16px]'
