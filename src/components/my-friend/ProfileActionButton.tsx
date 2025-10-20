@@ -1,16 +1,20 @@
 import { useModalStore } from '@/stores/useModalStore';
 
-const UnfriendButton = () => {
+type ProfileActionButtonProps = {
+  modalId: string;
+  label: string;
+};
+const ProfileActionButton = ({ modalId, label }: ProfileActionButtonProps) => {
   const { open } = useModalStore();
 
   return (
     <button
-      onClick={() => open('unfriend')}
+      onClick={() => open(modalId)}
       className='text-[12px] text-[#A4A2A2] px-[9px] border border-[#A4A2A2] rounded-[10px]'
     >
-      친구 끊기
+      {label}
     </button>
   );
 };
 
-export default UnfriendButton;
+export default ProfileActionButton;
