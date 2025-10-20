@@ -16,7 +16,9 @@ const CompletedChallengesSection = () => {
   const userChallengeList = useUserChallengeList(id) as UserChallenges;
 
   const onClickHandler = () => {
-    userChallengeList.length > 0 && open('completed-challenges');
+    if (userChallengeList.length > 0) {
+      open('completed-challenges');
+    }
   };
 
   return (

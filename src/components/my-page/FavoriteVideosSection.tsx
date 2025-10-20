@@ -14,7 +14,9 @@ const FavoriteVideosSection = () => {
   const userFavoriteVideoList = useUserFavoriteVideoList(id) as unknown as UserFavoriteVideos;
 
   const onClickHandler = () => {
-    userFavoriteVideoList.length > 0 && open('favorite-videos');
+    if (userFavoriteVideoList.length > 0) {
+      open('favorite-videos');
+    }
   };
 
   return (

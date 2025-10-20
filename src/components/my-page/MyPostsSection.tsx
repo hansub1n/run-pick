@@ -15,7 +15,9 @@ const MyPostsSection = () => {
   const userRelatedPostList = useUserRelatedPostList(id) as RelatedPosts;
 
   const onClickHandler = () => {
-    userRelatedPostList.length > 0 && open('user-related-posts');
+    if (userRelatedPostList.length > 0) {
+      open('user-related-posts');
+    }
   };
 
   return (
