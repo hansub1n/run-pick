@@ -4,7 +4,7 @@ export const updateFavoriteStatus = async (userId: string, friendId: string, isF
   const client = createClient();
 
   const { error } = await client
-    .from('friends')
+    .from('friend')
     .update({ is_favorite: isFavorite })
     .eq('user_id', userId)
     .eq('friend_id', friendId);
