@@ -10,7 +10,6 @@ export const updateFavoriteStatus = async (userId: string, friendId: string, isF
     .eq('friend_id', friendId);
 
   if (error) {
-    console.error('Failed to upload favoriteStauts: ', error);
-    return;
+    throw new Error();
   }
 };

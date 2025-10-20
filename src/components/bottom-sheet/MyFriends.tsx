@@ -1,6 +1,5 @@
 import FriendSearchBar from '../my-page/FriendSearchBar';
 import FriendList from '../my-page/FriendList';
-import { Friends } from '@/types/friends.types';
 import { useFriendList } from '@/hooks/queries/useFriendList';
 import { useUserStore } from '@/stores/useUserStore';
 

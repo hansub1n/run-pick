@@ -1,27 +1,55 @@
 import { updateFavoriteStatus } from '@/services/my-page/updateFavoriteStatus';
 import { useUserStore } from '@/stores/useUserStore';
 import Link from 'next/link';
-import React, { useState } from 'react';
 import { FaCircleMinus } from 'react-icons/fa6';
 import { GoStar, GoStarFill } from 'react-icons/go';
 import { QUERY_KEYS } from '@/hooks/queries/queryKeys';
-import { useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { Friends } from '@/types/friends.types';
 
 type FriendCardProps = {
   isFavorite: boolean;
   friendInfo: { id: string; nickname: string };
 };
 
-const FriendCard = ({ isFavorite: initialFavorite, friendInfo }: FriendCardProps) => {
+const FriendCard = ({ isFavorite, friendInfo }: FriendCardProps) => {
   const { id: userId } = useUserStore();
-  const [isFavorite, setIsFavorite] = useState(initialFavorite);
   const queryClient = useQueryClient();
 
-  const onClickHandler = async () => {
+  const mutation = useMutation<
+    void,
+    Error,
+    { userId: string; friendId: string; isFavorite: boolean },
+    { previousFriends?: Friends }
+  >({
+    mutationFn: ({ userId, friendId, isFavorite }) => updateFavoriteStatus(userId, friendId, isFavorite),
+    onMutate: async ({ friendId }) => {
+      await queryClient.cancelQueries({ queryKey: QUERY_KEYS.friends(userId) });
+      const previousFriends = (await queryClient.getQueryData(QUERY_KEYS.friends(userId))) as Friends;
+
+      if (previousFriends) {
+        const newData = previousFriends.map((friend) =>
+          friend.info.id === friendId ? { ...friend, is_favorite: !friend.is_favorite } : friend,
+        );
+        await queryClient.setQueryData(QUERY_KEYS.friends(userId), newData);
+        console.log('일단 보여주고', newData); // TODO: 지우도록
+      }
+
+      return { previousFriends };
+    },
+    onError: (error, _, context) => {
+      if (context?.previousFriends) {
+        console.log('에러 발생! 전으로 돌아감', context?.previousFriends); // TODO: 지우도록
+        queryClient.setQueryData(QUERY_KEYS.friends(userId), context?.previousFriends);
+        console.error('Failed to upload favoriteStauts: ', error.message);
+      }
+    },
+    onSettled: () => queryClient.invalidateQueries({ queryKey: QUERY_KEYS.friends(userId) }),
+  });
+
+  const onClickHandler = () => {
     const newValue = !isFavorite;
-    setIsFavorite(newValue);
-    await updateFavoriteStatus(userId, friendInfo.id, newValue);
-    await queryClient.invalidateQueries({ queryKey: QUERY_KEYS.friends(userId) });
+    mutation.mutate({ userId, friendId: friendInfo.id, isFavorite: newValue });
   };
 
   return (
