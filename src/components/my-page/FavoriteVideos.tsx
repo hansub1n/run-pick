@@ -1,6 +1,6 @@
 import { formatVideoDuration } from '@/utils/formatVideoDuration';
 import Card from '../Card';
-import { FaPersonRunning, FaStar } from 'react-icons/fa6';
+import { FaPersonRunning } from 'react-icons/fa6';
 import { useVideoDetailStore } from '@/stores/useVideoDetailStore';
 import { useRouter } from 'next/navigation';
 import { UserFavoriteVideos } from '@/types/userFavoriteVideos.type';

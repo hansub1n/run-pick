@@ -1,4 +1,3 @@
-import { ParamValue } from 'next/dist/server/request/params';
 import LoadMoreButton from './LoadMoreButton';
 import RelatedPostList from './RelatedPostList';
 

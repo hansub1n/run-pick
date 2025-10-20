@@ -1,7 +1,6 @@
 import { RelatedPosts } from '@/types/relatedPosts.types';
 import { formatDateShort } from '@/utils/formatDateShort';
 import Image from 'next/image';
-import { FaPersonRunning } from 'react-icons/fa6';
 
 type RelatedPostListProps = {
   list: RelatedPosts;
