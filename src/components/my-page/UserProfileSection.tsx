@@ -5,8 +5,7 @@ import DefaultProfileImg from '/public/assets/images/default-profile-img.webp';
 import { useModalStore } from '@/stores/useModalStore';
 import Modal from '../Modal';
 import EditProfile from '../modal/EditProfile';
-import EditProfileButton from './EditProfileButton';
-import UnfriendButton from '../my-friend/UnfriendButton';
+import ProfileActionButton from '../my-friend/ProfileActionButton';
 import Unfirend from '../modal/Unfirend';
 
 type UserProfileSectionProps = {
@@ -35,7 +34,17 @@ const UserProfileSection = ({ friendInfo }: UserProfileSectionProps) => {
           />
         </div>
         <h1 className='text-[20px] m-[4px]'>{nickname}</h1>
-        {friendInfo ? <UnfriendButton /> : <EditProfileButton />}
+        {friendInfo ? (
+          <ProfileActionButton
+            modalId={'unfriend'}
+            label={'친구 끊기'}
+          />
+        ) : (
+          <ProfileActionButton
+            modalId={'edit-profile'}
+            label={'프로필 수정'}
+          />
+        )}
       </section>
       {friendInfo ? (
         <Modal id={'unfriend'}>
