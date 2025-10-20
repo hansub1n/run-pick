@@ -32,14 +32,12 @@ const FriendCard = ({ isFavorite, friendInfo }: FriendCardProps) => {
           friend.info.id === friendId ? { ...friend, is_favorite: !friend.is_favorite } : friend,
         );
         await queryClient.setQueryData(QUERY_KEYS.friends(userId), newData);
-        console.log('일단 보여주고', newData); // TODO: 지우도록
       }
 
       return { previousFriends };
     },
     onError: (error, _, context) => {
       if (context?.previousFriends) {
-        console.log('에러 발생! 전으로 돌아감', context?.previousFriends); // TODO: 지우도록
         queryClient.setQueryData(QUERY_KEYS.friends(userId), context?.previousFriends);
         console.error('Failed to upload favoriteStauts: ', error.message);
       }
