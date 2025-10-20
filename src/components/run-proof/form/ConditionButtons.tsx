@@ -5,34 +5,36 @@ type CondtionButtonsProps = {
   selected: Condition;
   onSelect: (condition: Condition) => void;
 };
+
+export const CONDITONS = [
+  {
+    id: 0,
+    value: '상쾌',
+    label: '😊 상쾌',
+  },
+  {
+    id: 1,
+    value: '무난',
+    label: '🙂 무난',
+  },
+  {
+    id: 2,
+    value: '피곤',
+    label: '😵‍💫 피곤',
+  },
+  {
+    id: 3,
+    value: '녹초',
+    label: '😫 녹초',
+  },
+];
+
 export const ConditionButtons = React.memo(({ selected, onSelect }: CondtionButtonsProps) => {
-  const conditions = [
-    {
-      id: 0,
-      value: '상쾌',
-      label: '😊 상쾌',
-    },
-    {
-      id: 1,
-      value: '무난',
-      label: '🙂 무난',
-    },
-    {
-      id: 2,
-      value: '피곤',
-      label: '😵‍💫 피곤',
-    },
-    {
-      id: 3,
-      value: '녹초',
-      label: '😫 녹초',
-    },
-  ];
   return (
     <div className='flex flex-col gap-[6px]'>
       <h1>상태 체크</h1>
       <div className='flex gap-[10px]'>
-        {conditions.map((condition) => (
+        {CONDITONS.map((condition) => (
           <button
             key={condition.id}
             type='button'

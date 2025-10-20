@@ -1,7 +1,7 @@
 import { UserFavoriteVideos } from '@/types/userFavoriteVideos.type';
 import Image from 'next/image';
 import React from 'react';
-import { FaStar } from 'react-icons/fa6';
+import { FaPersonRunning } from 'react-icons/fa6';
 
 type FavoriteVideoListProps = {
   list: UserFavoriteVideos;
@@ -25,8 +25,8 @@ const FavoriteVideoList = ({ list }: FavoriteVideoListProps) => {
           </div>
           {/* TODO: 추후에 좋아요 카운팅 */}
           <h3 className='flex items-center text-[12px] gap-[3px]'>
-            <FaStar />
-            {video.info.favorite_count}
+            <FaPersonRunning />
+            {video.info.distance_category}km
           </h3>
         </div>
       ))}

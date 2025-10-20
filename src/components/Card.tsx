@@ -1,7 +1,7 @@
 import Image, { StaticImageData } from 'next/image';
 
 type StatIcon = {
-  icon: React.ReactNode;
+  icon?: React.ReactNode;
   label: string | number;
   onClick?: () => void;
 };
@@ -30,12 +30,12 @@ const Card = ({ imageUrl, title, subtitle, statIcons, onClick, children, isOpenM
           className='object-cover rounded-[10px]'
         />
       </div>
-      <div className='min-w-[193px] h-[65px] flex flex-col justify-between'>
+      <div className={`min-w-[193px] h-[65px] flex flex-col justify-between ${isOpenModal && 'pr-[10px]'}`}>
         <div>
           <h1 className='text-[12px] font-medium break-words line-clamp-2'>{title}</h1>
-          <p className='font-medium text-[10px]'>{typeof subtitle === 'function' ? subtitle() : subtitle}</p>
+          <p className={`font-medium text-[10px]`}>{typeof subtitle === 'function' ? subtitle() : subtitle}</p>
         </div>
-        <div className='font-semibold text-[10px] flex gap-[6px] justify-end'>
+        <div className={`font-semibold text-[10px] flex gap-[6px] justify-end`}>
           {statIcons.map((statIcon, index) => (
             <h3
               key={`statIcon-${index}`}

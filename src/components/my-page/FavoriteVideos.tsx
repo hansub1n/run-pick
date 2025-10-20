@@ -21,20 +21,19 @@ const FavoriteVideos = ({ list }: FavoriteVideosProps) => {
 
   return (
     <div className='relative flex flex-col items-center'>
-      <h1 className='top-[-1px] sticky bg-white w-full text-center text-[20px] z-10 pb-[5px]'>내가 작성한 글</h1>
-      <section className='w-full pt-[5px]'>
+      <h1 className='font-semibold top-[-1px] sticky bg-white w-full text-center text-[20px] z-10 pb-[5px]'>
+        즐겨찾기한 영상
+      </h1>
+      <section className='w-[full] pt-[5px]'>
         {list.map((video) => (
           <Card
             key={video.id}
             imageUrl={video.info.thumbnail_url}
             title={video.info.title}
             subtitle={() => formatVideoDuration(video.info.duration)}
-            statIcons={[
-              { icon: <FaStar />, label: video.info.favorite_count },
-              { icon: <FaPersonRunning />, label: video.info.proof_count },
-            ]}
+            statIcons={[{ icon: <FaPersonRunning />, label: `${video.info.distance_category}km` }]}
             onClick={() => onClickHandler(video.info)}
-            isOpenModal={false}
+            isOpenModal={true}
           />
         ))}
       </section>

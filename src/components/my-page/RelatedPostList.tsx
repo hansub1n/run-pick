@@ -1,4 +1,5 @@
 import { RelatedPosts } from '@/types/relatedPosts.types';
+import { formatDateShort } from '@/utils/formatDateShort';
 import Image from 'next/image';
 import { FaPersonRunning } from 'react-icons/fa6';
 
@@ -21,11 +22,7 @@ const RelatedPostList = ({ list }: RelatedPostListProps) => {
               className='object-cover rounded-[5px]'
             />
           </div>
-          {/* TODO: 추후에 좋아요 카운팅 */}
-          <h3 className='flex items-center text-[12px] gap-[3px]'>
-            <FaPersonRunning />
-            {relatedPost.distance_km}km
-          </h3>
+          <h3 className='flex items-center text-[12px] gap-[3px]'>{formatDateShort(relatedPost.created_at)}</h3>
         </div>
       ))}
     </>

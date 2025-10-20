@@ -4,7 +4,7 @@ export const fetchUserFavoriteVideoList = async (userId: string) => {
   const client = createClient();
   const { data, error } = await client
     .from('video_favorites')
-    .select('id, info:videos(youtube_video_id, title, thumbnail_url, distance_category, duration)')
+    .select('id, info:video_with_counts(*)')
     .eq('user_id', userId)
     .order('created_at', { ascending: false });
 
