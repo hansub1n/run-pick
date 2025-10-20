@@ -1,11 +1,8 @@
-import { updateFavoriteStatus } from '@/services/my-page/updateFavoriteStatus';
+import { useToggleFavoriteFriend } from '@/hooks/queries/useToggleFavoriteFriend';
 import { useUserStore } from '@/stores/useUserStore';
 import Link from 'next/link';
 import { FaCircleMinus } from 'react-icons/fa6';
 import { GoStar, GoStarFill } from 'react-icons/go';
-import { QUERY_KEYS } from '@/hooks/queries/queryKeys';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { Friends } from '@/types/friends.types';
 
 type FriendCardProps = {
   isFavorite: boolean;
@@ -14,40 +11,10 @@ type FriendCardProps = {
 
 const FriendCard = ({ isFavorite, friendInfo }: FriendCardProps) => {
   const { id: userId } = useUserStore();
-  const queryClient = useQueryClient();
-
-  const mutation = useMutation<
-    void,
-    Error,
-    { userId: string; friendId: string; isFavorite: boolean },
-    { previousFriends?: Friends }
-  >({
-    mutationFn: ({ userId, friendId, isFavorite }) => updateFavoriteStatus(userId, friendId, isFavorite),
-    onMutate: async ({ friendId }) => {
-      await queryClient.cancelQueries({ queryKey: QUERY_KEYS.friends(userId) });
-      const previousFriends = (await queryClient.getQueryData(QUERY_KEYS.friends(userId))) as Friends;
-
-      if (previousFriends) {
-        const newData = previousFriends.map((friend) =>
-          friend.info.id === friendId ? { ...friend, is_favorite: !friend.is_favorite } : friend,
-        );
-        await queryClient.setQueryData(QUERY_KEYS.friends(userId), newData);
-      }
-
-      return { previousFriends };
-    },
-    onError: (error, _, context) => {
-      if (context?.previousFriends) {
-        queryClient.setQueryData(QUERY_KEYS.friends(userId), context?.previousFriends);
-        console.error('Failed to upload favoriteStauts: ', error.message);
-      }
-    },
-    onSettled: () => queryClient.invalidateQueries({ queryKey: QUERY_KEYS.friends(userId) }),
-  });
+  const { mutate: toggleFavorite } = useToggleFavoriteFriend(userId);
 
   const onClickHandler = () => {
-    const newValue = !isFavorite;
-    mutation.mutate({ userId, friendId: friendInfo.id, isFavorite: newValue });
+    toggleFavorite({ userId, friendId: friendInfo.id, isFavorite: !isFavorite });
   };
 
   return (
