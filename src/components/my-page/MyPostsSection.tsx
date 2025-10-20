@@ -1,54 +1,39 @@
 'use client';
 import { useUserRelatedPostList } from '@/hooks/queries/useUserRelatedPostList';
 import { useUserStore } from '@/stores/useUserStore';
-import { FaChevronRight, FaPersonRunning } from 'react-icons/fa6';
 import Modal from '../Modal';
 import UserRelatedPosts from '../modal/UserRelatedPosts';
 import { useModalStore } from '@/stores/useModalStore';
-import Image from 'next/image';
+import RelatedPostList from './RelatedPostList';
+import SectionHeader from './SectionHeader';
+import ListSection from './ListSection';
+import { RelatedPosts } from '@/types/relatedPosts.types';
 
 const MyPostsSection = () => {
   const { open, activeModal } = useModalStore();
   const { id } = useUserStore();
-  const userRelatedPostList = useUserRelatedPostList(id);
+  const userRelatedPostList = useUserRelatedPostList(id) as RelatedPosts;
+
+  const onClickHandler = () => {
+    userRelatedPostList.length > 0 && open('user-related-posts');
+  };
 
   return (
     <>
-      <section>
-        <div className='flex items-center gap-[2px]'>
-          <h1 className='font-[19px]'>내가 작성한 글</h1>
-          <button
-            onClick={() => open('user-related-posts')}
-            className='cursor-pointer'
-          >
-            <FaChevronRight />
-          </button>
-        </div>
-        <section className='flex gap-[7px] pt-[8px]'>
-          {userRelatedPostList.slice(0, 3).map((relatedPost) => (
-            <div
-              key={relatedPost.id}
-              className='flex flex-col items-center'
-            >
-              <div className='relative w-[100px] h-[65px]'>
-                <Image
-                  src={relatedPost.image_url}
-                  alt={`${relatedPost.title} 이미지`}
-                  fill
-                  className='object-cover rounded-[5px]'
-                />
-              </div>
-              {/* TODO: 추후에 좋아요 카운팅 */}
-              <h3 className='flex items-center text-[12px] gap-[3px]'>
-                <FaPersonRunning />
-                {relatedPost.distance_km}km
-              </h3>
-            </div>
-          ))}
-        </section>
-      </section>
+      <div>
+        <SectionHeader
+          title={'내가 작성한 글'}
+          onClick={onClickHandler}
+        />
+        <ListSection
+          list={userRelatedPostList}
+          emptyMessage={'아직 글이 없어요. 런픽을 보고 달린 뒤, 나만의 기록을 공유해보세요!'}
+        >
+          <RelatedPostList list={userRelatedPostList} />
+        </ListSection>
+      </div>
       <Modal id={'user-related-posts'}>
-        {activeModal === 'user-related-posts' && <UserRelatedPosts userRelatedPostList={userRelatedPostList} />}
+        {activeModal === 'user-related-posts' && <UserRelatedPosts list={userRelatedPostList} />}
       </Modal>
     </>
   );

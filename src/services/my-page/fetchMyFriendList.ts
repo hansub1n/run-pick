@@ -7,7 +7,7 @@ export const fetchMyFriendList = async (userId: string) => {
     .from('friends')
     .select('id, is_favorite, info:users!friend_id(id, nickname)')
     .eq('user_id', userId)
-    .order('created_at', { ascending: true });
+    .order('created_at', { ascending: false });
 
   if (error) {
     console.error('Failed to fetch error: ', error);

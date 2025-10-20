@@ -1,6 +1,6 @@
 import { createClient } from '@/utils/supabase/client';
 
-export const fetchMonthlyStats = async (id: string) => {
+export const fetchMonthlyStats = async (userId: string) => {
   const client = createClient();
 
   const now = new Date();
@@ -10,7 +10,7 @@ export const fetchMonthlyStats = async (id: string) => {
   const { data, error } = await client
     .from('running_proof_posts')
     .select('id, created_at, distance_km')
-    .eq('user_id', id)
+    .eq('user_id', userId)
     .gte('created_at', startOfMonth.toISOString())
     .lte('created_at', endOfMonth.toISOString());
 

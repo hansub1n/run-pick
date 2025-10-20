@@ -12,13 +12,13 @@ export const useActiveChallenge = (userId: string) => {
 
   let completionRate: number | null = null;
 
-  if (Array.isArray(activeChallenge?.challenges)) {
-    activeChallenge.challenges = activeChallenge.challenges[0];
+  if (Array.isArray(activeChallenge?.info)) {
+    activeChallenge.info = activeChallenge.info[0];
   }
 
-  if (activeChallenge?.challenges) {
-    const type = activeChallenge.challenges.type;
-    const target = activeChallenge.challenges.target;
+  if (activeChallenge?.info) {
+    const type = activeChallenge.info.type;
+    const target = activeChallenge.info.target;
 
     if (type === 'distance') {
       completionRate = Math.floor((activeChallenge.progress_km / target) * 100);

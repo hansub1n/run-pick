@@ -1,39 +1,41 @@
-import React from 'react';
-import { FaChevronRight, FaStar } from 'react-icons/fa6';
+import SectionHeader from './SectionHeader';
+import { useModalStore } from '@/stores/useModalStore';
+import ListSection from './ListSection';
+import Modal from '../Modal';
+import FavoriteVideoList from './FavoriteVideoList';
+import { useUserStore } from '@/stores/useUserStore';
+import { useUserFavoriteVideoList } from '@/hooks/queries/useUserFavoriteVideoList';
+import { UserFavoriteVideos } from '@/types/userFavoriteVideos.type';
+import FavoriteVideos from './FavoriteVideos';
 
 const FavoriteVideosSection = () => {
+  const { activeModal, open } = useModalStore();
+  const { id } = useUserStore();
+  const userFavoriteVideoList = useUserFavoriteVideoList(id) as unknown as UserFavoriteVideos;
+
+  const onClickHandler = () => {
+    userFavoriteVideoList.length > 0 && open('favorite-videos');
+  };
+
   return (
-    <section>
+    <>
       <div>
-        <h1 className='flex items-center font-[19px]'>
-          즐겨찾기한 영상
-          <FaChevronRight />
-        </h1>
+        <SectionHeader
+          title={'즐겨찾기한 영상'}
+          onClick={onClickHandler}
+        />
+        <ListSection
+          list={userFavoriteVideoList}
+          emptyMessage='즐겨찾기한 영상이 없어요. 마음에 드는 영상을 추가해보세요!'
+        >
+          <FavoriteVideoList list={userFavoriteVideoList} />
+        </ListSection>
       </div>
-      <section className='flex gap-[7px] pt-[8px]'>
-        <div className='flex flex-col items-center'>
-          <div className='w-[100px] h-[65px] rounded-[5px] bg-[#B5B5B5]' />
-          <h3 className='flex items-center text-[12px] gap-[3px]'>
-            <FaStar />
-            1004
-          </h3>
-        </div>
-        <div className='flex flex-col items-center'>
-          <div className='w-[100px] h-[65px] rounded-[5px] bg-[#B5B5B5]' />
-          <h3 className='flex items-center text-[12px] gap-[3px]'>
-            <FaStar />
-            1004
-          </h3>
-        </div>
-        <div className='flex flex-col items-center'>
-          <div className='w-[100px] h-[65px] rounded-[5px] bg-[#B5B5B5]' />
-          <h3 className='flex items-center text-[12px] gap-[3px]'>
-            <FaStar />
-            1004
-          </h3>
-        </div>
-      </section>
-    </section>
+
+      <Modal id={'favorite-videos'}>
+        {activeModal === 'favorite-videos' && <FavoriteVideos list={userFavoriteVideoList} />}
+      </Modal>
+    </>
   );
 };
 

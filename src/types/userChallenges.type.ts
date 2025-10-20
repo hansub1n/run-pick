@@ -1,5 +1,7 @@
 import { ChallengeType } from './challenges.types';
 
+export type UserChallenges = UserChallenge[];
+
 export type UserChallenge = {
   id: number;
   end_date: string;
@@ -7,7 +9,7 @@ export type UserChallenge = {
   progress_km: number;
   run_count: number;
   completed_at: null | string | Date;
-  challenges: Challenge;
+  info: Challenge;
 };
 
 export type Status = 'in_progress' | 'completed' | 'expired';

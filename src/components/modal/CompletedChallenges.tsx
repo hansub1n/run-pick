@@ -1,21 +1,21 @@
-import { UserChallenge } from '@/types/userChallenge.type';
+import { UserChallenge } from '@/types/userChallenges.type';
 import DefaultChallengeImg from '/public/assets/images/default-challenge-img.webp';
 import Card from '../Card';
 
 type CompletedChallengesProps = {
-  userChallengeList: UserChallenge[];
+  list: UserChallenge[];
 };
 
-const CompletedChallenges = ({ userChallengeList }: CompletedChallengesProps) => {
+const CompletedChallenges = ({ list }: CompletedChallengesProps) => {
   return (
-    <div className='flex flex-col items-center'>
+    <div className='font-semibold flex flex-col items-center'>
       <h1 className='text-[20px] mb-[5px]'>완료한 챌린지</h1>
-      {userChallengeList.map((userChallenge) => (
+      {list.map((challenge) => (
         <Card
-          key={userChallenge.id}
-          imageUrl={userChallenge.challenges.image_url || DefaultChallengeImg}
-          title={userChallenge.challenges.title}
-          subtitle={userChallenge.challenges.description}
+          key={challenge.id}
+          imageUrl={challenge.info.image_url || DefaultChallengeImg}
+          title={challenge.info.title}
+          subtitle={challenge.info.description}
           statIcons={[]}
           isOpenModal={true}
         />

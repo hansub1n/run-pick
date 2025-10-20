@@ -1,7 +1,7 @@
 'use client';
 import MyFriends from '@/components/bottom-sheet/MyFriends';
 import BottomSheet from '@/components/BottomSheet';
-import CompltedChallengesSection from '@/components/my-page/CompltedChallengesSection';
+import CompletedChallengesSection from '@/components/my-page/CompletedChallengesSection';
 import FavoriteVideosSection from '@/components/my-page/FavoriteVideosSection';
 import MonthlyStatsSection from '@/components/my-page/MonthlyStatsSection';
 import MyPostsSection from '@/components/my-page/MyPostsSection';
@@ -54,8 +54,8 @@ const MyPageClient = ({ friendStatus, friendNickname }: MyPageClientProps) => {
       <div className='w-[313px] flex flex-col pt-[30px] pb-[23px]'>
         <UserProfileSection />
         <MonthlyStatsSection />
-        <section className='font-semibold flex flex-col gap-[15px]'>
-          <CompltedChallengesSection />
+        <section className='flex flex-col gap-[15px]'>
+          <CompletedChallengesSection />
           <FavoriteVideosSection />
           <MyPostsSection />
         </section>

@@ -4,19 +4,19 @@ import React from 'react';
 import Card from '../Card';
 
 type UserRelatedPostsPros = {
-  userRelatedPostList: RelatedPosts;
+  list: RelatedPosts;
 };
-const UserRelatedPosts = ({ userRelatedPostList }: UserRelatedPostsPros) => {
+const UserRelatedPosts = ({ list }: UserRelatedPostsPros) => {
   return (
     <div className='relative flex flex-col items-center'>
       <h1 className='top-[-1px] sticky bg-white w-full text-center text-[20px] z-10 pb-[5px]'>내가 작성한 글</h1>
       <section className='w-full pt-[5px]'>
-        {userRelatedPostList.map((relatedPost) => (
+        {list.map((post) => (
           <Card
-            key={relatedPost.id}
-            imageUrl={relatedPost.image_url || DefaultChallengeImg}
-            title={relatedPost.content}
-            subtitle={relatedPost.condition}
+            key={post.id}
+            imageUrl={post.image_url || DefaultChallengeImg}
+            title={post.content}
+            subtitle={post.condition}
             statIcons={[]}
             isOpenModal={true}
           />

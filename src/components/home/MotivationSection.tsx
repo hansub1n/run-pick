@@ -10,8 +10,8 @@ const MotivationSection = () => {
   const { id, nickname } = useUserStore();
   const { activeChallenge, completionRate } = useActiveChallenge(id);
 
-  if (Array.isArray(activeChallenge?.challenges)) {
-    activeChallenge.challenges = activeChallenge.challenges[0];
+  if (Array.isArray(activeChallenge?.info)) {
+    activeChallenge.info = activeChallenge.info[0];
   }
 
   return (
@@ -29,14 +29,14 @@ const MotivationSection = () => {
           <div className='flex justify-between items-end'>
             <p className='text-[8px] text-[#4F4F4F] pb-[4px]'>
               {completionRate}% 달성 ·{' '}
-              {activeChallenge.challenges.type === 'distance'
+              {activeChallenge.info.type === 'distance'
                 ? `${activeChallenge.progress_km}km`
                 : `${activeChallenge.run_count}회`}
             </p>
             <h1 className='text-[24px]'>
-              {activeChallenge.challenges.type === 'distance'
-                ? `${activeChallenge.challenges.target}km`
-                : `${activeChallenge.challenges.target}회`}
+              {activeChallenge.info.type === 'distance'
+                ? `${activeChallenge.info.target}km`
+                : `${activeChallenge.info.target}회`}
             </h1>
           </div>
           <div className='w-[279px] h-[9px] rounded-[10px] bg-white flex'>
