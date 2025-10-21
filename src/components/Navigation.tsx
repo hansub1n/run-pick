@@ -8,7 +8,6 @@ const baseLinks = [
   { href: '/', label: '홈' },
   { href: '/challenges', label: '챌린지' },
   { href: '/videos', label: '런픽' },
-  { href: '/run-proof/new', label: '러닝인증작성' },
 ];
 
 const Navigation = () => {
