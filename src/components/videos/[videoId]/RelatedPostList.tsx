@@ -1,30 +1,24 @@
 'use client';
-import { ParamValue } from 'next/dist/server/request/params';
-import { useRelatedPostList } from '@/hooks/queries/useRelatedPostList';
 import Card from '@/components/Card';
-import { BiSolidLike } from 'react-icons/bi';
 import DefaultProfileImg from '/public/assets/images/default-profile-img.webp';
 import { formatDateShort } from '@/utils/formatDateShort';
 import { formatRunDuration } from '@/utils/formatRunDuration';
 import { formatConditionLabel } from '@/utils/formatConditionLabel';
+import { RelatedPosts } from '@/types/relatedPosts.types';
 
 type RelatedPostListsProps = {
-  videoId: ParamValue;
+  list: RelatedPosts;
 };
-const RelatedPostList = ({ videoId }: RelatedPostListsProps) => {
-  const realatedPostList = useRelatedPostList(videoId);
-
+const RelatedPostList = ({ list }: RelatedPostListsProps) => {
   return (
     <>
-      {realatedPostList.map((realatedPost) => (
+      {list.map((post) => (
         <Card
-          key={realatedPost.id}
-          imageUrl={realatedPost.image_url || DefaultProfileImg}
-          title={realatedPost.content}
-          subtitle={`${realatedPost.distance_km}km | ${formatRunDuration(realatedPost.duration)}`}
-          statIcons={[
-            { label: `${formatConditionLabel(realatedPost.condition)} · ${formatDateShort(realatedPost.created_at)}` },
-          ]}
+          key={post.id}
+          imageUrl={post.image_url || DefaultProfileImg}
+          title={post.content}
+          subtitle={`${post.distance_km}km | ${formatRunDuration(post.duration)}`}
+          statIcons={[{ label: `${formatConditionLabel(post.condition)} · ${formatDateShort(post.created_at)}` }]}
           isOpenModal={false}
         />
       ))}
