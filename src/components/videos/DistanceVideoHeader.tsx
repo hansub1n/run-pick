@@ -1,5 +1,4 @@
 import { SortOption } from '@/types/videos.types';
-import { MouseEventHandler } from 'react';
 import { FaCaretDown } from 'react-icons/fa6';
 
 type DistanceVideoHeaderProps = {

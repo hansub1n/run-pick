@@ -2,9 +2,8 @@
 import DistanceTabs from '@/components/videos/DistanceTabs';
 import DistanceVideoHeader from '@/components/videos/DistanceVideoHeader';
 import VideoList from '@/components/videos/VideoList';
-import { useVideoList } from '@/hooks/queries/useVideoList';
-import { DBVideo, Distance, SortOption } from '@/types/videos.types';
-import { MouseEventHandler, useState } from 'react';
+import { Distance, SortOption } from '@/types/videos.types';
+import { useState } from 'react';
 
 const VideosPage = () => {
   const [selectedDistance, setSelectedDistance] = useState<Distance>('3km');

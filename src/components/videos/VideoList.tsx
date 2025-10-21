@@ -6,7 +6,6 @@ import { Distance, DBVideo, SortOption } from '@/types/videos.types';
 import { useVideoList } from '@/hooks/queries/useVideoList';
 import { formatVideoDuration } from '@/utils/formatVideoDuration';
 import { useVideoDetailStore } from '@/stores/useVideoDetailStore';
-import { useEffect } from 'react';
 
 type VideoListProps = {
   distance: Distance;
