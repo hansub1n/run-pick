@@ -32,7 +32,7 @@ const TopVideosSection = () => {
         <p className='text-[7px] text-[#787878]'>5분만 뛰어도 러너는 러너지. 이번 달도 같이 가요!</p>
       </div>
       <section className='flex gap-[7px] pt-[8px]'>
-        {topVideoList?.map((topVideo) => (
+        {topVideoList?.map((topVideo, idx) => (
           <div
             key={topVideo.id}
             className='flex flex-col items-center'
@@ -50,7 +50,7 @@ const TopVideosSection = () => {
             </div>
             <h3 className='flex items-center text-[10px] gap-[3px]'>
               <FaMedal />
-              {topVideo.proof_count}
+              {idx + 1}
             </h3>
           </div>
         ))}
