@@ -1,3 +1,5 @@
+export type SortOption = 'default' | 'proof' | 'favorite';
+
 export type Distance = '3km' | '5km' | '10km';
 
 export type YoutubeVideo = {

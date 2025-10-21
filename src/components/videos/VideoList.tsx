@@ -2,19 +2,27 @@
 import { FaPersonRunning, FaStar } from 'react-icons/fa6';
 import Card from '../Card';
 import { useRouter } from 'next/navigation';
-import { Distance, DBVideo } from '@/types/videos.types';
+import { Distance, DBVideo, SortOption } from '@/types/videos.types';
 import { useVideoList } from '@/hooks/queries/useVideoList';
 import { formatVideoDuration } from '@/utils/formatVideoDuration';
 import { useVideoDetailStore } from '@/stores/useVideoDetailStore';
+import { useEffect } from 'react';
 
 type VideoListProps = {
   distance: Distance;
+  sortOption: SortOption;
 };
 
-const VideoList = ({ distance }: VideoListProps) => {
+const VideoList = ({ distance, sortOption }: VideoListProps) => {
   const { setVideoDetail } = useVideoDetailStore();
   const router = useRouter();
   const videoList: DBVideo[] = useVideoList(distance) ?? [];
+
+  const sortedVidoList = [...videoList].sort((a, b) => {
+    if (sortOption === 'proof') return b.proof_count - a.proof_count;
+    if (sortOption === 'favorite') return b.favorite_count - a.proof_count;
+    return 0;
+  });
 
   const onClickHandler = (video: DBVideo) => {
     setVideoDetail(video);
@@ -23,7 +31,7 @@ const VideoList = ({ distance }: VideoListProps) => {
 
   return (
     <>
-      {videoList.map((video) => (
+      {sortedVidoList.map((video) => (
         <Card
           key={video.id}
           imageUrl={video.thumbnail_url}
