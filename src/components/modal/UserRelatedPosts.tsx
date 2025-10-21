@@ -4,6 +4,7 @@ import React from 'react';
 import Card from '../Card';
 import { formatDateShort } from '@/utils/formatDateShort';
 import { formatConditionLabel } from '@/utils/formatConditionLabel';
+import { formatRunDuration } from '@/utils/formatRunDuration';
 
 type UserRelatedPostsPros = {
   list: RelatedPosts;
@@ -20,8 +21,8 @@ const UserRelatedPosts = ({ list }: UserRelatedPostsPros) => {
             key={post.id}
             imageUrl={post.image_url || DefaultChallengeImg}
             title={post.content}
-            subtitle={`${post.distance_km}km`}
-            statIcons={[{ label: `${formatConditionLabel(post.condition)} | ${formatDateShort(post.created_at)}` }]}
+            subtitle={`${post.distance_km}km | ${formatRunDuration(post.duration)}`}
+            statIcons={[{ label: `${formatConditionLabel(post.condition)} · ${formatDateShort(post.created_at)}` }]}
             isOpenModal={true}
           />
         ))}

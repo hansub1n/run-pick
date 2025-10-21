@@ -4,6 +4,9 @@ import { useRelatedPostList } from '@/hooks/queries/useRelatedPostList';
 import Card from '@/components/Card';
 import { BiSolidLike } from 'react-icons/bi';
 import DefaultProfileImg from '/public/assets/images/default-profile-img.webp';
+import { formatDateShort } from '@/utils/formatDateShort';
+import { formatRunDuration } from '@/utils/formatRunDuration';
+import { formatConditionLabel } from '@/utils/formatConditionLabel';
 
 type RelatedPostListsProps = {
   videoId: ParamValue;
@@ -18,8 +21,10 @@ const RelatedPostList = ({ videoId }: RelatedPostListsProps) => {
           key={realatedPost.id}
           imageUrl={realatedPost.image_url || DefaultProfileImg}
           title={realatedPost.content}
-          subtitle={`${realatedPost.duration.hours}시간 ${realatedPost.duration.minutes}분 ${realatedPost.duration.seconds}초`}
-          statIcons={[{ icon: <BiSolidLike />, label: 0 }]}
+          subtitle={`${realatedPost.distance_km}km | ${formatRunDuration(realatedPost.duration)}`}
+          statIcons={[
+            { label: `${formatConditionLabel(realatedPost.condition)} · ${formatDateShort(realatedPost.created_at)}` },
+          ]}
           isOpenModal={false}
         />
       ))}
