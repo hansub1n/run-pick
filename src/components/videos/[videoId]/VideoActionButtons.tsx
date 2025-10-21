@@ -6,10 +6,8 @@ import { useAuthStatus } from '@/hooks/queries/useAuthStatus';
 import { GoStar, GoStarFill } from 'react-icons/go';
 import { useUserStore } from '@/stores/useUserStore';
 import { useUserFavoriteVideoList } from '@/hooks/queries/useUserFavoriteVideoList';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { toggleFavoriteVideo } from '@/services/videos/toggleFavoriteVideo';
-import { QUERY_KEYS } from '@/hooks/queries/queryKeys';
 import { useVideoDetailStore } from '@/stores/useVideoDetailStore';
+import { useToggleFavoriteVideo } from '@/hooks/queries/useToggleFavoriteVideo';
 
 type videoActionButtonsProps = {
   videoId: string;
@@ -21,32 +19,15 @@ const VideoActionButtons = ({ videoId }: videoActionButtonsProps) => {
   const { videoDetail } = useVideoDetailStore();
   const userFavoriteVideoList = useUserFavoriteVideoList(userId);
   const router = useRouter();
-  const queryClient = useQueryClient();
 
   const isFavorite = userFavoriteVideoList.some((video) => video.info.youtube_video_id == videoId);
 
-  const mutation = useMutation({
-    mutationFn: () => toggleFavoriteVideo(userId, videoId, isFavorite),
-    onMutate: async () => {
-      await queryClient.cancelQueries({ queryKey: QUERY_KEYS.userFavoriteVideos(userId) });
-      const previousVideo = userFavoriteVideoList;
-
-      const newVideoList = isFavorite
-        ? previousVideo.filter((video) => video.info.youtube_video_id !== videoId)
-        : [...previousVideo, { id: previousVideo.length + 1, info: { ...videoDetail! } }];
-
-      await queryClient.setQueryData(QUERY_KEYS.userFavoriteVideos(userId), newVideoList);
-      return { previousVideo };
-    },
-    onError: (error, _, context) => {
-      if (context?.previousVideo) {
-        console.error(error.message);
-        queryClient.setQueryData(QUERY_KEYS.userFavoriteVideos(userId), context.previousVideo);
-      }
-    },
-    onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.userFavoriteVideos(userId) });
-    },
+  const { mutate: toggleFavoirte } = useToggleFavoriteVideo({
+    userId,
+    videoId,
+    isFavorite,
+    userFavoriteVideoList,
+    videoDetail: videoDetail!,
   });
 
   const handlerFavoriteClick = () => {
@@ -55,7 +36,7 @@ const VideoActionButtons = ({ videoId }: videoActionButtonsProps) => {
       return;
     }
 
-    mutation.mutate();
+    toggleFavoirte();
   };
 
   const handleProofClick = (videoId: string) => {
