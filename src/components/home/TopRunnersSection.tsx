@@ -13,7 +13,7 @@ const TopRunnersSection = () => {
   const { topRunnerList, myRank } = useTopRunnerList(userId);
 
   const onClickHandler = () => {
-    if (topRunnerList.length >= 3) {
+    if (topRunnerList.length > 3) {
       open('top-runners');
     }
   };

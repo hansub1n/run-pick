@@ -10,14 +10,6 @@ const MOCK_TOPRUNNERLIST: [string, { nickname: string; profileImgUrl: StaticImag
   ['MOCK_USER1', { nickname: '케로로 중사', profileImgUrl: MOCK_USER1_IMG, totalDistance: 102 }],
   ['MOCK_USER2', { nickname: '쿠루루 상사', profileImgUrl: MOCK_USER2_IMG, totalDistance: 81 }],
   ['MOCK_USER3', { nickname: '기로로 하사', profileImgUrl: MOCK_USER3_IMG, totalDistance: 3 }],
-  ['MOCK_USER4', { nickname: '미야옹', profileImgUrl: MOCK_USER3_IMG, totalDistance: 3 }],
-  ['MOCK_USER5', { nickname: '미야옹', profileImgUrl: MOCK_USER3_IMG, totalDistance: 3 }],
-  ['MOCK_USER6', { nickname: '미야옹', profileImgUrl: MOCK_USER3_IMG, totalDistance: 3 }],
-  ['MOCK_USER7', { nickname: '미야옹', profileImgUrl: MOCK_USER3_IMG, totalDistance: 3 }],
-  ['MOCK_USER8', { nickname: '미야옹', profileImgUrl: MOCK_USER3_IMG, totalDistance: 3 }],
-  ['MOCK_USER9', { nickname: '미야옹', profileImgUrl: MOCK_USER3_IMG, totalDistance: 3 }],
-  ['MOCK_USER10', { nickname: '미야옹', profileImgUrl: MOCK_USER3_IMG, totalDistance: 3 }],
-  ['MOCK_USER11', { nickname: '미야옹', profileImgUrl: MOCK_USER3_IMG, totalDistance: 3 }],
 ];
 
 export const useTopRunnerList = (userId: string) => {

@@ -14,7 +14,7 @@ type TopRunnerPodiumProps = {
 
 const TopRunnerPodium = ({ topRunnerList }: TopRunnerPodiumProps) => {
   const ORDER = [1, 0, 2];
-  const HEIGHTS = [121, 84, 138];
+  const HEIGHT_CLASSES = ['h-[121px]', 'h-[84px]', 'h-[138px]'];
 
   return (
     <section className='flex'>
@@ -25,7 +25,7 @@ const TopRunnerPodium = ({ topRunnerList }: TopRunnerPodiumProps) => {
         return (
           <div
             key={`${i + 1}-${nickname}`}
-            className={`w-[84px] h-[${HEIGHTS[i]}px] pb-[10px] flex flex-col items-center justify-end`}
+            className={`w-[84px] ${HEIGHT_CLASSES[i]} pb-[10px] flex flex-col items-center justify-end`}
           >
             <h3 className='flex items-center text-[12px] gap-[3px]'>
               <FaMedal />
