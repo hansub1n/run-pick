@@ -1,23 +1,50 @@
-import React from 'react';
+import Image, { StaticImageData } from 'next/image';
 
-const TopRunners = () => {
-  // TODO: 10위 안에 들으면 11등까지, 못들으면 10위까지 + 내 등수
+type TopRunnersProps = {
+  topRunnerList: [
+    string,
+    {
+      nickname: string;
+      profileImgUrl: string | StaticImageData;
+      totalDistance: number;
+    },
+  ][];
+  myRank?: number;
+};
 
+const TopRunners = ({ topRunnerList, myRank }: TopRunnersProps) => {
   return (
-    <div className='flex flex-col items-center'>
-      <h1 className='text-[20px] mb-[5px]'>이달의 러너</h1>
+    <div className='relative flex flex-col items-center'>
+      <h1 className='font-semibold top-[-1px] sticky bg-white w-full text-center text-[20px] z-10 pb-[5px]'>
+        이달의 러너
+      </h1>
       <div className='flex flex-col gap-[2px]'>
-        <div>등수, 이름, 거리, 횟수</div>
-        <div>등수, 이름, 거리, 횟수</div>
-        <div>등수, 이름, 거리, 횟수</div>
-        <div>등수, 이름, 거리, 횟수</div>
-        <div>등수, 이름, 거리, 횟수</div>
-        <div>등수, 이름, 거리, 횟수</div>
-        <div>등수, 이름, 거리, 횟수</div>
-        <div>등수, 이름, 거리, 횟수</div>
-        <div>등수, 이름, 거리, 횟수</div>
-        <div>등수, 이름, 거리, 횟수</div>
-        <div>등수, 이름, 거리, 횟수</div>
+        {topRunnerList.map((runner, idx) => {
+          const [_, info] = runner;
+          const { nickname, profileImgUrl, totalDistance } = info;
+
+          return (
+            <div
+              key={`${idx + 1}-${nickname}`}
+              className={`text-[#494949] flex w-[293px] pr-[10px] py-[3px] items-center gap-[10px] justify-between ${idx + 1 === myRank ? 'bg-[#D9D9D9]' : ''}`}
+            >
+              <h1 className='flex justify-center w-1/6 text-[13px]'>{idx + 1}</h1>
+              <div className='flex flex-grow items-center gap-[10px]'>
+                <div className='relative w-[27px] h-[27px]'>
+                  <Image
+                    src={profileImgUrl}
+                    alt={`${idx + 1}위-${nickname}프로필`}
+                    fill
+                    className='object-cover rounded-full'
+                  />
+                </div>
+                <p className='text-[13px]'>{nickname}</p>
+              </div>
+
+              <p className='flex justify-end w-1/4 text-[13px]'>{totalDistance}km</p>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

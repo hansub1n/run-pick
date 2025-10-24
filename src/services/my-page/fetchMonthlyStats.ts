@@ -1,11 +1,9 @@
+import { getCurrentMonthRange } from '@/utils/getCurrnetMonthRange';
 import { createClient } from '@/utils/supabase/client';
 
 export const fetchMonthlyStats = async (userId: string) => {
   const client = createClient();
-
-  const now = new Date();
-  const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
-  const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+  const { startOfMonth, endOfMonth } = getCurrentMonthRange();
 
   const { data, error } = await client
     .from('running_proof_posts')
