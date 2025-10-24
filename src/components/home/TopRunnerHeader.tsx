@@ -1,4 +1,3 @@
-import { useModalStore } from '@/stores/useModalStore';
 import { FaChevronRight } from 'react-icons/fa6';
 
 type TopRunnerHeaderProps = {

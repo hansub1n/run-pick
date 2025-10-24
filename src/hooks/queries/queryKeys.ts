@@ -1,4 +1,3 @@
-import TopRunners from '@/components/modal/TopRunners';
 import { Level } from '@/types/challenges.types';
 import { Distance } from '@/types/videos.types';
 import { ParamValue } from 'next/dist/server/request/params';

@@ -19,7 +19,7 @@ const TopRunnerPodium = ({ topRunnerList }: TopRunnerPodiumProps) => {
   return (
     <section className='flex'>
       {ORDER.map((idx, i) => {
-        const [_, info] = topRunnerList[idx];
+        const [, info] = topRunnerList[idx];
         const { nickname, profileImgUrl, totalDistance } = info;
 
         return (

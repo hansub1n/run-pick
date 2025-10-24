@@ -20,7 +20,7 @@ const TopRunners = ({ topRunnerList, myRank }: TopRunnersProps) => {
       </h1>
       <div className='flex flex-col gap-[2px]'>
         {topRunnerList.map((runner, idx) => {
-          const [_, info] = runner;
+          const [, info] = runner;
           const { nickname, profileImgUrl, totalDistance } = info;
 
           return (
