@@ -1,4 +1,4 @@
-import { RelatedPosts } from '@/types/relatedPosts.types';
+import { ProofPosts } from '@/types/proofPosts.types';
 import DefaultChallengeImg from '/public/assets/images/default-challenge-img.webp';
 import React from 'react';
 import Card from '../Card';
@@ -6,10 +6,10 @@ import { formatDateShort } from '@/utils/formatDateShort';
 import { formatConditionLabel } from '@/utils/formatConditionLabel';
 import { formatRunDuration } from '@/utils/formatRunDuration';
 
-type UserRelatedPostsPros = {
-  list: RelatedPosts;
+type UserProofPostsPros = {
+  list: ProofPosts;
 };
-const UserRelatedPosts = ({ list }: UserRelatedPostsPros) => {
+const UserProofPosts = ({ list }: UserProofPostsPros) => {
   return (
     <div className='relative flex flex-col items-center'>
       <h1 className='font-semibold top-[-1px] sticky bg-white w-full text-center text-[20px] z-10 pb-[5px]'>
@@ -31,4 +31,4 @@ const UserRelatedPosts = ({ list }: UserRelatedPostsPros) => {
   );
 };
 
-export default UserRelatedPosts;
+export default UserProofPosts;

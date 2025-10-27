@@ -4,12 +4,12 @@ import DefaultProfileImg from '/public/assets/images/default-profile-img.webp';
 import { formatDateShort } from '@/utils/formatDateShort';
 import { formatRunDuration } from '@/utils/formatRunDuration';
 import { formatConditionLabel } from '@/utils/formatConditionLabel';
-import { RelatedPosts } from '@/types/relatedPosts.types';
+import { proofPosts } from '@/types/proofPosts.types';
 
-type RelatedPostListsProps = {
-  list: RelatedPosts;
+type ProofPostListProps = {
+  list: proofPosts;
 };
-const RelatedPostList = ({ list }: RelatedPostListsProps) => {
+const ProofPostList = ({ list }: ProofPostListProps) => {
   return (
     <>
       {list.map((post) => (
@@ -26,4 +26,4 @@ const RelatedPostList = ({ list }: RelatedPostListsProps) => {
   );
 };
 
-export default RelatedPostList;
+export default ProofPostList;

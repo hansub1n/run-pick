@@ -1,22 +1,22 @@
 'use client';
-import { useUserRelatedPostList } from '@/hooks/queries/useUserRelatedPostList';
+import { useUserProofPostList } from '@/hooks/queries/useUserProofPostList';
 import { useUserStore } from '@/stores/useUserStore';
 import Modal from '../Modal';
-import UserRelatedPosts from '../modal/UserRelatedPosts';
+import UserProofPosts from '../modal/UserProofPosts';
 import { useModalStore } from '@/stores/useModalStore';
-import RelatedPostList from './RelatedPostList';
+import ProofPostList from './ProofPostList';
 import SectionHeader from './SectionHeader';
 import ListSection from './ListSection';
-import { RelatedPosts } from '@/types/relatedPosts.types';
+import { ProofPosts } from '@/types/proofPosts.types';
 
 const MyPostsSection = () => {
   const { open, activeModal } = useModalStore();
   const { id } = useUserStore();
-  const userRelatedPostList = useUserRelatedPostList(id) as RelatedPosts;
+  const userProofPostList = useUserProofPostList(id) as ProofPosts;
 
   const onClickHandler = () => {
-    if (userRelatedPostList.length > 0) {
-      open('user-related-posts');
+    if (userProofPostList.length > 0) {
+      open('user-proof-posts');
     }
   };
 
@@ -28,14 +28,14 @@ const MyPostsSection = () => {
           onClick={onClickHandler}
         />
         <ListSection
-          list={userRelatedPostList}
+          list={userProofPostList}
           emptyMessage={'아직 글이 없어요. 런픽을 보고 달린 뒤, 나만의 기록을 공유해보세요!'}
         >
-          <RelatedPostList list={userRelatedPostList} />
+          <ProofPostList list={userProofPostList} />
         </ListSection>
       </div>
-      <Modal id={'user-related-posts'}>
-        {activeModal === 'user-related-posts' && <UserRelatedPosts list={userRelatedPostList} />}
+      <Modal id={'user-proof-posts'}>
+        {activeModal === 'user-proof-posts' && <UserProofPosts list={userProofPostList} />}
       </Modal>
     </>
   );

@@ -1,5 +1,5 @@
 import VideoActionButtons from '@/components/videos/[videoId]/VideoActionButtons';
-import VideoRelatedPosts from '@/components/videos/[videoId]/VideoRelatedPosts';
+import VideoProofPosts from '@/components/videos/[videoId]/VideoProofPosts';
 
 const VideoDetailPage = async ({ params }: { params: Promise<{ videoId: string }> }) => {
   const { videoId } = await params;
@@ -20,7 +20,7 @@ const VideoDetailPage = async ({ params }: { params: Promise<{ videoId: string }
           />
           <VideoActionButtons videoId={videoId} />
         </div>
-        <VideoRelatedPosts videoId={videoId} />
+        <VideoProofPosts videoId={videoId} />
       </div>
     </>
   );

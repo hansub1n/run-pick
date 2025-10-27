@@ -1,6 +1,6 @@
 import { createClient } from '@/utils/supabase/client';
 
-export const fetchUserRelatedPostList = async (userId: string) => {
+export const fetchUserProofPostList = async (userId: string) => {
   const client = createClient();
 
   const { data, error } = await client
@@ -10,7 +10,7 @@ export const fetchUserRelatedPostList = async (userId: string) => {
     .order('created_at', { ascending: false });
 
   if (error) {
-    console.error('Failed fetch to userRelatedPostList: ', error);
+    console.error('Failed fetch to userProofPostList: ', error);
   }
 
   return data ?? [];

@@ -1,8 +1,8 @@
 import { Condition, Duration } from './runProofForm.types';
 
-export type RelatedPosts = RelatedPost[];
+export type ProofPosts = ProofPost[];
 
-export type RelatedPost = {
+export type ProofPost = {
   id: number;
   condition: Condition;
   content: string;

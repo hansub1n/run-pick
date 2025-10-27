@@ -1,9 +1,9 @@
-import { RelatedPosts } from '@/types/relatedPosts.types';
+import { ProofPosts } from '@/types/proofPosts.types';
 import { UserChallenges } from '@/types/userChallenges.type';
 import { UserFavoriteVideos } from '@/types/userFavoriteVideos.type';
 
 type ListSectionProps = {
-  list: UserChallenges | UserFavoriteVideos | RelatedPosts;
+  list: UserChallenges | UserFavoriteVideos | ProofPosts;
   emptyMessage: string;
   children: React.ReactNode;
 };
