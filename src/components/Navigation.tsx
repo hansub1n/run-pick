@@ -1,6 +1,7 @@
 'use client';
 import { useAuthStatus } from '@/hooks/queries/useAuthStatus';
 import { handleSignOut } from '@/utils/supabase/auth';
+import { useQueryClient } from '@tanstack/react-query';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
@@ -11,8 +12,9 @@ const baseLinks = [
 ];
 
 const Navigation = () => {
-  const router = useRouter();
   const { isSignedIn } = useAuthStatus();
+  const router = useRouter();
+  const queryClient = useQueryClient();
 
   const authLinks = isSignedIn ? [{ href: '/my-page', label: '마이페이지' }] : [{ href: '/login', label: '로그인' }];
 
@@ -31,7 +33,7 @@ const Navigation = () => {
       ))}
       {isSignedIn && (
         <button
-          onClick={() => handleSignOut(router)}
+          onClick={() => handleSignOut(router, queryClient)}
           className='cursor-pointer text-[18px] pl-[23px] flex items-center h-[52px]'
         >
           로그아웃

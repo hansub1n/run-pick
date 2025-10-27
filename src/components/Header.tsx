@@ -20,9 +20,6 @@ const Header = () => {
           toggleMenu={toggleMenu}
         />
       </div>
-      {/* <nav>
-        <Navigation />
-      </nav> */}
     </>
   );
 };

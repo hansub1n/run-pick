@@ -6,17 +6,25 @@ import { useModalStore } from '@/stores/useModalStore';
 import Modal from '../Modal';
 import { useState } from 'react';
 import ConfirmChallengeRegister from '../modal/ConfirmChallengeRegister';
+import { useAuthStatus } from '@/hooks/queries/useAuthStatus';
+import { useRouter } from 'next/navigation';
 
 type ChallengeListProps = {
   level: Level;
 };
 
 const ChallengeList = ({ level }: ChallengeListProps) => {
+  const { isSignedIn } = useAuthStatus();
   const { activeModal, open, close } = useModalStore();
   const challengeList = useChallengeList(level);
   const [selectedChallenge, setSelectedChallenge] = useState<null | Challenge>(null);
+  const router = useRouter();
 
   const onClickhandler = (challenge: Challenge) => {
+    if (!isSignedIn) {
+      router.replace('/login');
+      return;
+    }
     setSelectedChallenge(challenge);
     open('confirm-challenge-register');
   };

@@ -1,5 +1,4 @@
 import { QUERY_KEYS } from '@/hooks/queries/queryKeys';
-import { useAuthStatus } from '@/hooks/queries/useAuthStatus';
 import { insertUserChallenge } from '@/services/challenges/insertUserChallenge';
 import { useModalStore } from '@/stores/useModalStore';
 import { useUserStore } from '@/stores/useUserStore';
@@ -15,14 +14,8 @@ type ConfirmChallengeRegisterProps = {
 const ConfirmChallengeRegister = ({ selectedChallenge, onClick }: ConfirmChallengeRegisterProps) => {
   const { id } = useUserStore();
   const { close } = useModalStore();
-  const { isSignedIn } = useAuthStatus();
   const router = useRouter();
   const queryClient = useQueryClient();
-
-  if (!isSignedIn) {
-    router.replace('/login');
-    return;
-  }
 
   if (!selectedChallenge) return;
 
