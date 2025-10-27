@@ -1,6 +1,5 @@
-import { QUERY_KEYS } from '@/hooks/queries/queryKeys';
 import { createClient } from '@/utils/supabase/client';
-import { QueryClient, useQueryClient } from '@tanstack/react-query';
+import { QueryClient } from '@tanstack/react-query';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 
 const client = createClient();
