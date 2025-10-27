@@ -4,10 +4,10 @@ import DefaultProfileImg from '/public/assets/images/default-profile-img.webp';
 import { formatDateShort } from '@/utils/formatDateShort';
 import { formatRunDuration } from '@/utils/formatRunDuration';
 import { formatConditionLabel } from '@/utils/formatConditionLabel';
-import { proofPosts } from '@/types/proofPosts.types';
+import { ProofPosts } from '@/types/proofPosts.types';
 
 type ProofPostListProps = {
-  list: proofPosts;
+  list: ProofPosts;
 };
 const ProofPostList = ({ list }: ProofPostListProps) => {
   return (
