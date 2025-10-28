@@ -97,10 +97,9 @@ const RunProofForm = () => {
             onSelect={onSelectHandler}
           />
         </section>
-        {/* TODO: 완료 버튼 클릭 시 확인 모달 렌더링 */}
         <button
           type='submit'
-          className='my-[30px] w-full h-[53px] rounded-[10px] bg-[#4F4F4F] text-[20px] text-[#ffffff]'
+          className='my-[30px] w-full h-[53px] rounded-[10px] bg-[#007aff] text-[20px]'
         >
           완료
         </button>

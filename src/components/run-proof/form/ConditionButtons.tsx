@@ -44,7 +44,7 @@ export const ConditionButtons = React.memo(({ selected, onSelect }: CondtionButt
                 onSelect(condition.value as Condition);
               }
             }}
-            className={`w-1/4 rounded-[15px] border py-[5px] text-[14px] ${selected === condition.value ? 'text-[#ffffff] bg-[#171717]' : 'text-[#000000] bg-[#ffffff]'}`}
+            className={`w-1/4 rounded-[15px] border py-[5px] text-[14px] ${selected === condition.value ? 'text-[#141414] bg-[#fafafa]' : 'bg-[#141414]'}`}
           >
             {condition.label}
           </button>
