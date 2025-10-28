@@ -34,13 +34,13 @@ const ConfirmChallengeRegister = ({ selectedChallenge, onClick }: ConfirmChallen
       <div className='mt-[20px] flex gap-[18px] text-[14px]'>
         <button
           onClick={onClick}
-          className='px-[35px] py-[7px] bg-[#EAEAEA] rounded-[10px]'
+          className='px-[35px] py-[7px] bg-[#414141] rounded-[10px]'
         >
           취소
         </button>
         <button
           onClick={() => onClickHandler(id, selectedChallenge.id)}
-          className='px-[35px] py-[7px] bg-[#AFAFAF] rounded-[10px]'
+          className='px-[35px] py-[7px] bg-[#007aff] rounded-[10px]'
         >
           등록
         </button>
