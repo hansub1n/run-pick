@@ -6,7 +6,7 @@ const TopVideosSection = () => {
   return (
     <section>
       <div>
-        <h1 className='flex items-center'>
+        <h1 className='flex items-center font-semibold'>
           <Link
             href={'/videos'}
             className='flex items-center gap-[2px]'
@@ -15,7 +15,7 @@ const TopVideosSection = () => {
             <FaChevronRight />
           </Link>
         </h1>
-        <p className='text-[7px] text-[#787878]'>5분만 뛰어도 러너는 러너지. 이번 달도 같이 가요!</p>
+        <p className='text-[10px] text-[#787878] font-medium'>5분만 뛰어도 러너는 러너지. 이번 달도 같이 가요!</p>
       </div>
       <TopVideoList />
     </section>

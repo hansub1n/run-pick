@@ -5,7 +5,7 @@ import TopVideosSection from '@/components/home/TopVideosSection';
 
 export default function Home() {
   return (
-    <div className='w-[313px] font-semibold flex flex-col gap-[23px] py-[23px]'>
+    <div className='w-[313px] flex flex-col gap-[23px] py-[23px]'>
       <MotivationSection />
       <TopVideosSection />
       <ChallengePromptSection />

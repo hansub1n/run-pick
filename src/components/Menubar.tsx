@@ -25,9 +25,9 @@ const Menubar = ({ isMenuOpen, toggleMenu }: MenubarProps) => {
         <>
           <div
             onClick={toggleMenu}
-            className='z-10 fixed inset-0 bg-black/50'
+            className='z-10 fixed inset-0 bg-black/70 backdrop-blur-sm'
           />
-          <div className='z-20 fixed left-0 top-0 pt-[5px] w-[240px] h-full bg-white flex flex-col font-semibold'>
+          <div className='z-20 fixed left-0 top-0 pt-[5px] w-[240px] h-full bg-[#1a1a1a] flex flex-col font-semibold'>
             <div className='pr-[12px] w-[full] h-[48px] flex justify-end items-center'>
               <IoCloseOutline
                 onClick={toggleMenu}

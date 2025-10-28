@@ -15,7 +15,7 @@ const ChallengePromptSection = () => {
   const router = useRouter();
 
   return (
-    <div className='h-[86px] rounded-[10px] bg-[#D9D9D9] '>
+    <div className='h-[86px] rounded-[10px] bg-[#414141] '>
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         loop={true}
@@ -33,11 +33,11 @@ const ChallengePromptSection = () => {
       >
         {ChallengePrompts.map((prompt, idx) => (
           <SwiperSlide key={idx}>
-            <div className='px-[17px] py-[14px] font-semibold'>
-              <h1>{prompt.label}</h1>
+            <div className='px-[17px] py-[14px]'>
+              <h1 className='font-semibold'>{prompt.label}</h1>
               <button
                 onClick={() => router.push('/challenges')}
-                className='cursor-pointer mt-[8px] px-[8px] py-[4px] rounded-[5px] bg-[#B5B5B5] text-[12px] text-white'
+                className='cursor-pointer mt-[8px] px-[8px] py-[4px] rounded-[5px] bg-[#007AFF] text-[12px] font-medium'
               >
                 챌린지 보러가기
               </button>

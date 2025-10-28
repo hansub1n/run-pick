@@ -11,7 +11,6 @@ const TopRunnersSection = () => {
   const { id: userId } = useUserStore();
   const { activeModal, open } = useModalStore();
   const { topRunnerList, myRank } = useTopRunnerList(userId);
-
   const onClickHandler = () => {
     if (topRunnerList.length > 3) {
       open('top-runners');
@@ -22,12 +21,12 @@ const TopRunnersSection = () => {
     <>
       <div>
         <TopRunnerHeader onClick={onClickHandler} />
-        <div className='relative mt-[8px] h-[193px] rounded-[10px] bg-[#D9D9D9] flex flex-col items-center justify-between'>
+        <div className='relative mt-[8px] h-[203px] rounded-[10px] bg-[#FAFAFA] flex flex-col items-center justify-between'>
           <TopRunnerPodium topRunnerList={topRunnerList.slice(0, 3)} />
-          <div className='flex items-end absolute bottom-0'>
-            <div className='w-[84px] h-[72px] bg-[#787878]' />
-            <div className='w-[84px] h-[109px] bg-[#787878]' />
-            <div className='w-[84px] h-[55px] bg-[#787878]' />
+          <div className='flex items-end absolute bottom-0 gap-[10px]'>
+            <div className='w-[84px] h-[72px] bg-[#007AFF] rounded-t-[5px]' />
+            <div className='w-[84px] h-[109px] bg-[#007AFF] rounded-t-[5px]' />
+            <div className='w-[84px] h-[55px] bg-[#007AFF] rounded-t-[5px]' />
           </div>
         </div>
       </div>
