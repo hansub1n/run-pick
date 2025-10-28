@@ -40,7 +40,7 @@ const Card = ({ imageUrl, title, subtitle, statIcons, onClick, children, isOpenM
             <h3
               key={`statIcon-${index}`}
               onClick={statIcon.onClick}
-              className='flex items-center gap-[3px] rounded-[3px] px-[6px] py-[2px] bg-[#007aff]'
+              className={`flex items-center gap-[3px] rounded-[3px] px-[6px] py-[2px] ${statIcon.onClick ? 'bg-[#007aff] text-[#141414]' : 'bg-[#141414] text-[#007aff]'}`}
             >
               <span>{statIcon.icon}</span>
               <span>{statIcon.label}</span>

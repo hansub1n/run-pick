@@ -15,7 +15,7 @@ const VideosPage = () => {
 
   return (
     <div className='w-[313px] pb-[23px]'>
-      <div className='sticky top-[55px] pt-[23px] bg-white z-3'>
+      <div className='sticky top-[55px] pt-[23px] bg-[#1a1a1a] z-3'>
         <DistanceVideoHeader
           sortOption={sortOption}
           onSortOptionChange={handleSortChange}
