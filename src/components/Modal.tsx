@@ -30,13 +30,13 @@ const Modal = ({ children, id }: ModalProps) => {
             className='z-10 fixed inset-0 bg-black/70 backdrop-blur-sm'
           />
           <section className='z-20 absolute top-1/5 left-1/2 transform -translate-x-1/2 fixed w-[313px] pt-[10px] pb-[20px] px-[10px] bg-[#1a1a1a] rounded-[10px]'>
-            <div className='w-[full] h-[30px] flex justify-end items-center'>
+            <div className='w-full h-[30px] flex justify-end items-center'>
               <IoCloseOutline
                 onClick={close}
                 className='cursor-pointer w-[25px] h-[25px]'
               />
             </div>
-            <div className='overflow-y-auto max-h-[50vh]'>{children}</div>
+            <div className='overflow-y-auto scrollbar-hide max-h-[50vh]'>{children}</div>
           </section>
         </>
       )}

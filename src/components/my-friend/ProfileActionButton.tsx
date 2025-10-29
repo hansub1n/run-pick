@@ -10,7 +10,7 @@ const ProfileActionButton = ({ modalId, label }: ProfileActionButtonProps) => {
   return (
     <button
       onClick={() => open(modalId)}
-      className='text-[12px] text-[#A4A2A2] px-[9px] border border-[#A4A2A2] rounded-[10px]'
+      className='text-[12px] text-[#787878] px-[9px] border border-[#787878] rounded-[10px]'
     >
       {label}
     </button>

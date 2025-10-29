@@ -27,7 +27,7 @@ const MonthlyStatsSection = ({ friendId }: MonthlyStatsSectionProps) => {
             value={totalDistance}
             unit='km'
           />
-          <div className='bg-[#D9D9D9] w-[1px] h-[30px]' />
+          <div className='bg-[#787878] w-[1px] h-[30px]' />
           <StatCard
             title='총 누적 횟수'
             value={totalRuns}

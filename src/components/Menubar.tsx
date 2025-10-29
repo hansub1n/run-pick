@@ -3,25 +3,25 @@ import Navigation from './Navigation';
 import { useEffect } from 'react';
 
 type MenubarProps = {
-  isMenuOpen: boolean;
+  isOpen: boolean;
   toggleMenu: () => void;
 };
 
-const Menubar = ({ isMenuOpen, toggleMenu }: MenubarProps) => {
+const Menubar = ({ isOpen, toggleMenu }: MenubarProps) => {
   useEffect(() => {
     // TODO: 데스크탑에서 모달 오픈했을 시 스크롤바 너비 생각해야 됨
-    if (isMenuOpen) {
+    if (isOpen) {
       document.body.style.overflow = 'hidden';
       document.body.style.paddingRight = '';
     } else {
       document.body.style.overflow = '';
       document.body.style.paddingRight = '';
     }
-  }, [isMenuOpen]);
+  }, [isOpen]);
 
   return (
     <>
-      {isMenuOpen && (
+      {isOpen && (
         <>
           <div
             onClick={toggleMenu}

@@ -28,7 +28,7 @@ const MyFriends = () => {
         onChange={handleNicknameChange}
       />
       {friendList.length === 0 ? (
-        <p className='w-full px-[6px] py-[22px] text-center text-[14px] text-[#5C5C5C]'>
+        <p className='w-full px-[6px] py-[22px] text-center text-[12px] text-[#5C5C5C]'>
           아직 친구가 없어요. 새로운 친구를 추가해보세요!
         </p>
       ) : (

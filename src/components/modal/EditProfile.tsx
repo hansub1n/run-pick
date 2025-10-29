@@ -92,13 +92,13 @@ const EditProfile = () => {
           value={newProfile.nickname}
           placeholder='새로운 닉네임'
           onChange={onChangeProfileHandler}
-          className='h-[32px] rounded-[10px] border pl-[10px] border-[#787878]'
+          className='h-[32px] rounded-[10px] border pl-[10px] border-[#414141]'
         />
       </div>
       <div className='mt-[20px] flex gap-[18px] text-[14px]'>
         <button
           onClick={onClickHandler}
-          className='px-[35px] py-[7px] bg-[#AFAFAF] rounded-[10px] font-semibold'
+          className='px-[35px] py-[7px] bg-[#007aff] rounded-[10px] font-semibold'
         >
           등록
         </button>

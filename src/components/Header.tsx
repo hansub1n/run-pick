@@ -1,12 +1,11 @@
 'use client';
 
-import { useState } from 'react';
 import Menubar from './Menubar';
 import { FiMenu } from 'react-icons/fi';
+import { useMenuStore } from '@/stores/useMenuStore';
 
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const { isOpen, toggleMenu } = useMenuStore();
 
   return (
     <>
@@ -16,7 +15,7 @@ const Header = () => {
           className='cursor-pointer w-[25px] h-[25px] absolute left-[15px] top-[15px]'
         />
         <Menubar
-          isMenuOpen={isMenuOpen}
+          isOpen={isOpen}
           toggleMenu={toggleMenu}
         />
       </div>

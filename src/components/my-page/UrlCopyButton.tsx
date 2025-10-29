@@ -18,7 +18,7 @@ const UrlCopyButton = ({ userId }: UrlCopyButtonProps) => {
   return (
     <div
       onClick={onClickhandler}
-      className='absolute gap-[25px] py-[7px] px-[12px] flex items-center right-[23px] top-[-43px] rounded-[10px] bg-[#ACACAC]'
+      className='cursor-pointer absolute gap-[25px] py-[7px] px-[12px] flex items-center right-[23px] top-[-43px] rounded-[10px] bg-[#414141]'
     >
       <p>카카오톡으로 친구 초대</p>
       <RiKakaoTalkFill className='w-[25px] h-[25px]' />
