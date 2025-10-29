@@ -14,7 +14,7 @@ const DistanceVideoHeader = ({ sortOption, onSortOptionChange }: DistanceVideoHe
         <select
           value={sortOption}
           onChange={onSortOptionChange}
-          className='appearance-none font-medium text-[10px] w-[100px] h-[23px] pl-[15px] rounded-[15px] border border-[#007aff] bg-[#007aff]'
+          className='cursor-pointer appearance-none font-medium text-[10px] w-[100px] h-[23px] pl-[15px] rounded-[15px] border border-[#007aff] bg-[#007aff]'
         >
           <option value='default'>기본 순</option>
           <option value='proof'>인증글 순</option>

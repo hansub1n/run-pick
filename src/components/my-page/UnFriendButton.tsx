@@ -11,7 +11,7 @@ const UnFriendButton = ({ modalId }: UnFriendButtonProps) => {
   return (
     <FaCircleMinus
       onClick={() => open(modalId)}
-      className='w-[20px] h-[20px]'
+      className='cursor-pointer w-[20px] h-[20px]'
     />
   );
 };

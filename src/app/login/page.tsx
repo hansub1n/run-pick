@@ -28,7 +28,7 @@ const LoginPage = () => {
         <button
           key={provider.value}
           onClick={provider.onClick}
-          className='w-full h-[53px] rounded-[10px] bg-[#4F4F4F] text-[20px] text-[#ffffff]'
+          className='cursor-pointer w-full h-[53px] rounded-[10px] bg-[#4F4F4F] text-[20px] text-[#ffffff]'
         >
           {provider.label}
         </button>

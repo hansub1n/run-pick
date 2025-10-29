@@ -39,7 +39,7 @@ const PhotoUploadField = ({ videoDetail, onChange }: PhotoUploadFieldProps) => {
         {videoDetail?.distance_category}km | {videoDetail?.title}
       </p>
       {previewUrl ? (
-        <div className='h-[160px] w-[313px] rounded-[15px] bg-black relative overflow-hidden'>
+        <div className='cursor-pointer h-[160px] w-[313px] rounded-[15px] bg-black relative overflow-hidden'>
           <Image
             src={previewUrl}
             alt='미리보기'
@@ -50,7 +50,7 @@ const PhotoUploadField = ({ videoDetail, onChange }: PhotoUploadFieldProps) => {
       ) : (
         <label
           htmlFor='file-upload'
-          className='h-[160px] rounded-[15px] border flex flex-col justify-center items-center'
+          className='cursor-pointer h-[160px] rounded-[15px] border flex flex-col justify-center items-center'
         >
           <IoMdPhotos className='w-[70px] h-[70px]' />
           <p className='text-[14px]'>사진 추가</p>

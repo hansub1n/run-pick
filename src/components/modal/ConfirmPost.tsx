@@ -28,13 +28,13 @@ const ConfirmPost = ({ onConfirm }: ConfirmPostProps) => {
       <div className='mt-[20px] flex gap-[18px] text-[14px]'>
         <button
           onClick={close}
-          className='px-[35px] py-[7px] bg-[#414141] rounded-[10px]'
+          className='cursor-pointer px-[35px] py-[7px] bg-[#414141] rounded-[10px]'
         >
           취소
         </button>
         <button
           onClick={onConfirm}
-          className='px-[35px] py-[7px] bg-[#007aff] rounded-[10px]'
+          className='cursor-pointer px-[35px] py-[7px] bg-[#007aff] rounded-[10px]'
         >
           등록
         </button>

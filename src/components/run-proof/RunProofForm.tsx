@@ -99,7 +99,7 @@ const RunProofForm = () => {
         </section>
         <button
           type='submit'
-          className='my-[30px] w-full h-[53px] rounded-[10px] bg-[#007aff] text-[20px]'
+          className='cursor-pointer my-[30px] w-full h-[53px] rounded-[10px] bg-[#007aff] text-[20px]'
         >
           완료
         </button>

@@ -75,7 +75,7 @@ const EditProfile = () => {
             />
           </div>
           <label htmlFor='file-upload'>
-            <FaEdit className='z-12 absolute bottom-[3px] right-[-4px] w-[25px] h-[25px]' />
+            <FaEdit className='cursor-pointer z-12 absolute bottom-[3px] right-[-4px] w-[25px] h-[25px]' />
           </label>
           <input
             id='file-upload'
@@ -98,7 +98,7 @@ const EditProfile = () => {
       <div className='mt-[20px] flex gap-[18px] text-[14px]'>
         <button
           onClick={onClickHandler}
-          className='px-[35px] py-[7px] bg-[#007aff] rounded-[10px] font-semibold'
+          className='cursor-pointer px-[35px] py-[7px] bg-[#007aff] rounded-[10px] font-semibold'
         >
           등록
         </button>

@@ -15,7 +15,7 @@ const FriendInviteButton = () => {
       {isInviteOpen && <UrlCopyButton userId={id} />}
       <ImUserPlus
         onClick={onClickHandler}
-        className='w-[27px] h-[27px]'
+        className='cursor-pointer w-[27px] h-[27px]'
       />
     </div>
   );

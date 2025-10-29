@@ -11,7 +11,7 @@ const ChallengesHeader = () => {
       <div className='flex items-end gap-[2px]'>
         <FaQuestion
           onClick={onClickhandler}
-          className='text-[12px] bg-[#414141] p-[3px] rounded-full'
+          className='cursor-pointer text-[12px] bg-[#414141] p-[3px] rounded-full'
         />
         <p
           className={`font-medium text-[8px] px-[8px] py-[5px] rounded-[10px] bg-[#414141] transition-opacity duration-300 ${

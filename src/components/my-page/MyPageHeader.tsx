@@ -11,7 +11,7 @@ const MyPageHeader = () => {
     <header className={`${isMenuOpen ? 'z-4' : 'z-5'} fixed right-[15px] top-[15px]`}>
       <FaUserFriends
         onClick={open}
-        className='w-[25px] h-[25px]'
+        className='cursor-pointer w-[25px] h-[25px]'
       />
     </header>
   );

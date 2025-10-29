@@ -26,9 +26,9 @@ const FriendCard = ({ isFavorite, friendInfo }: FriendCardProps) => {
       <div className='flex items-center w-full px-[6px] py-[15px] border-b'>
         <div onClick={() => onClickHandler()}>
           {isFavorite ? (
-            <GoStarFill className='w-[24px] h-[24px] mr-[21px]' />
+            <GoStarFill className='cursor-pointer w-[24px] h-[24px] mr-[21px]' />
           ) : (
-            <GoStar className='w-[24px] h-[24px] p-[1px] mr-[21px]' />
+            <GoStar className='cursor-pointer w-[24px] h-[24px] p-[1px] mr-[21px]' />
           )}
         </div>
 

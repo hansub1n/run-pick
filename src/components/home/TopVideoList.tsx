@@ -24,7 +24,7 @@ const TopVideoList = () => {
           className='flex flex-col items-center'
         >
           <div
-            className='relative min-w-[100px] min-h-[65px]'
+            className='cursor-pointer relative min-w-[100px] min-h-[65px]'
             onClick={() => onClickHandler(topVideo)}
           >
             <Image
