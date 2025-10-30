@@ -21,10 +21,10 @@ const FavoriteVideos = ({ list }: FavoriteVideosProps) => {
 
   return (
     <div className='relative flex flex-col items-center'>
-      <h1 className='font-semibold top-[-1px] sticky bg-white w-full text-center text-[20px] z-10 pb-[5px]'>
+      <h1 className='font-semibold top-[-1px] sticky bg-[#1a1a1a] w-full text-center text-[20px] z-10 pb-[5px]'>
         즐겨찾기한 영상
       </h1>
-      <section className='w-[full] pt-[5px]'>
+      <section className='w-full pt-[5px]'>
         {list.map((video) => (
           <Card
             key={video.id}

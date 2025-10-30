@@ -19,9 +19,10 @@ type CardProps = {
 const Card = ({ imageUrl, title, subtitle, statIcons, onClick, children, isOpenModal }: CardProps) => {
   return (
     <div
-      className='cursor-pointer min-h-[100px] py-[17px] border-b border-[#D9D9D9] flex gap-[16px]'
+      className={`${statIcons[0]?.onClick ? '' : 'cursor-pointer'} flex gap-[16px]  min-h-[100px] py-[17px] px-[10px] rounded-lg shadow-md transition-all hover:bg-[#2e2e2e] hover:scale-[1.01]`}
       onClick={onClick}
     >
+      {/* TODO: px-[10px] 모바일 확인 */}
       <div className={`relative min-h-[65px] ${isOpenModal ? 'min-w-[84px]' : 'min-w-[104px]'}`}>
         <Image
           src={imageUrl}
@@ -30,21 +31,24 @@ const Card = ({ imageUrl, title, subtitle, statIcons, onClick, children, isOpenM
           className='object-cover rounded-[10px]'
         />
       </div>
-      <div className={`min-w-[193px] h-[65px] flex flex-col justify-between ${isOpenModal && 'pr-[10px]'}`}>
+      <div className='min-w-[193px] h-[65px] flex flex-col justify-between pr-[20px]'>
+        {/* TODO: pr-[20px] 모바일 확인 */}
         <div>
-          <h1 className='text-[12px] font-medium break-words line-clamp-2'>{title}</h1>
-          <p className={`font-medium text-[10px]`}>{typeof subtitle === 'function' ? subtitle() : subtitle}</p>
+          <h3 className='text-[12px] font-semibold break-words line-clamp-2'>{title}</h3>
+          <p className='font-medium text-[#787878] text-[10px]'>
+            {typeof subtitle === 'function' ? subtitle() : subtitle}
+          </p>
         </div>
-        <div className={`font-semibold text-[10px] flex gap-[6px] justify-end`}>
-          {statIcons.map((statIcon, index) => (
-            <h3
-              key={`statIcon-${index}`}
-              onClick={statIcon.onClick}
-              className='flex items-center gap-[2px]'
+        <div className='flex justify-end gap-[6px]'>
+          {statIcons.map((icon, idx) => (
+            <button
+              key={idx}
+              onClick={icon.onClick}
+              className={`flex items-center gap-[3px] px-3 py-1 rounded-md text-[10px] font-semibold transition-colors
+        ${icon.onClick ? 'bg-[#007AFF] text-[#141414] hover:bg-[#339EFF] cursor-pointer' : 'bg-[#141414] text-[#bbbbbb]'}`}
             >
-              <span>{statIcon.icon}</span>
-              <span>{statIcon.label}</span>
-            </h3>
+              {icon.icon} {icon.label}
+            </button>
           ))}
         </div>
       </div>

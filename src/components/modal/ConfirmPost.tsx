@@ -18,23 +18,23 @@ const ConfirmPost = ({ onConfirm }: ConfirmPostProps) => {
   }
 
   return (
-    <div className='flex flex-col items-center font-semibold text-center'>
-      <h1 className='text-[20px]'>확인 안내</h1>
-      <p className='text-[14px] mt-2 leading-[1.5] text-gray-700'>
+    <div className='flex flex-col items-center text-center'>
+      <h1 className='font-semibold text-[20px]'>확인 안내</h1>
+      <p className='font-medium text-[14px] mt-2 leading-[1.5] text-[#cccccc]'>
         작성한 기록은 등록 후 수정할 수 없습니다.
         <br />
         이대로 등록하시겠습니까?
       </p>
-      <div className='mt-[20px] flex gap-[18px] text-[14px]'>
+      <div className='font-semibold mt-[20px] flex gap-[18px] text-[14px]'>
         <button
           onClick={close}
-          className='px-[35px] py-[7px] bg-[#EAEAEA] rounded-[10px]'
+          className='cursor-pointer px-[35px] py-[7px] bg-[#414141] rounded-[10px] transition-colors hover:bg-[#333333]'
         >
           취소
         </button>
         <button
           onClick={onConfirm}
-          className='px-[35px] py-[7px] bg-[#AFAFAF] rounded-[10px]'
+          className='cursor-pointer px-[35px] py-[7px] bg-[#007aff] rounded-[10px] transition-colors hover:bg-[#0066cc]'
         >
           등록
         </button>

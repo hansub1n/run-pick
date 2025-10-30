@@ -15,7 +15,7 @@ type TopRunnersProps = {
 const TopRunners = ({ topRunnerList, myRank }: TopRunnersProps) => {
   return (
     <div className='relative flex flex-col items-center'>
-      <h1 className='font-semibold top-[-1px] sticky bg-white w-full text-center text-[20px] z-10 pb-[5px]'>
+      <h1 className='font-semibold top-[-1px] sticky w-full bg-[#1a1a1a] text-center text-[20px] z-10 pb-[5px]'>
         이달의 러너
       </h1>
       <div className='flex flex-col gap-[2px]'>
@@ -26,7 +26,8 @@ const TopRunners = ({ topRunnerList, myRank }: TopRunnersProps) => {
           return (
             <div
               key={`${idx + 1}-${nickname}`}
-              className={`text-[#494949] flex w-[293px] pr-[10px] py-[3px] items-center gap-[10px] justify-between ${idx + 1 === myRank ? 'bg-[#D9D9D9]' : ''}`}
+              className={`font-medium flex w-[293px] pr-[10px] py-[3px] items-center gap-[10px] justify-between rounded-md transition-colors
+    ${idx + 1 === myRank ? 'bg-[#007AFF]' : 'bg-[#2a2a2a] text-[#787878] hover:bg-[#333]'}`}
             >
               <h1 className='flex justify-center w-1/6 text-[13px]'>{idx + 1}</h1>
               <div className='flex flex-grow items-center gap-[10px]'>

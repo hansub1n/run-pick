@@ -12,7 +12,7 @@ type UserProofPostsPros = {
 const UserProofPosts = ({ list }: UserProofPostsPros) => {
   return (
     <div className='relative flex flex-col items-center'>
-      <h1 className='font-semibold top-[-1px] sticky bg-white w-full text-center text-[20px] z-10 pb-[5px]'>
+      <h1 className='font-semibold top-[-1px] sticky bg-[#1a1a1a] w-full text-center text-[20px] z-10 pb-[5px]'>
         내가 작성한 글
       </h1>
       <section className='w-full pt-[5px]'>

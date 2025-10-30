@@ -9,12 +9,12 @@ type DistanceVideoHeaderProps = {
 const DistanceVideoHeader = ({ sortOption, onSortOptionChange }: DistanceVideoHeaderProps) => {
   return (
     <div className='flex justify-between items-center mb-[7px]'>
-      <h1 className='font-semibold text-[20px]'> 거리별 영상</h1>
+      <h1 className='font-semibold text-[20px] text-[#fafafa]'>거리별 영상</h1>
       <div className='relative'>
         <select
           value={sortOption}
           onChange={onSortOptionChange}
-          className='appearance-none font-regular text-[9px] w-[100px] h-[23px] pl-[15px] rounded-[15px] border'
+          className='cursor-pointer appearance-none font-medium text-[10px] w-[100px] h-[23px] pl-[15px] rounded-[15px] border border-[#007AFF] bg-[#262626] transition-colors hover:bg-[#333333]'
         >
           <option value='default'>기본 순</option>
           <option value='proof'>인증글 순</option>

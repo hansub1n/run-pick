@@ -1,15 +1,17 @@
 'use client';
 import { useBottomSheetStore } from '@/stores/useBottomSheetStore';
+import { useMenuStore } from '@/stores/useMenuStore';
 import { FaUserFriends } from 'react-icons/fa';
 
 const MyPageHeader = () => {
+  const { isOpen: isMenuOpen } = useMenuStore();
   const { open } = useBottomSheetStore();
 
   return (
-    <header className='z-5 fixed absolute right-[15px] top-[15px]'>
+    <header className={`${isMenuOpen ? 'z-4' : 'z-5'} fixed right-[15px] top-[15px]`}>
       <FaUserFriends
         onClick={open}
-        className='w-[25px] h-[25px]'
+        className='cursor-pointer w-[25px] h-[25px]'
       />
     </header>
   );

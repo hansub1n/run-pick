@@ -52,7 +52,7 @@ const VideoActionButtons = ({ videoId }: videoActionButtonsProps) => {
       <div className='mt-[14px] flex gap-[24px] justify-center'>
         <VideoActionButton
           onClick={handlerFavoriteClick}
-          label={'즐겨찾기'}
+          label={isFavorite ? '추가됨' : '즐겨찾기'}
           icon={isFavorite ? <GoStarFill className='w-[16px] h-[16px]' /> : <GoStar className='w-[16px] h-[16px]' />}
         />
         <VideoActionButton

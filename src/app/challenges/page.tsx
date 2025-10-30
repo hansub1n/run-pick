@@ -10,8 +10,8 @@ const ChallengesPage = () => {
 
   const handleLevelChange = (level: Level) => setSelectedLevel(level);
   return (
-    <div className='w-[313px] pb-[23px]'>
-      <div className='sticky top-[55px] pt-[7px] bg-white z-3'>
+    <div className='flex flex-col items-center pb-[23px]'>
+      <div className='sticky w-[330px] top-[55px] pt-[7px] bg-[#1a1a1a] z-3'>
         <ChallengesHeader />
         <ChallengeTabs
           level={selectedLevel}

@@ -17,14 +17,14 @@ const TopVideoList = () => {
   };
 
   return (
-    <section className='flex gap-[7px] pt-[8px]'>
+    <section className='flex gap-[6px] pt-[8px]'>
       {topVideoList?.map((topVideo, idx) => (
         <div
           key={topVideo.id}
           className='flex flex-col items-center'
         >
           <div
-            className='relative min-w-[100px] min-h-[65px]'
+            className='cursor-pointer relative min-w-[100px] min-h-[65px]'
             onClick={() => onClickHandler(topVideo)}
           >
             <Image
@@ -34,7 +34,7 @@ const TopVideoList = () => {
               className='object-cover rounded-[10px]'
             />
           </div>
-          <h3 className='flex items-center text-[10px] gap-[3px]'>
+          <h3 className='flex items-center text-[12px] gap-[3px] font-semibold'>
             <FaMedal />
             {idx + 1}
           </h3>

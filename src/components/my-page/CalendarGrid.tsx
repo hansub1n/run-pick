@@ -9,12 +9,13 @@ const CalendarGrid = ({ weeks, posts }: CalendarGridProps) => {
   const today = new Date();
 
   return (
-    <div className='w-[313px] p-3 rounded-[10px] bg-[#D9D9D9]'>
-      <div className='grid grid-cols-7 text-center font-semibold text-sm'>
+    <div className='w-[313px] p-3 rounded-[10px] bg-[#141414] shadow-md'>
+      <div className='grid grid-cols-7 text-center font-semibold text-[13px] text-[#787878] mb-2'>
         {daysOfWeek.map((day) => (
           <div key={day}>{day}</div>
         ))}
       </div>
+
       <div className='grid grid-cols-7 gap-y-2 text-center text-sm'>
         {weeks.flat().map((date) => {
           const isToday =
@@ -26,7 +27,6 @@ const CalendarGrid = ({ weeks, posts }: CalendarGridProps) => {
 
           const isRunOnDate = posts.some((post) => {
             const postDate = new Date(post.created_at);
-
             return (
               postDate.getFullYear() === date.getFullYear() &&
               postDate.getMonth() === date.getMonth() &&
@@ -36,16 +36,22 @@ const CalendarGrid = ({ weeks, posts }: CalendarGridProps) => {
 
           return (
             <div
-              key={`${date.toISOString()}`}
-              className={
-                `relative aspect-square flex items-center justify-center text-sm ` +
-                (isOtherMonth ? 'text-gray-400' : '') +
-                (isToday ? 'text-white' : '')
-              }
+              key={date.toISOString()}
+              className={`relative aspect-square flex items-center justify-center transition-all duration-300 rounded-[10px]
+                ${
+                  isToday
+                    ? 'bg-[#007aff]/30 text-white font-bold'
+                    : isOtherMonth
+                      ? 'text-[#787878]'
+                      : 'text-[#e0e0e0] hover:bg-[#414141] cursor-pointer'
+                }
+              `}
             >
-              <span className='z-1'>{date.getDate()}</span>
-              {isToday && !isOtherMonth && <div className='z-0 absolute w-7 h-7 bg-gray-500 rounded-full' />}
-              {isRunOnDate && <div className='z-2 absolute bottom-0 w-2 h-2 bg-white rounded-full translate-y-2' />}
+              <span>{date.getDate()}</span>
+
+              {isRunOnDate && !isToday && (
+                <div className='absolute bottom-1 w-[6px] h-[6px] bg-[#007aff] rounded-full' />
+              )}
             </div>
           );
         })}
@@ -55,13 +61,3 @@ const CalendarGrid = ({ weeks, posts }: CalendarGridProps) => {
 };
 
 export default CalendarGrid;
-{
-  /* <div key={`week-${idx}`}>
-{week.map((day) => (
-  <div
-    key={`${day.getMonth()}-${day.getDate()}`}
-    className='flex m-auto'
-  >{`${day.getDate()}`}</div>
-))}
-</div> */
-}

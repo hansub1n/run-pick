@@ -3,31 +3,31 @@ import Navigation from './Navigation';
 import { useEffect } from 'react';
 
 type MenubarProps = {
-  isMenuOpen: boolean;
+  isOpen: boolean;
   toggleMenu: () => void;
 };
 
-const Menubar = ({ isMenuOpen, toggleMenu }: MenubarProps) => {
+const Menubar = ({ isOpen, toggleMenu }: MenubarProps) => {
   useEffect(() => {
     // TODO: 데스크탑에서 모달 오픈했을 시 스크롤바 너비 생각해야 됨
-    if (isMenuOpen) {
+    if (isOpen) {
       document.body.style.overflow = 'hidden';
       document.body.style.paddingRight = '';
     } else {
       document.body.style.overflow = '';
       document.body.style.paddingRight = '';
     }
-  }, [isMenuOpen]);
+  }, [isOpen]);
 
   return (
     <>
-      {isMenuOpen && (
+      {isOpen && (
         <>
           <div
             onClick={toggleMenu}
-            className='z-10 fixed inset-0 bg-black/50'
+            className='z-10 fixed inset-0 bg-black/70 backdrop-blur-sm'
           />
-          <div className='z-20 fixed left-0 top-0 pt-[5px] w-[240px] h-full bg-white flex flex-col font-semibold'>
+          <div className='z-20 fixed left-0 top-0 pt-[5px] w-[240px] h-full bg-[#1a1a1a] flex flex-col font-semibold'>
             <div className='pr-[12px] w-[full] h-[48px] flex justify-end items-center'>
               <IoCloseOutline
                 onClick={toggleMenu}

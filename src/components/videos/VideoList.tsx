@@ -29,7 +29,7 @@ const VideoList = ({ distance, sortOption }: VideoListProps) => {
   };
 
   return (
-    <>
+    <div className='w-[313px]'>
       {sortedVidoList.map((video) => (
         <Card
           key={video.id}
@@ -44,7 +44,7 @@ const VideoList = ({ distance, sortOption }: VideoListProps) => {
           isOpenModal={false}
         />
       ))}
-    </>
+    </div>
   );
 };
 

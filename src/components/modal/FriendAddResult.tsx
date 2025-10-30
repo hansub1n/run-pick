@@ -24,25 +24,22 @@ const FriendAddResult = ({ friendStatus, friendNickname }: FriendAddResultProps)
   };
 
   return (
-    <div className='flex flex-col items-center font-semibold text-center'>
-      <h1 className='text-[20px]'>{isSuccess ? '친구 추가 성공' : '친구 추가 실패'}</h1>
+    <div className='flex flex-col items-center text-center'>
+      <h1 className='text-[20px] font-semibold'>{isSuccess ? '친구 추가 성공' : '친구 추가 실패'}</h1>
       {isSuccess ? (
-        <>
-          <p className='text-[14px] mt-2 leading-[1.5] text-gray-700'>
-            {`'${friendNickname}'`}
-            <br />
-            {message}
+        <div className='mt-2 leading-[1.6] text-center'>
+          <p className='text-[15px] text-[#B5B5B5]'>
+            새로운 친구 <span className='text-[#FAFAFA] font-semibold'>{friendNickname}</span>
+            님을 추가했어요!
           </p>
-          <p className='text-[10px] text-[#787878] mt-[10px] leading-[1.4]'>
-            친구 목록에서 새로 추가된 친구를 확인할 수 있습니다.
-          </p>
-        </>
+          <p className='text-[12px] text-[#787878] mt-[3px]'>친구 목록에서 바로 확인해보세요.</p>
+        </div>
       ) : (
-        <p className='text-[14px] mt-2 leading-[1.5] text-gray-700'>{message}</p>
+        <p className='text-[14px] mt-2 leading-[1.6] text-[#B5B5B5]'>{message}</p>
       )}
       <button
         onClick={onClickHandler}
-        className='mt-[20px] text-[14px] px-[35px] py-[7px] bg-[#AFAFAF] rounded-[10px]'
+        className='mt-[20px] text-[14px] font-semibold px-[40px] py-[8px] bg-[#007AFF] rounded-[10px] transition-colors hover:bg-[#0066CC]'
       >
         확인
       </button>

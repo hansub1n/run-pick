@@ -35,7 +35,7 @@ const ChallengeList = ({ level }: ChallengeListProps) => {
   };
 
   return (
-    <div>
+    <div className='w-[313px]'>
       {challengeList.map((challenge) =>
         challenge.level === level ? (
           <Card

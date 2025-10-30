@@ -7,14 +7,14 @@ const ChallengesHeader = () => {
   const onClickhandler = () => setIsInfoVisible(!isInfoVisible);
   return (
     <header className='flex items-end gap-[4px] mb-[7px]'>
-      <h1 className='font-semibold text-[20px] leading-[24px] '>주간 챌린지</h1>
+      <h1 className='font-semibold text-[20px] leading-[24px]'>주간 챌린지</h1>
       <div className='flex items-end gap-[2px]'>
         <FaQuestion
           onClick={onClickhandler}
-          className='text-[12px] bg-[#D9D9D9] p-[3px] rounded-full'
+          className='cursor-pointer text-[12px] bg-[#414141] p-[3px] rounded-full'
         />
         <p
-          className={`font-medium text-[8px] px-[8px] py-[5px] rounded-[10px] bg-[#D9D9D9] transition-opacity duration-300 ${
+          className={`font-medium text-[8px] px-[8px] py-[5px] rounded-[10px] bg-[#414141] transition-opacity duration-300 ${
             isInfoVisible ? 'opacity-100 visible' : 'opacity-0 invisible'
           }`}
         >

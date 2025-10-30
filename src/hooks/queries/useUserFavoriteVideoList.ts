@@ -7,6 +7,7 @@ export const useUserFavoriteVideoList = (userId: string) => {
   const { data: userFavoriteVideoList } = useQuery({
     queryKey: QUERY_KEYS.userFavoriteVideos(userId),
     queryFn: () => fetchUserFavoriteVideoList(userId),
+    enabled: !!userId,
   });
 
   return (userFavoriteVideoList as unknown as UserFavoriteVideos) ?? [];

@@ -79,9 +79,9 @@ const RunProofForm = () => {
     <>
       <form
         onSubmit={onSubmitHandler}
-        className='font-semibold pt-[23px] w-[313px] h-[calc(100vh-55px)]'
+        className='font-semibold pt-[23px] w-[313px] h-[calc(100vh-55px)] text-[#EDEDED]'
       >
-        <section className='flex flex-col gap-[13px]'>
+        <section className='flex flex-col gap-[15px]'>
           <PhotoUploadField
             videoDetail={videoDetail}
             onChange={onChangeHandler}
@@ -97,10 +97,13 @@ const RunProofForm = () => {
             onSelect={onSelectHandler}
           />
         </section>
-        {/* TODO: 완료 버튼 클릭 시 확인 모달 렌더링 */}
         <button
           type='submit'
-          className='my-[30px] w-full h-[53px] rounded-[10px] bg-[#4F4F4F] text-[20px] text-[#ffffff]'
+          className='cursor-pointer mt-[35px] w-full h-[53px] 
+               text-[20px] font-semibold rounded-[10px] 
+               bg-[#007AFF] text-[#FAFAFA] 
+               transition-all duration-300
+               hover:bg-[#0066CC] active:scale-[0.98]'
         >
           완료
         </button>
