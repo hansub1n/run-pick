@@ -7,14 +7,14 @@ type SectionHeaderProps = {
 
 const SectionHeader = ({ title, onClick }: SectionHeaderProps) => {
   return (
-    <div className='font-semibold flex items-center gap-[2px]'>
-      <h1 className='font-[19px]'>{title}</h1>
-      <button
+    <div className='font-semibold flex items-center'>
+      <h1
         onClick={onClick}
-        className='cursor-pointer'
+        className='flex items-center font-semibold gap-[4px] cursor-pointer text-[16px] leading-[22px] hover:text-[#007AFF] transition-colors'
       >
-        <FaChevronRight />
-      </button>
+        {title}
+        <FaChevronRight className='text-[#007AFF]' />
+      </h1>
     </div>
   );
 };

@@ -27,11 +27,13 @@ const ConfirmChallengeRegister = ({ selectedChallenge, onClick }: ConfirmChallen
   };
 
   return (
-    <div className='flex flex-col items-center font-semibold text-center'>
-      <h1 className='text-[20px]'>{selectedChallenge.title}</h1>
-      <p className='text-[#cccccc]'>주간 챌린지로 등록하시겠습니까?</p>
-      <p className='text-[10px] text-[#787878] mt-[10px] leading-[1.4]'>등록한 챌린지는 일주일 후 변경 가능합니다</p>
-      <div className='mt-[20px] flex gap-[18px] text-[14px]'>
+    <div className='flex flex-col items-center text-center'>
+      <h1 className='text-[20px] font-semibold'>{selectedChallenge.title}</h1>
+      <p className='text-[#cccccc] font-medium'>주간 챌린지로 등록하시겠습니까?</p>
+      <p className='text-[10px] text-[#787878] mt-[10px] leading-[1.4] font-medium'>
+        등록한 챌린지는 일주일 후 변경 가능합니다
+      </p>
+      <div className='mt-[20px] flex gap-[18px] text-[14px] font-semibold'>
         <button
           onClick={onClick}
           className='cursor-pointer px-[35px] py-[7px] bg-[#414141] rounded-[10px] transition-colors hover:bg-[#333333]'

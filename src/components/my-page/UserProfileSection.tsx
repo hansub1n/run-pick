@@ -46,6 +46,7 @@ const UserProfileSection = ({ friendInfo }: UserProfileSectionProps) => {
           />
         )}
       </section>
+
       {friendInfo ? (
         <Modal id={'unfriend'}>
           {activeModal === 'unfriend' && (

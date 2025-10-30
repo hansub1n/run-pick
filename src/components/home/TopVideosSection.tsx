@@ -6,7 +6,7 @@ const TopVideosSection = () => {
   return (
     <div>
       <div>
-        <h1 className='flex items-center font-semibold text-[#FAFAFA] text-[16px] leading-[22px]'>
+        <h1 className='flex items-center font-semibold text-[16px] leading-[22px]'>
           <Link
             href={'/videos'}
             className='flex items-center gap-[4px] hover:text-[#007AFF] transition-colors'

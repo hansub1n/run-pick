@@ -63,8 +63,8 @@ const EditProfile = () => {
 
   return (
     <div className='flex flex-col items-center'>
-      <h1 className='font-semibold text-[20px] mb-[10px]'>프로필 수정</h1>
-      <div className='flex items-center flex-col gap-[7px]'>
+      <h1 className='font-semibold text-[20px] mb-[12px]'>프로필 수정</h1>
+      <div className='flex items-center flex-col gap-[10px]'>
         <div className='relative w-[78px]'>
           <div className='relative w-[72px] h-[72px] rounded-full overflow-hidden'>
             <Image
@@ -75,7 +75,9 @@ const EditProfile = () => {
             />
           </div>
           <label htmlFor='file-upload'>
-            <FaEdit className='cursor-pointer z-12 absolute bottom-[3px] right-[-4px] w-[25px] h-[25px]' />
+            <div className='cursor-pointer absolute bottom-[3px] right-[-4px] flex items-center justify-center w-[25px] h-[25px] pl-[3px] rounded-[10px] bg-[#007aff]'>
+              <FaEdit className='w-[15px] h-[15px]' />
+            </div>
           </label>
           <input
             id='file-upload'
@@ -92,7 +94,7 @@ const EditProfile = () => {
           value={newProfile.nickname}
           placeholder='새로운 닉네임'
           onChange={onChangeProfileHandler}
-          className='h-[32px] rounded-[10px] border pl-[10px] border-[#414141]'
+          className='w-[200px] h-[36px] rounded-[10px] border border-[#414141] bg-[#262626] px-[10px]'
         />
       </div>
       <div className='mt-[20px] flex gap-[18px] text-[14px]'>

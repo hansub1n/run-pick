@@ -23,22 +23,23 @@ const FriendCard = ({ isFavorite, friendInfo }: FriendCardProps) => {
 
   return (
     <>
-      <div className='flex items-center w-full px-[6px] py-[15px] border-b'>
+      <div className='flex items-center w-full px-[10px] py-[15px] border-b border-[#2A2A2A] hover:bg-[#1E1E1E] transition-colors'>
         <div onClick={() => onClickHandler()}>
           {isFavorite ? (
-            <GoStarFill className='cursor-pointer w-[24px] h-[24px] mr-[21px]' />
+            <GoStarFill className='cursor-pointer w-[22px] h-[22px] mr-[16px] text-[#007AFF]' />
           ) : (
-            <GoStar className='cursor-pointer w-[24px] h-[24px] p-[1px] mr-[21px]' />
+            <GoStar className='cursor-pointer w-[22px] h-[22px] mr-[16px] text-[#777]' />
           )}
         </div>
 
         <Link
           href={`/my-friend/${friendInfo.id}`}
-          className='flex-grow'
+          className='flex-grow text-[14px] text-[#EAEAEA]'
         >
           {friendInfo.nickname}
         </Link>
-        <UnFriendButton modalId={'unfriend'} />
+
+        <UnFriendButton modalId='unfriend' />
       </div>
       <Modal id={'unfriend'}>
         {activeModal === 'unfriend' && (

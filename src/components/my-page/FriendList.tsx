@@ -13,7 +13,7 @@ const FriendList = ({ searchNickname, friendList }: FriendListProps) => {
   return (
     <div className='flex flex-col w-full pb-[10px] max-h-[346px] overflow-y-auto scrollbar-hide'>
       {filteredFriends.length === 0 ? (
-        <p className='w-full px-[6px] py-[17px] text-center text-[12px] text-[#5C5C5C]'>
+        <p className='w-full h-[53px] pt-[17px] pl-[45px] text-[12px] text-[#5C5C5C]'>
           검색 결과가 없어요. 다시 검색해보세요!
         </p>
       ) : (

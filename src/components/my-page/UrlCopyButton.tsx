@@ -18,10 +18,13 @@ const UrlCopyButton = ({ userId }: UrlCopyButtonProps) => {
   return (
     <div
       onClick={onClickhandler}
-      className='cursor-pointer absolute gap-[25px] py-[7px] px-[12px] flex items-center right-[23px] top-[-43px] rounded-[10px] bg-[#414141]'
+      className='cursor-pointer absolute flex items-center gap-[8px] right-[23px] top-[-43px] 
+             px-[12px] py-[7px] rounded-[10px] 
+             bg-[#FEE500]/90 text-[#1A1A1A] font-medium
+             shadow-sm hover:bg-[#FDDC00] transition-colors'
     >
-      <p>카카오톡으로 친구 초대</p>
-      <RiKakaoTalkFill className='w-[25px] h-[25px]' />
+      <p className='text-[13px]'>카카오톡으로 친구 초대</p>
+      <RiKakaoTalkFill className='w-[22px] h-[22px]' />
     </div>
   );
 };
