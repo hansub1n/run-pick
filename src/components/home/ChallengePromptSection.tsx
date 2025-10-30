@@ -33,11 +33,11 @@ const ChallengePromptSection = () => {
       >
         {ChallengePrompts.map((prompt, idx) => (
           <SwiperSlide key={idx}>
-            <div className='px-[17px] py-[14px]'>
-              <h1 className='font-semibold'>{prompt.label}</h1>
+            <div className='px-[17px] py-[14px] flex flex-col justify-between h-full'>
+              <h1 className='font-semibold text-[#FAFAFA]'>{prompt.label}</h1>
               <button
                 onClick={() => router.push('/challenges')}
-                className='cursor-pointer mt-[8px] px-[8px] py-[4px] rounded-[5px] bg-[#007AFF] text-[12px] font-medium'
+                className='cursor-pointer w-fit mt-[8px] px-[10px] py-[5px] rounded-[6px] bg-[#007AFF] hover:bg-[#339CFF] active:scale-95 text-[12px] font-medium text-white transition-all duration-200'
               >
                 챌린지 보러가기
               </button>
