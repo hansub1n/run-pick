@@ -28,12 +28,12 @@ const FriendAddResult = ({ friendStatus, friendNickname }: FriendAddResultProps)
       <h1 className='text-[20px]'>{isSuccess ? '친구 추가 성공' : '친구 추가 실패'}</h1>
       {isSuccess ? (
         <>
-          <p className='text-[14px] mt-2 leading-[1.5] text-gray-700'>
-            {`'${friendNickname}'`}
+          <p className='text-[14px] mt-2 leading-[1.5]'>
+            {friendNickname}
             <br />
             {message}
           </p>
-          <p className='text-[10px] text-[#787878] mt-[10px] leading-[1.4]'>
+          <p className='text-[10px] text-[#cccccc] mt-[10px] leading-[1.4]'>
             친구 목록에서 새로 추가된 친구를 확인할 수 있습니다.
           </p>
         </>
@@ -42,7 +42,7 @@ const FriendAddResult = ({ friendStatus, friendNickname }: FriendAddResultProps)
       )}
       <button
         onClick={onClickHandler}
-        className='mt-[20px] text-[14px] px-[35px] py-[7px] bg-[#AFAFAF] rounded-[10px]'
+        className='mt-[20px] text-[14px] px-[35px] py-[7px] bg-[#007aff] rounded-[10px] transition-colors hover:bg-[#0066cc]'
       >
         확인
       </button>

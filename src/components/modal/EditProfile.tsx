@@ -98,7 +98,7 @@ const EditProfile = () => {
       <div className='mt-[20px] flex gap-[18px] text-[14px]'>
         <button
           onClick={onClickHandler}
-          className='cursor-pointer px-[35px] py-[7px] bg-[#007aff] rounded-[10px] font-semibold'
+          className='cursor-pointer font-semibold  px-[35px] py-[7px] bg-[#007aff] rounded-[10px] transition-colors hover:bg-[#0066cc]'
         >
           등록
         </button>
