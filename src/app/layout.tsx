@@ -18,10 +18,7 @@ export const metadata: Metadata = {
   openGraph: {
     images: [
       {
-        url: '/assets/images/branding/banner.webp',
-        width: 313,
-        height: 200,
-        alt: '런픽 로고',
+        url: '/opengraph-image',
       },
     ],
   },
