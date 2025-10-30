@@ -17,7 +17,6 @@ const TopRunnersSection = () => {
     }
   };
 
-  const MOCK_MYRANK = 2;
   return (
     <>
       <div>
@@ -37,7 +36,7 @@ const TopRunnersSection = () => {
         {activeModal === 'top-runners' && (
           <TopRunners
             topRunnerList={topRunnerList}
-            myRank={MOCK_MYRANK}
+            myRank={myRank}
           />
         )}
       </Modal>
