@@ -14,6 +14,16 @@ const pretendard = localFont({
 export const metadata: Metadata = {
   title: '런픽(run-pick)',
   description: 'Pick하고 Run해! 매주 새로운 러닝 루틴',
+  openGraph: {
+    images: [
+      {
+        url: '/assets/images/branding/banner.webp',
+        width: 313,
+        height: 200,
+        alt: '런픽 로고',
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
@@ -22,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
+    <html lang='ko'>
       <body className={`${pretendard.variable} antialiased`}>
         <QueryProvider>
           <UserInit />
