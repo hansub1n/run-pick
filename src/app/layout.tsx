@@ -14,6 +14,7 @@ const pretendard = localFont({
 export const metadata: Metadata = {
   title: '런픽(run-pick)',
   description: 'Pick하고 Run해! 매주 새로운 러닝 루틴',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_DOMAIN as string),
   openGraph: {
     images: [
       {
