@@ -31,20 +31,21 @@ export const CONDITONS = [
 
 export const ConditionButtons = React.memo(({ selected, onSelect }: CondtionButtonsProps) => {
   return (
-    <div className='flex flex-col gap-[6px]'>
-      <h1>상태 체크</h1>
+    <div className='flex flex-col gap-[8px]'>
+      <h1 className='text-[13px] text-[#B5B5B5]'>상태 체크</h1>
       <div className='flex gap-[10px]'>
         {CONDITONS.map((condition) => (
           <button
             key={condition.id}
             type='button'
             value={condition.value}
-            onClick={() => {
-              if (selected !== condition.value) {
-                onSelect(condition.value as Condition);
-              }
-            }}
-            className={`cursor-pointer w-1/4 rounded-[15px] border py-[5px] text-[14px] ${selected === condition.value ? 'text-[#141414] bg-[#fafafa]' : 'bg-[#141414]'}`}
+            onClick={() => onSelect(condition.value as Condition)}
+            className={`cursor-pointer w-1/4 py-[7px] rounded-[12px] border 
+                   text-[13px] transition-colors duration-300 ${
+                     selected === condition.value
+                       ? 'bg-[#007AFF] text-[#FAFAFA] border-[#007AFF]'
+                       : 'bg-[#1A1A1A] text-[#B5B5B5] border-[#2C2C2C] hover:border-[#007AFF]'
+                   }`}
           >
             {condition.label}
           </button>
