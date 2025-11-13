@@ -79,9 +79,9 @@ const RunProofForm = () => {
     <>
       <form
         onSubmit={onSubmitHandler}
-        className='font-semibold pt-[23px] w-[313px] h-[calc(100vh-55px)] text-[#EDEDED]'
+        className='font-semibold pt-[23px] w-[313px] h-[calc(100vh-55px)] text-[#EDEDED] gap-[15px]'
       >
-        <section className='flex flex-col gap-[15px]'>
+        <section className='flex flex-col gap-[7px]'>
           <PhotoUploadField
             videoDetail={videoDetail}
             onChange={onChangeHandler}
@@ -99,7 +99,7 @@ const RunProofForm = () => {
         </section>
         <button
           type='submit'
-          className='cursor-pointer mt-[35px] w-full h-[53px] 
+          className='cursor-pointer my-[25px] w-full h-[53px] 
                text-[20px] font-semibold rounded-[10px] 
                bg-[#007AFF] text-[#FAFAFA] 
                transition-all duration-300

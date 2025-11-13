@@ -6,6 +6,7 @@ import GoogleIconImg from '/public/assets/icons/icon-google.webp';
 import NaverIconImg from '/public/assets/icons/icon-naver.webp';
 import LogoImg from '/public/assets/images/branding/logo.webp';
 import Image from 'next/image';
+import { toast } from 'react-toastify';
 
 const AUTH_PROVIDERS = [
   {
@@ -26,7 +27,7 @@ const AUTH_PROVIDERS = [
     label: 'Naver 로그인',
     iconSrc: NaverIconImg,
     provider: 'naver',
-    onClick: () => alert('준비중인 서비스입니다.'),
+    onClick: () => toast.info('준비중인 서비스입니다.'),
     className: 'bg-[#03CF5C]',
   },
 ];
