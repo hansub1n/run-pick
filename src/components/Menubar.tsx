@@ -1,6 +1,7 @@
 import { IoCloseOutline } from 'react-icons/io5';
 import Navigation from './Navigation';
 import { useEffect } from 'react';
+import { motion, AnimatePresence, easeInOut } from 'framer-motion';
 
 type MenubarProps = {
   isOpen: boolean;
@@ -8,27 +9,35 @@ type MenubarProps = {
 };
 
 const Menubar = ({ isOpen, toggleMenu }: MenubarProps) => {
+  const variants = {
+    open: { x: 0, transition: { duration: 0.4, ease: easeInOut } },
+    closed: { x: '-100%', transition: { duration: 0.4, ease: easeInOut } },
+  };
+
   useEffect(() => {
-    // TODO: 데스크탑에서 모달 오픈했을 시 스크롤바 너비 생각해야 됨
     if (isOpen) {
       document.body.style.overflow = 'hidden';
-      document.body.style.paddingRight = '';
     } else {
       document.body.style.overflow = '';
-      document.body.style.paddingRight = '';
     }
   }, [isOpen]);
 
   return (
-    <>
+    <AnimatePresence>
       {isOpen && (
         <>
           <div
             onClick={toggleMenu}
-            className='z-10 fixed inset-0 bg-black/70 backdrop-blur-sm'
+            className='fixed inset-0 bg-black/70 backdrop-blur-sm z-10'
           />
-          <div className='z-20 fixed left-0 top-0 pt-[5px] w-[240px] h-full bg-[#1a1a1a] flex flex-col font-semibold'>
-            <div className='pr-[12px] w-[full] h-[48px] flex justify-end items-center'>
+          <motion.div
+            initial='closed'
+            animate='open'
+            exit='closed'
+            variants={variants}
+            className='fixed left-0 top-0 pt-[5px] w-[240px] h-full bg-[#1a1a1a] flex flex-col font-semibold z-20'
+          >
+            <div className='pr-[12px] w-full h-[48px] flex justify-end items-center'>
               <IoCloseOutline
                 onClick={toggleMenu}
                 className='cursor-pointer w-[30px] h-[30px]'
@@ -40,10 +49,10 @@ const Menubar = ({ isOpen, toggleMenu }: MenubarProps) => {
             >
               <Navigation />
             </nav>
-          </div>
+          </motion.div>
         </>
       )}
-    </>
+    </AnimatePresence>
   );
 };
 
