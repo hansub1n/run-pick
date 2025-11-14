@@ -1,6 +1,7 @@
 'use client';
 import { getStartAndEndDate } from '@/utils/getStartAndEndDate';
 import { createClient } from '@/utils/supabase/client';
+import { toast } from 'react-toastify';
 
 export const insertUserChallenge = async (userId: string, challengeId: number) => {
   const { startDate, endDate } = getStartAndEndDate();
@@ -21,7 +22,7 @@ export const insertUserChallenge = async (userId: string, challengeId: number) =
   const now = new Date();
 
   if (data && new Date(data.end_date) > now) {
-    alert('이미 등록된 챌린지가 존재합니다.');
+    toast.info('이미 등록된 챌린지가 존재합니다.');
     return;
   }
 
@@ -41,5 +42,5 @@ export const insertUserChallenge = async (userId: string, challengeId: number) =
     return;
   }
 
-  alert('챌린지가 성공적으로 등록되었습니다!');
+  toast.info('챌린지가 성공적으로 등록되었습니다!');
 };

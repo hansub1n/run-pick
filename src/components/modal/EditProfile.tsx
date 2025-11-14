@@ -6,6 +6,7 @@ import { ChangeEvent, useState } from 'react';
 import { updateUserProfile } from '@/services/my-page/updateUserProfile';
 import { useModalStore } from '@/stores/useModalStore';
 import DefaultProfileImg from '/public/assets/images/default-profile-img.webp';
+import { toast } from 'react-toastify';
 
 const EditProfile = () => {
   const { close } = useModalStore();
@@ -49,7 +50,7 @@ const EditProfile = () => {
 
   const onClickHandler = () => {
     if (newProfile.nickname === '') {
-      alert('닉네임을 작성해주세요');
+      toast.info('닉네임을 작성해주세요');
       return;
     }
 

@@ -5,6 +5,7 @@ import { createClient } from '@/utils/supabase/client';
 import { getPublicUserInfo } from '@/utils/supabase/client';
 import { updateUserChallenge } from '../challenges/updateUserChallenge';
 import { RunProofFormType } from '@/types/runProofForm.types';
+import { toast } from 'react-toastify';
 
 type insertRunProofFormProps = {
   videoDetail: DBVideo | null;
@@ -32,5 +33,5 @@ export const insertRunProofForm = async ({ videoDetail, runProofForm }: insertRu
   }
 
   await updateUserChallenge(userInfo.id, runProofForm.distance_km);
-  alert('인증글이 성공적으로 등록되었습니다!');
+  toast.info('인증글이 성공적으로 등록되었습니다!');
 };

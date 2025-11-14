@@ -1,4 +1,5 @@
 import { createClient } from '@/utils/supabase/client';
+import { toast } from 'react-toastify';
 
 export const deleteFriend = async (myId: string, friendId: string) => {
   const client = createClient();
@@ -10,5 +11,5 @@ export const deleteFriend = async (myId: string, friendId: string) => {
     return;
   }
 
-  alert('정상적으로 처리되었습니다');
+  toast.info('정상적으로 처리되었습니다');
 };

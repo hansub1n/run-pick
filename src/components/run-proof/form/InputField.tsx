@@ -33,7 +33,7 @@ const InputField = ({ content, distance_km, duration, onChange }: InputFieldprop
           placeholder='시간'
           onChange={onChange}
           className='h-[45px] rounded-[10px] bg-[#1A1A1A] border border-[#2C2C2C] 
-                     px-[8px] w-[80px] text-[#EDEDED] focus:border-[#007AFF]'
+                     px-[8px] w-[80px] text-[#EDEDED] focus:outline-none focus:border-[#007AFF]'
         />
         :
         <input
@@ -46,7 +46,7 @@ const InputField = ({ content, distance_km, duration, onChange }: InputFieldprop
           placeholder='분'
           onChange={onChange}
           className='h-[45px] rounded-[10px] bg-[#1A1A1A] border border-[#2C2C2C] 
-                     px-[8px] w-[80px] text-[#EDEDED] focus:border-[#007AFF]'
+                     px-[8px] w-[80px] text-[#EDEDED] focus:outline-none focus:border-[#007AFF]'
         />
         :
         <input
@@ -59,7 +59,7 @@ const InputField = ({ content, distance_km, duration, onChange }: InputFieldprop
           placeholder='초'
           onChange={onChange}
           className='h-[45px] rounded-[10px] bg-[#1A1A1A] border border-[#2C2C2C] 
-                     px-[8px] w-[80px] text-[#EDEDED] focus:border-[#007AFF]'
+                     px-[8px] w-[80px] text-[#EDEDED] focus:outline-none focus:border-[#007AFF]'
         />
       </div>
       <label className='text-[13px] text-[#B5B5B5]'>한줄 소감</label>
@@ -68,8 +68,9 @@ const InputField = ({ content, distance_km, duration, onChange }: InputFieldprop
         name='content'
         value={content}
         onChange={onChange}
+        autoComplete='off'
         className='h-[45px] rounded-[10px] bg-[#1A1A1A] border border-[#2C2C2C] 
-               px-[8px] text-[#EDEDED] focus:border-[#007AFF]'
+               px-[8px] text-[#EDEDED] focus:outline-none focus:border-[#007AFF]'
       />
     </div>
   );
