@@ -3,6 +3,7 @@
   "crons": [
     {
       "path": "/api/youtube-refresh",
+
       "schedule": "0 5 * * *"
     }
   ]
