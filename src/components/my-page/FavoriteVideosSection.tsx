@@ -5,13 +5,12 @@ import Modal from '../Modal';
 import FavoriteVideoList from './FavoriteVideoList';
 import { useUserStore } from '@/stores/useUserStore';
 import { useUserFavoriteVideoList } from '@/hooks/queries/useUserFavoriteVideoList';
-import { UserFavoriteVideos } from '@/types/userFavoriteVideos.type';
 import FavoriteVideos from './FavoriteVideos';
 
 const FavoriteVideosSection = () => {
   const { activeModal, open } = useModalStore();
   const { id } = useUserStore();
-  const userFavoriteVideoList = useUserFavoriteVideoList(id) as unknown as UserFavoriteVideos;
+  const { userFavoriteVideoList, isLoading } = useUserFavoriteVideoList(id);
 
   const onClickHandler = () => {
     if (userFavoriteVideoList.length > 0) {
@@ -28,6 +27,7 @@ const FavoriteVideosSection = () => {
         />
         <ListSection
           list={userFavoriteVideoList}
+          isLoading={isLoading}
           emptyMessage='즐겨찾기한 영상이 없어요. 마음에 드는 영상을 추가해보세요!'
         >
           <FavoriteVideoList list={userFavoriteVideoList} />

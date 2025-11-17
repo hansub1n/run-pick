@@ -3,10 +3,10 @@ import { QUERY_KEYS } from './queryKeys';
 import { fetchTopVideos } from '@/services/home/fetchTopVideos';
 
 export const useTopVideoList = () => {
-  const { data: topVideoList } = useQuery({
+  const { data: topVideoList, isLoading } = useQuery({
     queryKey: QUERY_KEYS.topVideos(),
     queryFn: () => fetchTopVideos(),
   });
 
-  return { topVideoList };
+  return { topVideoList, isLoading };
 };

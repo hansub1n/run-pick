@@ -17,7 +17,7 @@ const VideoActionButtons = ({ videoId }: videoActionButtonsProps) => {
   const { id: userId } = useUserStore();
   const { isSignedIn } = useAuthStatus();
   const { videoDetail } = useVideoDetailStore();
-  const userFavoriteVideoList = useUserFavoriteVideoList(userId);
+  const { userFavoriteVideoList } = useUserFavoriteVideoList(userId);
   const router = useRouter();
 
   const isFavorite = userFavoriteVideoList.some((video) => video.info.youtube_video_id == videoId);

@@ -4,11 +4,11 @@ import { fetchUserFavoriteVideoList } from '@/services/my-page/fetchUserFavorite
 import { UserFavoriteVideos } from '@/types/userFavoriteVideos.type';
 
 export const useUserFavoriteVideoList = (userId: string) => {
-  const { data: userFavoriteVideoList } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: QUERY_KEYS.userFavoriteVideos(userId),
     queryFn: () => fetchUserFavoriteVideoList(userId),
     enabled: !!userId,
   });
 
-  return (userFavoriteVideoList as unknown as UserFavoriteVideos) ?? [];
+  return { userFavoriteVideoList: data as unknown as UserFavoriteVideos, isLoading };
 };

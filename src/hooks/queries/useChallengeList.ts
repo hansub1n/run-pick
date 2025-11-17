@@ -6,10 +6,10 @@ import { Level } from '@/types/challenges.types';
 import { fetchChallenges } from '@/services/challenges/fetchChallenges';
 
 export const useChallengeList = (level: Level) => {
-  const { data: challengeList } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: QUERY_KEYS.challenges(level),
     queryFn: () => fetchChallenges(level),
   });
 
-  return challengeList ?? [];
+  return { challengeList: data ?? [], isLoading };
 };

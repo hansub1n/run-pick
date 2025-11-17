@@ -5,9 +5,10 @@ import { DBVideo } from '@/types/videos.types';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { FaMedal } from 'react-icons/fa6';
+import TopVideoSkeleton from '../skeletons/TopVideoSkeleton';
 
 const TopVideoList = () => {
-  const { topVideoList } = useTopVideoList();
+  const { topVideoList, isLoading } = useTopVideoList();
   const { setVideoDetail } = useVideoDetailStore();
   const router = useRouter();
 
@@ -15,6 +16,18 @@ const TopVideoList = () => {
     setVideoDetail(video);
     router.push(`/videos/${video.youtube_video_id}`);
   };
+
+  if (isLoading) {
+    return (
+      <section
+        aria-busy='true'
+        aria-label='Top videos loading'
+        className='flex gap-[6px] pt-[8px]'
+      >
+        <TopVideoSkeleton count={3} />
+      </section>
+    );
+  }
 
   return (
     <section className='flex gap-[6px] pt-[8px]'>
@@ -30,6 +43,7 @@ const TopVideoList = () => {
             <Image
               src={topVideo.thumbnail_url}
               alt={`${topVideo.title} 이미지`}
+              priority={true}
               fill
               className='object-cover rounded-[10px]'
             />
