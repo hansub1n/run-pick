@@ -1,21 +1,14 @@
 'use client';
 import { useTopVideoList } from '@/hooks/queries/useTopVideoList';
 import { useVideoDetailStore } from '@/stores/useVideoDetailStore';
-import { DBVideo } from '@/types/videos.types';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import { FaMedal } from 'react-icons/fa6';
 import TopVideoSkeleton from '../skeletons/TopVideoSkeleton';
+import Link from 'next/link';
 
 const TopVideoList = () => {
   const { topVideoList, isLoading } = useTopVideoList();
   const { setVideoDetail } = useVideoDetailStore();
-  const router = useRouter();
-
-  const onClickHandler = (video: DBVideo) => {
-    setVideoDetail(video);
-    router.push(`/videos/${video.youtube_video_id}`);
-  };
 
   if (isLoading) {
     return (
@@ -36,18 +29,18 @@ const TopVideoList = () => {
           key={topVideo.id}
           className='flex flex-col items-center'
         >
-          <div
+          <Link
+            href={`/videos/${topVideo.youtube_video_id}`}
             className='cursor-pointer relative min-w-[100px] min-h-[65px]'
-            onClick={() => onClickHandler(topVideo)}
+            onClick={() => setVideoDetail(topVideo)}
           >
             <Image
               src={topVideo.thumbnail_url}
               alt={`${topVideo.title} 이미지`}
-              priority={true}
               fill
               className='object-cover rounded-[10px]'
             />
-          </div>
+          </Link>
           <h3 className='flex items-center text-[12px] gap-[3px] font-semibold'>
             <FaMedal />
             {idx + 1}
