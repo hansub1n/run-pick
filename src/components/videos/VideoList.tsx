@@ -6,6 +6,7 @@ import { Distance, DBVideo, SortOption } from '@/types/videos.types';
 import { useVideoList } from '@/hooks/queries/useVideoList';
 import { formatVideoDuration } from '@/utils/formatVideoDuration';
 import { useVideoDetailStore } from '@/stores/useVideoDetailStore';
+import CardSkeleton from '../skeletons/CardSkeleton';
 
 type VideoListProps = {
   distance: Distance;
@@ -15,7 +16,7 @@ type VideoListProps = {
 const VideoList = ({ distance, sortOption }: VideoListProps) => {
   const { setVideoDetail } = useVideoDetailStore();
   const router = useRouter();
-  const videoList: DBVideo[] = useVideoList(distance) ?? [];
+  const { videoList, isLoading } = useVideoList(distance);
 
   const sortedVidoList = [...videoList].sort((a, b) => {
     if (sortOption === 'proof') return b.proof_count - a.proof_count;
@@ -28,6 +29,21 @@ const VideoList = ({ distance, sortOption }: VideoListProps) => {
     router.push(`/videos/${video.youtube_video_id}`);
   };
 
+  if (isLoading) {
+    return (
+      <div
+        aria-busy='true'
+        aria-label='Top videos loading'
+        className='w-[313px]'
+      >
+        <CardSkeleton
+          isOpenModal={false}
+          statIconsCount={2}
+          count={5}
+        />
+      </div>
+    );
+  }
   return (
     <div className='w-[313px]'>
       {sortedVidoList.map((video) => (

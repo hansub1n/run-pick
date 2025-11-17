@@ -1,13 +1,14 @@
 import { Challenge, Level } from '@/types/challenges.types';
 import Card from '../Card';
 import { FaStamp } from 'react-icons/fa6';
-import { useChallengeList } from '@/hooks/queries/useChallengeList';
 import { useModalStore } from '@/stores/useModalStore';
 import Modal from '../Modal';
 import { useState } from 'react';
 import ConfirmChallengeRegister from '../modal/ConfirmChallengeRegister';
 import { useAuthStatus } from '@/hooks/queries/useAuthStatus';
 import { useRouter } from 'next/navigation';
+import { useChallengeList } from '@/hooks/queries/useChallengeList';
+import CardSkeleton from '../skeletons/CardSkeleton';
 
 type ChallengeListProps = {
   level: Level;
@@ -16,7 +17,7 @@ type ChallengeListProps = {
 const ChallengeList = ({ level }: ChallengeListProps) => {
   const { isSignedIn } = useAuthStatus();
   const { activeModal, open, close } = useModalStore();
-  const challengeList = useChallengeList(level);
+  const { challengeList, isLoading } = useChallengeList(level);
   const [selectedChallenge, setSelectedChallenge] = useState<null | Challenge>(null);
   const router = useRouter();
 
@@ -33,6 +34,22 @@ const ChallengeList = ({ level }: ChallengeListProps) => {
     setSelectedChallenge(null);
     close();
   };
+
+  if (isLoading) {
+    return (
+      <div
+        aria-busy='true'
+        aria-label='Top videos loading'
+        className='w-[313px]'
+      >
+        <CardSkeleton
+          isOpenModal={false}
+          statIconsCount={1}
+          count={5}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className='w-[313px]'>

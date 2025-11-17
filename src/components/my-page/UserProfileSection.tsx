@@ -19,6 +19,7 @@ type UserProfileSectionProps = {
 const UserProfileSection = ({ friendInfo }: UserProfileSectionProps) => {
   const { activeModal } = useModalStore();
   const { id: myId, nickname: myNickname, profileImgUrl: myProfileImgUrl } = useUserStore();
+
   const nickname = friendInfo ? friendInfo.nickname : myNickname;
   const profileImgUrl = friendInfo ? friendInfo.profile_img_url : myProfileImgUrl;
 
@@ -33,7 +34,7 @@ const UserProfileSection = ({ friendInfo }: UserProfileSectionProps) => {
             className='object-cover'
           />
         </div>
-        <h1 className='text-[20px] m-[4px]'>{nickname}</h1>
+        <h1 className='text-[20px] h-[30px] m-[4px]'>{nickname}</h1>
         {friendInfo ? (
           <ProfileActionButton
             modalId={'unfriend'}

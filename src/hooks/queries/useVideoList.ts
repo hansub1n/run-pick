@@ -10,11 +10,11 @@ const fetchVideosFromAPI = async (distance: Distance) => {
 };
 
 export const useVideoList = (distance: Distance) => {
-  const { data: videoList } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: QUERY_KEYS.videos(distance),
     queryFn: () => fetchVideosFromAPI(distance),
     staleTime: 1000 * 60 * 60 * 24,
   });
 
-  return videoList ?? [];
+  return { videoList: data ?? [], isLoading };
 };
