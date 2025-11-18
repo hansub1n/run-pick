@@ -31,13 +31,16 @@ const TopVideoList = () => {
         >
           <Link
             href={`/videos/${topVideo.youtube_video_id}`}
-            className='cursor-pointer relative min-w-[100px] min-h-[65px]'
+            className='cursor-pointer'
             onClick={() => setVideoDetail(topVideo)}
           >
             <Image
               src={topVideo.thumbnail_url}
               alt={`${topVideo.title} 이미지`}
-              fill
+              width={100}
+              height={56}
+              priority={true}
+              quality={60}
               className='object-cover rounded-[10px]'
             />
           </Link>
