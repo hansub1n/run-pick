@@ -20,7 +20,7 @@ const VideoActionButtons = ({ videoId }: videoActionButtonsProps) => {
   const { userFavoriteVideoList } = useUserFavoriteVideoList(userId);
   const router = useRouter();
 
-  const isFavorite = userFavoriteVideoList.some((video) => video.info.youtube_video_id == videoId);
+  const isFavorite = userFavoriteVideoList?.some((video) => video.info.youtube_video_id == videoId);
 
   const { mutate: toggleFavoirte } = useToggleFavoriteVideo({
     userId,
