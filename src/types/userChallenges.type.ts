@@ -1,5 +1,22 @@
 import { ChallengeType } from './challenges.types';
 
+export type ActiveChallenge =
+  | {
+      id: number;
+      status: Status;
+      end_date: string;
+      completed_at: string;
+      info: {
+        id: number;
+        type: ChallengeType;
+        target: number;
+      }[];
+      progress_km: number;
+      run_count: number;
+    }
+  | UserChallenge
+  | null;
+
 export type UserChallenges = UserChallenge[];
 
 export type UserChallenge = {

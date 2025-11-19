@@ -1,15 +1,9 @@
-import Image, { StaticImageData } from 'next/image';
+import { TopRunnerList } from '@/types/topRunners.types';
+import Image from 'next/image';
 import { FaMedal } from 'react-icons/fa6';
 
 type TopRunnerPodiumProps = {
-  topRunnerList: [
-    string,
-    {
-      nickname: string;
-      profileImgUrl: string | StaticImageData;
-      totalDistance: number;
-    },
-  ][];
+  topRunnerList: TopRunnerList;
 };
 
 const TopRunnerPodium = ({ topRunnerList }: TopRunnerPodiumProps) => {

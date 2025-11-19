@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from './queryKeys';
 import { checkAndUpdateChallengeStatus } from '@/services/challenges/checkAndUpdateChallengeStatus';
+import { calculateCompletionRate } from '@/utils/calculateCompletionRate';
 
 export const useActiveChallenge = (userId: string) => {
   const { data: activeChallenge } = useQuery({
@@ -10,26 +11,7 @@ export const useActiveChallenge = (userId: string) => {
     enabled: !!userId,
   });
 
-  let completionRate: number | null = null;
-
-  if (Array.isArray(activeChallenge?.info)) {
-    activeChallenge.info = activeChallenge.info[0];
-  }
-
-  if (activeChallenge?.info) {
-    const type = activeChallenge.info.type;
-    const target = activeChallenge.info.target;
-
-    if (type === 'distance') {
-      completionRate = Math.floor((activeChallenge.progress_km / target) * 100);
-    } else if (type === 'count') {
-      completionRate = Math.floor((activeChallenge.run_count / target) * 100);
-    }
-
-    if (completionRate !== null) {
-      completionRate = Math.min(100, Math.max(0, completionRate));
-    }
-  }
+  const completionRate = calculateCompletionRate(activeChallenge ?? null);
 
   return { activeChallenge, completionRate };
 };

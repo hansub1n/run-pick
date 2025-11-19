@@ -1,16 +1,13 @@
-'use client';
-import { useTopVideoList } from '@/hooks/queries/useTopVideoList';
-import { useVideoDetailStore } from '@/stores/useVideoDetailStore';
 import Image from 'next/image';
 import { FaMedal } from 'react-icons/fa6';
 import TopVideoSkeleton from '../skeletons/TopVideoSkeleton';
 import Link from 'next/link';
+import { fetchTopVideos } from '@/services/home/fetchTopVideos';
 
-const TopVideoList = () => {
-  const { topVideoList, isLoading } = useTopVideoList();
-  const { setVideoDetail } = useVideoDetailStore();
+const TopVideoList = async () => {
+  const topVideoList = await fetchTopVideos();
 
-  if (isLoading) {
+  if (!topVideoList) {
     return (
       <section
         aria-busy='true'
@@ -32,7 +29,6 @@ const TopVideoList = () => {
           <Link
             href={`/videos/${topVideo.youtube_video_id}`}
             className='cursor-pointer'
-            onClick={() => setVideoDetail(topVideo)}
           >
             <Image
               src={topVideo.thumbnail_url}
