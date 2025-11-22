@@ -34,7 +34,7 @@ const ChallengePromptSection = () => {
             <div className='px-[17px] py-[14px] flex flex-col justify-between h-full'>
               <h1 className='font-semibold text-[#FAFAFA]'>{prompt.label}</h1>
               <Link
-                href={'/challenge'}
+                href={'/challenges'}
                 className='cursor-pointer w-fit mt-[8px] px-[10px] py-[5px] rounded-[6px] bg-[#007AFF] hover:bg-[#339CFF] active:scale-95 text-[12px] font-medium text-white transition-all duration-200'
               >
                 챌린지 보러가기
