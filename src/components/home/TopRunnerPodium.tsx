@@ -1,15 +1,9 @@
-import Image, { StaticImageData } from 'next/image';
+import { TopRunnerList } from '@/types/topRunners.types';
+import Image from 'next/image';
 import { FaMedal } from 'react-icons/fa6';
 
 type TopRunnerPodiumProps = {
-  topRunnerList: [
-    string,
-    {
-      nickname: string;
-      profileImgUrl: string | StaticImageData;
-      totalDistance: number;
-    },
-  ][];
+  topRunnerList: TopRunnerList;
 };
 
 const TopRunnerPodium = ({ topRunnerList }: TopRunnerPodiumProps) => {
@@ -39,14 +33,13 @@ const TopRunnerPodium = ({ topRunnerList }: TopRunnerPodiumProps) => {
               />
               {totalDistance}km
             </h3>
-            <div className='relative w-[42px] h-[42px] mt-[3px]'>
-              <Image
-                src={profileImgUrl}
-                alt={`${i + 1}위-${nickname}프로필`}
-                fill
-                className='object-cover rounded-full border border-[#2C2C2E] shadow-md shadow-black/40'
-              />
-            </div>
+            <Image
+              src={profileImgUrl}
+              alt={`${i + 1}위-${nickname}프로필`}
+              height={42}
+              width={42}
+              className='object-cover rounded-full border border-[#2C2C2E] shadow-md shadow-black/40 mt-[3px]'
+            />
             <h1 className='mt-[4px] text-[11px] font-medium text-[#FAFAFA]'>{nickname}</h1>
           </div>
         );

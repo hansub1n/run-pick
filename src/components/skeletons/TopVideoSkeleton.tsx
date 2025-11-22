@@ -7,7 +7,7 @@ const TopVideoSkeleton = ({ count }: { count: number }) => {
           aria-hidden='true'
           className='flex flex-col items-center animate-pulse'
         >
-          <div className='relative min-w-[100px] min-h-[65px] bg-[#2C2C2E] rounded-[10px]' />
+          <div className='relative min-w-[100px] min-h-[56px] bg-[#2C2C2E] rounded-[10px]' />
 
           <div className='flex items-center gap-[3px] mt-[3px]'>
             <div className='w-[14px] h-[14px] rounded-full bg-[#2C2C2E]' />

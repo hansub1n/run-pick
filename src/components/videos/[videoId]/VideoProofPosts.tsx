@@ -1,13 +1,16 @@
-'use client';
-import { useProofPostList } from '@/hooks/queries/useProofPostList';
 import ProofPostList from './ProofPostList';
+import { fetchProofPosts } from '@/services/run-proof/fetchProofPosts';
 
 type VideoProofPostsProps = {
   videoId: string;
 };
 
-const VideoProofPosts = ({ videoId }: VideoProofPostsProps) => {
-  const proofPostList = useProofPostList(videoId);
+const VideoProofPosts = async ({ videoId }: VideoProofPostsProps) => {
+  const proofPostList = await fetchProofPosts(videoId);
+
+  if (!proofPostList) {
+    return null;
+  }
 
   return (
     <div>

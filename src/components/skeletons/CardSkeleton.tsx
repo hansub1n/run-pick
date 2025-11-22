@@ -14,10 +14,10 @@ const CardSkeleton = ({ isOpenModal, statIconsCount = 2, count = 3 }: CardSkelet
           className='flex gap-[16px] min-h-[100px] py-[17px] px-[10px] rounded-lg shadow-md animate-pulse bg-[#1e1e1e]'
         >
           <div
-            className={`relative min-h-[65px] ${isOpenModal ? 'min-w-[84px]' : 'min-w-[104px]'} bg-[#2e2e2e] rounded-[10px]`}
+            className={`min-h-[65px] ${isOpenModal ? 'min-w-[84px]' : 'min-w-[104px]'} bg-[#2e2e2e] rounded-[10px]`}
           />
 
-          <div className='min-w-[193px] h-[65px] flex flex-col justify-between pr-[20px]'>
+          <div className='w-[193px] h-[65px] flex flex-col justify-between'>
             <div className='space-y-2'>
               <div className='h-[12px] w-[80%] bg-[#2e2e2e] rounded-md' />
               <div className='h-[10px] w-[60%] bg-[#2e2e2e] rounded-md' />

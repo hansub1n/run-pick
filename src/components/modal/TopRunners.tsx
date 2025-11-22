@@ -1,14 +1,8 @@
-import Image, { StaticImageData } from 'next/image';
+import { TopRunnerList } from '@/types/topRunners.types';
+import Image from 'next/image';
 
 type TopRunnersProps = {
-  topRunnerList: [
-    string,
-    {
-      nickname: string;
-      profileImgUrl: string | StaticImageData;
-      totalDistance: number;
-    },
-  ][];
+  topRunnerList: TopRunnerList;
   myRank?: number;
 };
 

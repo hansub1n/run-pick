@@ -7,7 +7,8 @@ import UserInit from '@/components/UserInit';
 import { ToastContainer } from 'react-toastify';
 
 const pretendard = localFont({
-  src: './fonts/PretendardVariable.ttf',
+  src: './fonts/pretendard/PretendardVariable.woff2',
+  display: 'swap',
   variable: '--font-pretendard',
   weight: '100 900',
 });
@@ -32,7 +33,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='ko'>
-      <body className={`${pretendard.variable} antialiased`}>
+      <body className={`${pretendard.className} antialiased`}>
         <QueryProvider>
           <UserInit />
           <Header />

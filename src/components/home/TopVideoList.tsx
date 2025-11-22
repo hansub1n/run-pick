@@ -1,23 +1,13 @@
-'use client';
-import { useTopVideoList } from '@/hooks/queries/useTopVideoList';
-import { useVideoDetailStore } from '@/stores/useVideoDetailStore';
-import { DBVideo } from '@/types/videos.types';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import { FaMedal } from 'react-icons/fa6';
 import TopVideoSkeleton from '../skeletons/TopVideoSkeleton';
+import Link from 'next/link';
+import { fetchTopVideos } from '@/services/home/fetchTopVideos';
 
-const TopVideoList = () => {
-  const { topVideoList, isLoading } = useTopVideoList();
-  const { setVideoDetail } = useVideoDetailStore();
-  const router = useRouter();
+const TopVideoList = async () => {
+  const topVideoList = await fetchTopVideos();
 
-  const onClickHandler = (video: DBVideo) => {
-    setVideoDetail(video);
-    router.push(`/videos/${video.youtube_video_id}`);
-  };
-
-  if (isLoading) {
+  if (!topVideoList) {
     return (
       <section
         aria-busy='true'
@@ -36,18 +26,20 @@ const TopVideoList = () => {
           key={topVideo.id}
           className='flex flex-col items-center'
         >
-          <div
-            className='cursor-pointer relative min-w-[100px] min-h-[65px]'
-            onClick={() => onClickHandler(topVideo)}
+          <Link
+            href={`/videos/${topVideo.youtube_video_id}`}
+            className='cursor-pointer'
           >
             <Image
               src={topVideo.thumbnail_url}
               alt={`${topVideo.title} 이미지`}
+              width={100}
+              height={56}
               priority={true}
-              fill
+              quality={60}
               className='object-cover rounded-[10px]'
             />
-          </div>
+          </Link>
           <h3 className='flex items-center text-[12px] gap-[3px] font-semibold'>
             <FaMedal />
             {idx + 1}

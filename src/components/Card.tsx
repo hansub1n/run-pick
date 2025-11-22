@@ -31,8 +31,7 @@ const Card = ({ imageUrl, title, subtitle, statIcons, onClick, children, isOpenM
           className='object-cover rounded-[10px]'
         />
       </div>
-      <div className='min-w-[193px] h-[65px] flex flex-col justify-between pr-[20px]'>
-        {/* TODO: pr-[20px] 모바일 확인 */}
+      <div className='w-[193px] h-[65px] flex flex-col justify-between'>
         <div>
           <h3 className='text-[12px] font-semibold break-words line-clamp-2'>{title}</h3>
           <p className='font-medium text-[#787878] text-[10px]'>
