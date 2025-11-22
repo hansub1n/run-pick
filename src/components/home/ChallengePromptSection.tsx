@@ -13,7 +13,7 @@ const CHALLENGE_PROMPTS = [
 ];
 const ChallengePromptSection = () => {
   return (
-    <div className='h-[86px] rounded-[10px] bg-[#414141] '>
+    <div className='relative h-[86px] px-[17px] py-[14px] rounded-[10px] bg-[#414141] '>
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         loop={true}
@@ -31,17 +31,15 @@ const ChallengePromptSection = () => {
       >
         {CHALLENGE_PROMPTS.map((prompt, idx) => (
           <SwiperSlide key={idx}>
-            <div className='px-[17px] py-[14px] flex flex-col justify-between h-full'>
-              <h1 className='font-semibold text-[#FAFAFA]'>{prompt.label}</h1>
-              <Link
-                href={'/challenges'}
-                className='cursor-pointer w-fit mt-[8px] px-[10px] py-[5px] rounded-[6px] bg-[#007AFF] hover:bg-[#339CFF] active:scale-95 text-[12px] font-medium text-white transition-all duration-200'
-              >
-                챌린지 보러가기
-              </Link>
-            </div>
+            <h1 className='h-[58px] font-semibold text-[#FAFAFA]'>{prompt.label}</h1>
           </SwiperSlide>
         ))}
+        <Link
+          href={'/challenges'}
+          className='absolute bottom-0 cursor-pointer px-[10px] py-[5px] rounded-[6px] bg-[#007AFF] hover:bg-[#339CFF] active:scale-95 text-[12px] font-medium text-white transition-all duration-200'
+        >
+          챌린지 보러가기
+        </Link>
       </Swiper>
     </div>
   );
