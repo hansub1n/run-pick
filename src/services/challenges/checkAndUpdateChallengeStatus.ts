@@ -11,8 +11,12 @@ export const checkAndUpdateChallengeStatus = async (userId: string) => {
     .eq('status', 'in_progress')
     .maybeSingle<UserChallenge>();
 
-  if (fetchError || !data) {
+  if (fetchError) {
     console.error('Failed to fetch user_challenges: ', fetchError);
+    return null;
+  }
+
+  if (!data) {
     return null;
   }
 

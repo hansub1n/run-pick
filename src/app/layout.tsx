@@ -5,6 +5,7 @@ import QueryProvider from '@/components/providers/QueryProvider';
 import Header from '@/components/Header';
 import UserInit from '@/components/UserInit';
 import { ToastContainer } from 'react-toastify';
+import { getIsSignIn } from '@/utils/supabase/server';
 
 const pretendard = localFont({
   src: './fonts/pretendard/PretendardVariable.woff2',
@@ -26,16 +27,18 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const isSignedIn = await getIsSignIn();
+
   return (
     <html lang='ko'>
       <body className={`${pretendard.className} antialiased`}>
         <QueryProvider>
-          <UserInit />
+          <UserInit isSignedIn={isSignedIn} />
           <Header />
           <main className='flex flex-col items-center pt-[55px]'>
             {children}
