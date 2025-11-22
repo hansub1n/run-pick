@@ -17,20 +17,22 @@ type CardProps = {
 };
 
 const Card = ({ imageUrl, title, subtitle, statIcons, onClick, children, isOpenModal }: CardProps) => {
+  const IMG_WIDTH = isOpenModal ? 84 : 104;
+
   return (
     <div
       className={`${statIcons[0]?.onClick ? '' : 'cursor-pointer'} flex gap-[16px]  min-h-[100px] py-[17px] px-[10px] rounded-lg shadow-md transition-all hover:bg-[#2e2e2e] hover:scale-[1.01]`}
       onClick={onClick}
     >
-      {/* TODO: px-[10px] 모바일 확인 */}
-      <div className={`relative min-h-[65px] ${isOpenModal ? 'min-w-[84px]' : 'min-w-[104px]'}`}>
-        <Image
-          src={imageUrl}
-          alt={`${title} 이미지`}
-          fill
-          className='object-cover rounded-[10px]'
-        />
-      </div>
+      <Image
+        src={imageUrl}
+        alt={`${title} 이미지`}
+        height={65}
+        width={IMG_WIDTH}
+        priority
+        quality={60}
+        className='object-cover rounded-[10px]'
+      />
       <div className='w-[193px] h-[65px] flex flex-col justify-between'>
         <div>
           <h3 className='text-[12px] font-semibold break-words line-clamp-2'>{title}</h3>
