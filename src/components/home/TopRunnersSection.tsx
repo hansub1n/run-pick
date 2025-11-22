@@ -3,8 +3,10 @@ import TopRunnerPodium from './TopRunnerPodium';
 import TopRunnerHeader from './TopRunnerHeader';
 import { useTopRunners } from '@/hooks/queries/useTopRunners';
 import TopRunnersSkeleton from '../skeletons/TopRunnersSkeleton';
+import { useUserStore } from '@/stores/useUserStore';
 
-const TopRunnersSection = ({ userId }: { userId: string }) => {
+const TopRunnersSection = () => {
+  const { id: userId } = useUserStore();
   const { topRunnerList, myRank, isLoading } = useTopRunners(userId);
 
   if (isLoading) {

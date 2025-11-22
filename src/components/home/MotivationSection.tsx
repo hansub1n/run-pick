@@ -1,10 +1,11 @@
 import MotivationHeader from './motivation/MotivationHeader';
 import ChallengeProgressSection from './motivation/ChallengeProgressSection';
 import NoChallengeCTA from './motivation/NoChallengeCTA';
+import { getPublicUserInfo } from '@/utils/supabase/server';
 import { checkAndUpdateChallengeStatus } from '@/services/challenges/checkAndUpdateChallengeStatus';
-import { User } from '@/types/users.types';
 
-const MotivationSection = async ({ userInfo }: { userInfo: User }) => {
+const MotivationSection = async () => {
+  const userInfo = await getPublicUserInfo();
   const isSignIn = !!userInfo;
   const activeChallenge = isSignIn ? await checkAndUpdateChallengeStatus(userInfo.id) : null;
 
