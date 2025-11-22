@@ -1,14 +1,14 @@
 import { User } from '@/types/users.types';
 
 type MotivationHeaderProps = {
-  isSignIn: boolean;
+  isSignedIn: boolean;
   userInfo: User | null;
 };
-const MotivationHeader = ({ isSignIn, userInfo }: MotivationHeaderProps) => {
+const MotivationHeader = ({ isSignedIn, userInfo }: MotivationHeaderProps) => {
   return (
     <div className='flex flex-col'>
       <h1 className='leading-[23px] font-semibold text-[#FAFAFA]'>
-        {isSignIn && userInfo ? (
+        {isSignedIn && userInfo ? (
           <>
             <span className='text-[#007AFF]'>{userInfo.nickname}</span>
             <span>님,</span>
