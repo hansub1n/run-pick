@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import localFont from 'next/font/local';
 import './globals.css';
 import QueryProvider from '@/components/providers/QueryProvider';
 import Header from '@/components/Header';
@@ -6,12 +7,13 @@ import UserInit from '@/components/UserInit';
 import { ToastContainer } from 'react-toastify';
 import { getIsSignIn } from '@/utils/supabase/server';
 
-// const pretendard = localFont({
-//   src: './fonts/pretendard/PretendardVariable.woff2',
-//   display: 'swap',
-//   variable: '--font-pretendard',
-//   weight: '100 900',
-// });
+const pretendard = localFont({
+  src: './fonts/pretendard/PretendardVariable.woff2',
+  display: 'swap',
+  variable: '--font-pretendard',
+  weight: '100 900',
+  preload: true,
+});
 
 export const metadata: Metadata = {
   title: '런픽(run-pick)',
@@ -35,7 +37,7 @@ export default async function RootLayout({
 
   return (
     <html lang='ko'>
-      <body>
+      <body className={`${pretendard.className} antialiased`}>
         <QueryProvider>
           <UserInit isSignedIn={isSignedIn} />
           <Header />
