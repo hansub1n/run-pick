@@ -1,22 +1,24 @@
+'use client';
 import TopRunnerPodium from './TopRunnerPodium';
 import TopRunnerHeader from './TopRunnerHeader';
-import { getPublicUserInfo } from '@/utils/supabase/server';
-import { fetchTopRunners } from '@/services/home/fetchTopRunners';
-import { calculateTopRunnerDisplay } from '@/utils/calculateTopRunnerDisplay';
+import { useTopRunners } from '@/hooks/queries/useTopRunners';
+import TopRunnersSkeleton from '../skeletons/TopRunnersSkeleton';
 
-const TopRunnersSection = async () => {
-  const [userInfo, topRunnerList] = await Promise.all([getPublicUserInfo(), fetchTopRunners()]);
-  const { displayedRunners, myRank } = calculateTopRunnerDisplay(topRunnerList ?? null, userInfo?.id);
+const TopRunnersSection = ({ userId }: { userId: string }) => {
+  const { topRunnerList, myRank, isLoading } = useTopRunners(userId);
 
+  if (isLoading) {
+    return <TopRunnersSkeleton />;
+  }
   return (
     <>
       <div>
         <TopRunnerHeader
-          topRunnerList={displayedRunners}
+          topRunnerList={topRunnerList}
           myRank={myRank}
         />
         <div className='relative mt-[8px] h-[203px] rounded-[12px] bg-[#2C2C2E] flex flex-col items-center justify-between shadow-md'>
-          <TopRunnerPodium topRunnerList={displayedRunners.slice(0, 3)} />
+          <TopRunnerPodium topRunnerList={topRunnerList.slice(0, 3)} />
 
           <div className='flex items-end absolute bottom-0 gap-[10px]'>
             <div className='w-[84px] h-[72px] bg-[#007AFF] rounded-t-[6px] shadow-sm shadow-[#007AFF]/30' />
