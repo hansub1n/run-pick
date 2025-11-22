@@ -20,8 +20,8 @@ body {
 }
 
 .swiper-pagination {
-  bottom: 8px !important;
-  right: 16px !important;
+  bottom: 0px !important;
+  right: 0px !important;
   left: auto !important;
   text-align: right !important;
   width: auto !important;
