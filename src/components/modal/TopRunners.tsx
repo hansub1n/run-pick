@@ -25,14 +25,13 @@ const TopRunners = ({ topRunnerList, myRank }: TopRunnersProps) => {
             >
               <h1 className='flex justify-center w-1/6 text-[13px]'>{idx + 1}</h1>
               <div className='flex flex-grow items-center gap-[10px]'>
-                <div className='relative w-[27px] h-[27px]'>
-                  <Image
-                    src={profileImgUrl}
-                    alt={`${idx + 1}위-${nickname}프로필`}
-                    fill
-                    className='object-cover rounded-full'
-                  />
-                </div>
+                <Image
+                  src={profileImgUrl}
+                  alt={`${idx + 1}위-${nickname}프로필`}
+                  width={27}
+                  height={27}
+                  className='object-cover rounded-full'
+                />
                 <p className='text-[13px]'>{nickname}</p>
               </div>
 
