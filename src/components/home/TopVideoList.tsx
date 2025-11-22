@@ -1,13 +1,14 @@
+'use client';
 import Image from 'next/image';
 import { FaMedal } from 'react-icons/fa6';
 import TopVideoSkeleton from '../skeletons/TopVideoSkeleton';
 import Link from 'next/link';
-import { fetchTopVideos } from '@/services/home/fetchTopVideos';
+import { useTopVideos } from '@/hooks/queries/useTopVideos';
 
-const TopVideoList = async () => {
-  const topVideoList = await fetchTopVideos();
+const TopVideoList = () => {
+  const { topVideoList, isLoading } = useTopVideos();
 
-  if (!topVideoList) {
+  if (isLoading || !topVideoList) {
     return (
       <section
         aria-busy='true'
