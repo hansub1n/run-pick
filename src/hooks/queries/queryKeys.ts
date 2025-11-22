@@ -14,4 +14,5 @@ export const QUERY_KEYS = {
   monthlyStats: (userId: string) => ['monthlyStats', userId],
   friends: (userId: string) => ['friends', userId],
   topVideos: () => ['topVideos'],
+  topRunners: () => ['topRunners'],
 };
