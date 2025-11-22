@@ -7,12 +7,12 @@ import UserInit from '@/components/UserInit';
 import { ToastContainer } from 'react-toastify';
 import { getIsSignIn } from '@/utils/supabase/server';
 
-const pretendard = localFont({
-  src: './fonts/pretendard/PretendardVariable.woff2',
-  display: 'swap',
-  variable: '--font-pretendard',
-  weight: '100 900',
-});
+// const pretendard = localFont({
+//   src: './fonts/pretendard/PretendardVariable.woff2',
+//   display: 'swap',
+//   variable: '--font-pretendard',
+//   weight: '100 900',
+// });
 
 export const metadata: Metadata = {
   title: '런픽(run-pick)',
@@ -36,7 +36,7 @@ export default async function RootLayout({
 
   return (
     <html lang='ko'>
-      <body className={`${pretendard.className} antialiased`}>
+      <body>
         <QueryProvider>
           <UserInit isSignedIn={isSignedIn} />
           <Header />
