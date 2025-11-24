@@ -31,20 +31,6 @@ Pick하고 Run해! 러닝 루틴 제공하고 기록하는 서비스
 
    <br/>
 
-## Git Commit Convention
-
-- feat : 해당 파일에 새로운 기능이 생김
-- add: 없던 파일을 생성함, 초기 세팅
-- bugfix: 버그 수정
-- refactor: 코드 리팩토링
-- fix: 코드 수정
-- move: 파일 옮김/정리
-- delete: 기능/파일을 삭제
-- test: 테스트 코드를 작성
-- style: css
-- gitfix: gitignore 수정
-- script: package.json 변경(npm 설치 등)
-
 ## ERD 설계도
 
 <img width="2330" height="1262" alt="supabase-schema-yxidgnwdpxfizivnsqwy (1)" src="https://github.com/user-attachments/assets/4a90e198-20b7-43af-bcfc-7dbc91cf04e2" />
@@ -147,6 +133,7 @@ Pick하고 Run해! 러닝 루틴 제공하고 기록하는 서비스
 콘텐츠 로딩 중 빈 화면으로 인해 레이아웃이 변경되는 것이 보여 UX도 좋지 않았습니다.
 
 <br/>
+                
 | Metric       | Before ❌ | After ✅ |
 |--------------|-----------|---------|
 | FCP          | 0.9s      | 1.0s    |
