@@ -127,6 +127,9 @@ Pick하고 Run해! 러닝 루틴 제공하고 기록하는 서비스
 
 ### ◉ LCP 지표 개선 + Skeleton UI 적용을 통한 체감 성능 향상
 
+
+<img width="1216" height="538" alt="스크린샷 2025-11-30 오후 11 08 14" src="https://github.com/user-attachments/assets/5e500937-0d44-4173-9324-0f26b40655e5" />
+
 **✔ 문제 상황**
 
 초기 페이지 렌더링 성능이 저조했고,
@@ -154,6 +157,10 @@ Pick하고 Run해! 러닝 루틴 제공하고 기록하는 서비스
 - CLS 방지 -> 이미지 영역 고정
 - 비어있는 상태 개선 -> Skeleton UI 도입
 - JS 번들 최적화 -> 서버 컴포넌트 전환 및 클라이언트 코드 최소화
+
+
+<img width="809" height="671" alt="스크린샷 2025-11-30 오후 11 08 41" src="https://github.com/user-attachments/assets/70c84c05-3bdc-4ab9-a429-fa2ee4146455" />
+
 
 **✔ 최종 결과**
 
