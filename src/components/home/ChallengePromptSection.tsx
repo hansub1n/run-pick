@@ -36,7 +36,7 @@ const ChallengePromptSection = () => {
         ))}
         <Link
           href={'/challenges'}
-          className='absolute bottom-0 cursor-pointer px-[10px] py-[5px] rounded-[6px] bg-[#007AFF] hover:bg-[#339CFF] active:scale-95 text-[12px] font-medium text-white transition-all duration-200'
+          className='z-10 absolute bottom-0 cursor-pointer px-[10px] py-[5px] rounded-[6px] bg-[#007AFF] hover:bg-[#339CFF] active:scale-95 text-[12px] font-medium text-white transition-all duration-200'
         >
           챌린지 보러가기
         </Link>
