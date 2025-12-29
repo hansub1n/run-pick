@@ -1,20 +1,23 @@
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from './queryKeys';
 import { Distance } from '@/types/videos.types';
 
-const fetchVideosFromAPI = async (distance: Distance) => {
-  const res = await fetch(`/api/videos?distance=${distance}`);
+const fetchVideosFromAPI = async (distance: Distance, pageParam: number) => {
+  const res = await fetch(`/api/videos?distance=${distance}&page=${pageParam}`);
   const data = await res.json();
 
-  return data ?? [];
+  return data;
 };
 
 export const useVideoList = (distance: Distance) => {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, fetchNextPage, isFetchingNextPage, hasNextPage } = useInfiniteQuery({
     queryKey: QUERY_KEYS.videos(distance),
-    queryFn: () => fetchVideosFromAPI(distance),
-    staleTime: 1000 * 60 * 60 * 24,
+    initialPageParam: 1,
+    queryFn: ({ pageParam }) => fetchVideosFromAPI(distance, pageParam),
+    getNextPageParam: (lastPage, allPages) => (lastPage.videos.length < 10 ? undefined : allPages.length + 1),
   });
 
-  return { videoList: data ?? [], isLoading };
+  console.log(data);
+  const videoList = data?.pages.flatMap((page) => page.videos) ?? [];
+  return { videoList, isLoading, fetchNextPage, isFetchingNextPage, hasNextPage };
 };

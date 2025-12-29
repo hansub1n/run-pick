@@ -16,7 +16,7 @@ type VideoListProps = {
 const VideoList = ({ distance, sortOption }: VideoListProps) => {
   const { setVideoDetail } = useVideoDetailStore();
   const router = useRouter();
-  const { videoList, isLoading } = useVideoList(distance);
+  const { videoList, isLoading, fetchNextPage, isFetchingNextPage, hasNextPage } = useVideoList(distance);
 
   const sortedVidoList = [...videoList].sort((a, b) => {
     if (sortOption === 'proof') return b.proof_count - a.proof_count;
@@ -60,6 +60,14 @@ const VideoList = ({ distance, sortOption }: VideoListProps) => {
           isOpenModal={false}
         />
       ))}
+      {hasNextPage && !isFetchingNextPage && <button onClick={() => fetchNextPage()}>비디오 추가</button>}
+      {isFetchingNextPage && (
+        <CardSkeleton
+          isOpenModal={false}
+          statIconsCount={2}
+          count={3}
+        />
+      )}
     </div>
   );
 };
