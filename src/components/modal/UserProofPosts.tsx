@@ -1,5 +1,5 @@
 import { ProofPosts } from '@/types/proofPosts.types';
-import DefaultChallengeImg from '/public/assets/images/default-challenge-img.webp';
+import defaultRunProofImg from '/public/assets/images/default-run-proof-img.webp';
 import React from 'react';
 import Card from '../Card';
 import { formatDateShort } from '@/utils/formatDateShort';
@@ -19,7 +19,7 @@ const UserProofPosts = ({ list }: UserProofPostsPros) => {
         {list.map((post) => (
           <Card
             key={post.id}
-            imageUrl={post.image_url || DefaultChallengeImg}
+            imageUrl={post.image_url || defaultRunProofImg}
             title={post.content}
             subtitle={`${post.distance_km}km | ${formatRunDuration(post.duration)}`}
             statIcons={[{ label: `${formatConditionLabel(post.condition)} · ${formatDateShort(post.created_at)}` }]}

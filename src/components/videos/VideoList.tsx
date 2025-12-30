@@ -25,7 +25,6 @@ const VideoList = ({ distance, sortOption }: VideoListProps) => {
 
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting && hasNextPage && !isFetchingNextPage) {
-        console.log('발견--------------');
         fetchNextPage();
       }
     });

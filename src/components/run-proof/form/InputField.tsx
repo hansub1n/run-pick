@@ -13,9 +13,11 @@ const InputField = ({ content, distance_km, duration, onChange }: InputFieldprop
       <div className='flex items-end'>
         <input
           type='number'
+          min={1}
           name='distance_km'
           value={distance_km}
           onChange={onChange}
+          required
           className='h-[45px] rounded-[10px] bg-[#1A1A1A] border border-[#2C2C2C] 
                  px-[8px] w-[80px] text-[#EDEDED] focus:outline-none focus:border-[#007AFF]'
         />
@@ -38,26 +40,28 @@ const InputField = ({ content, distance_km, duration, onChange }: InputFieldprop
         :
         <input
           type='number'
-          min={0}
+          min={1}
           max={59}
           maxLength={2}
           name='minutes'
           value={duration.minutes}
           placeholder='분'
           onChange={onChange}
+          required
           className='h-[45px] rounded-[10px] bg-[#1A1A1A] border border-[#2C2C2C] 
                      px-[8px] w-[80px] text-[#EDEDED] focus:outline-none focus:border-[#007AFF]'
         />
         :
         <input
           type='number'
-          min={0}
+          min={1}
           max={59}
           maxLength={2}
           name='seconds'
           value={duration.seconds}
           placeholder='초'
           onChange={onChange}
+          required
           className='h-[45px] rounded-[10px] bg-[#1A1A1A] border border-[#2C2C2C] 
                      px-[8px] w-[80px] text-[#EDEDED] focus:outline-none focus:border-[#007AFF]'
         />
@@ -69,6 +73,7 @@ const InputField = ({ content, distance_km, duration, onChange }: InputFieldprop
         value={content}
         onChange={onChange}
         autoComplete='off'
+        required
         className='h-[45px] rounded-[10px] bg-[#1A1A1A] border border-[#2C2C2C] 
                px-[8px] text-[#EDEDED] focus:outline-none focus:border-[#007AFF]'
       />
