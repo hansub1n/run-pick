@@ -1,6 +1,6 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
+import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from './queryKeys';
 import { Level } from '@/types/challenges.types';
 import { fetchChallenges } from '@/services/challenges/fetchChallenges';
@@ -9,6 +9,7 @@ export const useChallengeList = (level: Level) => {
   const { data, isLoading } = useQuery({
     queryKey: QUERY_KEYS.challenges(level),
     queryFn: () => fetchChallenges(level),
+    placeholderData: keepPreviousData,
   });
 
   return { challengeList: data ?? [], isLoading };

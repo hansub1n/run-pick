@@ -1,6 +1,6 @@
 'use client';
 import Card from '@/components/Card';
-import DefaultProfileImg from '/public/assets/images/default-profile-img.webp';
+import DefaultRunProofImg from '/public/assets/images/default-run-proof-img.webp';
 import { formatDateShort } from '@/utils/formatDateShort';
 import { formatRunDuration } from '@/utils/formatRunDuration';
 import { formatConditionLabel } from '@/utils/formatConditionLabel';
@@ -15,7 +15,7 @@ const ProofPostList = ({ list }: ProofPostListProps) => {
       {list.map((post) => (
         <Card
           key={post.id}
-          imageUrl={post.image_url || DefaultProfileImg}
+          imageUrl={post.image_url || DefaultRunProofImg}
           title={post.content}
           subtitle={`${post.distance_km}km | ${formatRunDuration(post.duration)}`}
           statIcons={[{ label: `${formatConditionLabel(post.condition)} · ${formatDateShort(post.created_at)}` }]}
