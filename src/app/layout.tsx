@@ -40,7 +40,7 @@ export default async function RootLayout({
       <body className={`${pretendard.className} antialiased`}>
         <QueryProvider>
           <UserInit isSignedIn={isSignedIn} />
-          <Header />
+          <Header isSignedIn={isSignedIn} />
           <main className='flex flex-col items-center pt-[55px]'>
             {children}
             <ToastContainer

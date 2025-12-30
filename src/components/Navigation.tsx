@@ -1,5 +1,4 @@
 'use client';
-import { useAuthStatus } from '@/hooks/queries/useAuthStatus';
 import { handleSignOut } from '@/utils/supabase/auth';
 import { useQueryClient } from '@tanstack/react-query';
 import Link from 'next/link';
@@ -11,8 +10,7 @@ const baseLinks = [
   { href: '/videos', label: '런픽' },
 ];
 
-const Navigation = () => {
-  const { isSignedIn } = useAuthStatus();
+const Navigation = ({ isSignedIn }: { isSignedIn: boolean }) => {
   const router = useRouter();
   const queryClient = useQueryClient();
 

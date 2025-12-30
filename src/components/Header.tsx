@@ -4,7 +4,7 @@ import Menubar from './Menubar';
 import { FiMenu } from 'react-icons/fi';
 import { useMenuStore } from '@/stores/useMenuStore';
 
-const Header = () => {
+const Header = ({ isSignedIn }: { isSignedIn: boolean }) => {
   const { isOpen, toggleMenu } = useMenuStore();
 
   return (
@@ -17,6 +17,7 @@ const Header = () => {
         <Menubar
           isOpen={isOpen}
           toggleMenu={toggleMenu}
+          isSignedIn={isSignedIn}
         />
       </div>
     </>
