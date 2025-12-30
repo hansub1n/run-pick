@@ -7,6 +7,7 @@ import { useVideoList } from '@/hooks/queries/useVideoList';
 import { formatVideoDuration } from '@/utils/formatVideoDuration';
 import { useVideoDetailStore } from '@/stores/useVideoDetailStore';
 import CardSkeleton from '../skeletons/CardSkeleton';
+import { useEffect, useRef } from 'react';
 
 type VideoListProps = {
   distance: Distance;
@@ -15,8 +16,24 @@ type VideoListProps = {
 
 const VideoList = ({ distance, sortOption }: VideoListProps) => {
   const { setVideoDetail } = useVideoDetailStore();
-  const router = useRouter();
   const { videoList, isLoading, fetchNextPage, isFetchingNextPage, hasNextPage } = useVideoList(distance);
+  const targetRef = useRef<HTMLDivElement | null>(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!targetRef.current) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && hasNextPage && !isFetchingNextPage) {
+        console.log('발견--------------');
+        fetchNextPage();
+      }
+    });
+
+    observer.observe(targetRef.current);
+
+    return () => observer.disconnect();
+  }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
   const sortedVidoList = [...videoList].sort((a, b) => {
     if (sortOption === 'proof') return b.proof_count - a.proof_count;
@@ -60,7 +77,7 @@ const VideoList = ({ distance, sortOption }: VideoListProps) => {
           isOpenModal={false}
         />
       ))}
-      {hasNextPage && !isFetchingNextPage && <button onClick={() => fetchNextPage()}>비디오 추가</button>}
+
       {isFetchingNextPage && (
         <CardSkeleton
           isOpenModal={false}
@@ -68,6 +85,8 @@ const VideoList = ({ distance, sortOption }: VideoListProps) => {
           count={3}
         />
       )}
+
+      <div ref={targetRef} />
     </div>
   );
 };

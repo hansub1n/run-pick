@@ -1,12 +1,12 @@
 import { convertDistanceToNumber } from '@/utils/convertDistanceToNumber';
 import { createClient } from '@/utils/supabase/server';
 
-export const fetchVideosFromDB = async (distance: string, page: number, pageSize = 10) => {
+export const fetchVideosFromDB = async (distance: string, page: number, limit: number) => {
   const distanceValue = convertDistanceToNumber(distance);
   const client = await createClient();
 
-  const from = (page - 1) * pageSize;
-  const to = from + pageSize - 1;
+  const from = (page - 1) * limit;
+  const to = from + limit - 1;
 
   const { data, error, count } = await client
     .from('video_with_counts')
