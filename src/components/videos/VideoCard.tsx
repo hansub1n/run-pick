@@ -33,18 +33,20 @@ const VideoCard = ({ video, behaviorStore, saveHandler }: VideoCardProps) => {
       }
     };
 
+    if (!behaviorStore.current[videoId]) {
+      behaviorStore.current[videoId] = {
+        videoId,
+        viewStartTime: Date.now(),
+        viewTime: 0,
+        clicked: false,
+        category,
+      };
+    } else if (behaviorStore.current[videoId].viewStartTime === 0) {
+      behaviorStore.current[videoId].viewStartTime = Date.now();
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (!behaviorStore.current[videoId]) {
-          behaviorStore.current[videoId] = {
-            videoId,
-            viewStartTime: 0,
-            viewTime: 0,
-            clicked: false,
-            category,
-          };
-        }
-
         if (entry.isIntersecting) {
           if (behaviorStore.current[videoId].viewStartTime === 0)
             behaviorStore.current[videoId].viewStartTime = Date.now();
