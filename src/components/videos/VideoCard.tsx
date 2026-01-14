@@ -22,40 +22,49 @@ const VideoCard = ({ video, behaviorStore, saveHandler }: VideoCardProps) => {
   useEffect(() => {
     if (!targetRef.current) return;
 
-    const finalizeView = () => {
-      const start = behaviorStore.current[videoId].viewStartTime;
+    const getStore = () => {
+      if (!behaviorStore.current[videoId]) {
+        behaviorStore.current[videoId] = {
+          videoId,
+          viewStartTime: 0,
+          viewTime: 0,
+          clicked: false,
+          category,
+        };
+      }
+      return behaviorStore.current[videoId];
+    };
 
-      if (start) {
-        const duration = (Date.now() - start) / 1000;
-        behaviorStore.current[videoId].viewTime += duration;
-        behaviorStore.current[videoId].viewStartTime = 0;
-        saveHandler();
+    const startView = () => {
+      const store = getStore();
+      if (store.viewStartTime === 0) {
+        store.viewStartTime = Date.now();
       }
     };
 
-    if (!behaviorStore.current[videoId]) {
-      behaviorStore.current[videoId] = {
-        videoId,
-        viewStartTime: Date.now(),
-        viewTime: 0,
-        clicked: false,
-        category,
-      };
-    } else if (behaviorStore.current[videoId].viewStartTime === 0) {
-      behaviorStore.current[videoId].viewStartTime = Date.now();
-    }
+    const finalizeView = () => {
+      const store = getStore();
+      if (store.viewStartTime === 0) return;
+
+      const duration = (Date.now() - store.viewStartTime) / 1000;
+      store.viewTime += duration;
+      store.viewStartTime = 0;
+      saveHandler();
+    };
+
+    startView();
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          if (behaviorStore.current[videoId].viewStartTime === 0)
-            behaviorStore.current[videoId].viewStartTime = Date.now();
+          startView();
         } else {
           finalizeView();
         }
       },
       { threshold: 0.5 },
     );
+
     observer.observe(targetRef.current);
 
     return () => {
