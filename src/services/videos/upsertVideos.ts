@@ -11,13 +11,15 @@ export const upsertVideos = async (videos: YoutubeVideo[], distance: string) => 
       !video.id ||
       !video.snippet?.title ||
       !video.snippet?.thumbnails?.medium?.url ||
-      !video.contentDetails?.duration
+      !video.contentDetails?.duration ||
+      !video.category
     ) {
       console.warn('[upsert] 영상 데이터 누락:', {
         id: video.id,
         title: video.snippet?.title,
         thumbnails: video.snippet?.thumbnails,
         duration: video.contentDetails?.duration,
+        video_category: video.category,
       });
       return;
     }
@@ -29,6 +31,7 @@ export const upsertVideos = async (videos: YoutubeVideo[], distance: string) => 
         thumbnail_url: video.snippet.thumbnails.medium.url,
         duration: video.contentDetails.duration,
         distance_category: distanceValue,
+        video_category: video.category, // TODO: 바꿔야 됨
         updated_at: new Date().toISOString(),
       },
       { onConflict: 'youtube_video_id' },

@@ -2,6 +2,25 @@ export type SortOption = 'default' | 'proof' | 'favorite';
 
 export type Distance = '3km' | '5km' | '10km';
 
+export type Category = 'music' | 'vlog' | 'training' | 'info' | 'motivation';
+
+export type Behavior = {
+  videoId: string;
+  viewStartTime: number;
+  viewTime: number;
+  clicked: boolean;
+  category: Category;
+};
+
+export type BehaviorLogs = Behavior[];
+
+export type YoutubeItems = {
+  kind: string;
+  etag: string;
+  id: Object;
+  snippet: Object;
+};
+
 export type YoutubeVideo = {
   id: string;
   snippet: {
@@ -18,6 +37,7 @@ export type YoutubeVideo = {
   contentDetails: {
     duration: string;
   };
+  category: Category;
 };
 
 export type ThumbnailDetail = { url: string; width: number; height: number };
@@ -30,5 +50,6 @@ export type DBVideo = {
   distance_category: number;
   duration: string;
   favorite_count: number;
-  proof_count: number;
+  post_count: number;
+  video_category: Category;
 };

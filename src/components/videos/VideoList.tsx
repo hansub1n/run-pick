@@ -1,13 +1,10 @@
 'use client';
-import { FaPersonRunning, FaStar } from 'react-icons/fa6';
-import Card from '../Card';
-import { useRouter } from 'next/navigation';
-import { Distance, DBVideo, SortOption } from '@/types/videos.types';
+import { Distance, SortOption, Behavior } from '@/types/videos.types';
 import { useVideoList } from '@/hooks/queries/useVideoList';
-import { formatVideoDuration } from '@/utils/formatVideoDuration';
-import { useVideoDetailStore } from '@/stores/useVideoDetailStore';
 import CardSkeleton from '../skeletons/CardSkeleton';
 import { useEffect, useRef } from 'react';
+import VideoCard from './VideoCard';
+import { saveBehaviorStore } from '@/utils/behaviorStorage';
 
 type VideoListProps = {
   distance: Distance;
@@ -15,10 +12,12 @@ type VideoListProps = {
 };
 
 const VideoList = ({ distance, sortOption }: VideoListProps) => {
-  const { setVideoDetail } = useVideoDetailStore();
   const { videoList, isLoading, fetchNextPage, isFetchingNextPage, hasNextPage } = useVideoList(distance);
   const targetRef = useRef<HTMLDivElement | null>(null);
-  const router = useRouter();
+  const behaviorStore = useRef<Record<string, Behavior>>(
+    typeof window !== 'undefined' ? JSON.parse(sessionStorage.getItem('video_behavior') || '{}') : {},
+  );
+  const saveHandler = () => saveBehaviorStore(behaviorStore);
 
   useEffect(() => {
     if (!targetRef.current) return;
@@ -35,15 +34,10 @@ const VideoList = ({ distance, sortOption }: VideoListProps) => {
   }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
   const sortedVidoList = [...videoList].sort((a, b) => {
-    if (sortOption === 'proof') return b.proof_count - a.proof_count;
-    if (sortOption === 'favorite') return b.favorite_count - a.proof_count;
+    if (sortOption === 'proof') return b.post_count - a.post_count;
+    if (sortOption === 'favorite') return b.favorite_count - a.favorite_count;
     return 0;
   });
-
-  const onClickHandler = (video: DBVideo) => {
-    setVideoDetail(video);
-    router.push(`/videos/${video.youtube_video_id}`);
-  };
 
   if (isLoading) {
     return (
@@ -60,20 +54,15 @@ const VideoList = ({ distance, sortOption }: VideoListProps) => {
       </div>
     );
   }
+
   return (
     <div className='w-[313px]'>
       {sortedVidoList.map((video) => (
-        <Card
+        <VideoCard
           key={video.id}
-          imageUrl={video.thumbnail_url}
-          title={video.title}
-          subtitle={() => formatVideoDuration(video.duration)}
-          statIcons={[
-            { icon: <FaStar />, label: video.favorite_count },
-            { icon: <FaPersonRunning />, label: video.proof_count },
-          ]}
-          onClick={() => onClickHandler(video)}
-          isOpenModal={false}
+          video={video}
+          behaviorStore={behaviorStore}
+          saveHandler={saveHandler}
         />
       ))}
 
