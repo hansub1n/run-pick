@@ -17,8 +17,8 @@ export type BehaviorLogs = Behavior[];
 export type YoutubeItems = {
   kind: string;
   etag: string;
-  id: Object;
-  snippet: Object;
+  id: object;
+  snippet: object;
 };
 
 export type YoutubeVideo = {
