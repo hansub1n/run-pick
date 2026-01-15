@@ -7,7 +7,8 @@ import { useRouter } from 'next/navigation';
 const baseLinks = [
   { href: '/', label: '홈' },
   { href: '/challenges', label: '챌린지' },
-  { href: '/videos', label: '런픽' },
+  { href: '/videos', label: 'Run-Pick' },
+  { href: '/fortune-quiz', label: '오늘의 러닝 운세' },
 ];
 
 const Navigation = ({ isSignedIn }: { isSignedIn: boolean }) => {
