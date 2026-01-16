@@ -1,5 +1,3 @@
-import { number } from 'framer-motion';
-import { label } from 'framer-motion/client';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 const TOTAL_QUESTIONS = 5;
@@ -8,9 +6,13 @@ const BUTTON_LABELS = {
   start: '시작하기',
   next: '다음',
   end: '결과 확인',
-} as const;
+};
 
-const FortuneQuizButton = ({ value }: { value: string }) => {
+type FortuneQuizButtonProps = {
+  value: string;
+  resetAnswer: () => void;
+};
+const FortuneQuizButton = ({ value, resetAnswer }: FortuneQuizButtonProps) => {
   const params = useSearchParams();
   const router = useRouter();
 
@@ -25,8 +27,17 @@ const FortuneQuizButton = ({ value }: { value: string }) => {
   const saveAnswer = (answer?: string) => {
     if (!answer) return;
 
-    const prev = JSON.parse(sessionStorage.getItem('fortune-quiz') || '[]');
-    sessionStorage.setItem('fortune-quiz', JSON.stringify([...prev, answer]));
+    const prev = JSON.parse(sessionStorage.getItem('fortune-quiz') || '{}');
+
+    if (prev[step] === answer) return;
+
+    const next = {
+      ...prev,
+      [step]: answer,
+    };
+
+    sessionStorage.setItem('fortune-quiz', JSON.stringify(next));
+    resetAnswer();
   };
 
   const onClickHandler = () => {
@@ -50,12 +61,26 @@ const FortuneQuizButton = ({ value }: { value: string }) => {
   const buttonType = getButtonType();
 
   return (
-    <button
-      onClick={onClickHandler}
-      disabled={step > 0 && !value}
-    >
-      {BUTTON_LABELS[buttonType]}
-    </button>
+    <div className='mt-4'>
+      <button
+        onClick={onClickHandler}
+        disabled={step > 0 && !value}
+        className={`
+            cursor-pointer
+            w-full py-3 rounded-2xl font-semibold text-lg text-white
+            bg-[#007AFF] shadow-lg
+            transition-all duration-200
+            active:scale-[0.97]
+            hover:bg-[#0066CC]
+            hover:brightness-110
+            disabled:opacity-40
+            disabled:cursor-not-allowed
+            disabled:shadow-none
+          `}
+      >
+        {BUTTON_LABELS[buttonType]}
+      </button>
+    </div>
   );
 };
 
