@@ -1,10 +1,10 @@
 import { FortuneProfile } from '@/app/fortune-quiz/result/page';
+import { upsertSharedFortune } from '@/services/fortune-quiz/upsertSharedFortune';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
 import { FiShare2 } from 'react-icons/fi';
 
 const BUTTON_STYLES = {
-  retry:
+  retryOrStart:
     'cursor-pointer flex-1 py-3.5 rounded-2xl font-semibold text-[15px] text-[#38BDF8] bg-[#007AFF15] border border-[#007AFF30] transition-all duration-200 active:scale-[0.96] hover:bg-[#007AFF25] hover:border-[#007AFF60]',
   share:
     'cursor-pointer px-5 rounded-2xl bg-[#1E293B] border border-[#334155] text-[#38BDF8] shadow-lg transition-all duration-200 active:scale-[0.95] hover:bg-[#334155] flex items-center justify-center',
@@ -12,6 +12,7 @@ const BUTTON_STYLES = {
 };
 
 const BUTTON_LABELS = {
+  start: '내 운세 보기',
   retry: '다시하기',
   share: <FiShare2 className='w-[22px] h-[22px]' />,
   home: '홈으로 가기',
@@ -23,37 +24,39 @@ type ResultButtonsProps = {
 };
 
 const ResultButtons = ({ fortune, isShared }: ResultButtonsProps) => {
-  const [resultUrl, setResultUrl] = useState<string | null>(null);
   const router = useRouter();
-
-  useEffect(() => {
-    const url = `${window.location.origin}/fortune-quiz/result?type=${encodeURIComponent(fortune.id)}`;
-    setResultUrl(url);
-  }, [fortune.id]);
 
   const onClickHandler = async (type: string) => {
     switch (type) {
-      case 'retry':
-        sessionStorage.removeItem('fortune-quiz');
+      case 'retryOrStart':
+        if (!isShared) {
+          sessionStorage.removeItem('fortune-quiz');
+          sessionStorage.removeItem('fortune-result');
+        }
         router.replace('/fortune-quiz');
         return;
+
       case 'share':
+        const shareId = await upsertSharedFortune(fortune);
+        const shareUrl = `${location.origin}/fortune-quiz/result?shareId=${shareId}`;
+
         if (navigator.share) {
           try {
             await navigator.share({
               title: '오늘의 러닝 운세 결과',
               text: `${fortune.title} - ${fortune.description.slice(0, 100)}...`,
-              url: resultUrl!,
+              url: shareUrl!,
             });
           } catch (error) {
             console.error(error);
             return;
           }
         } else {
-          await navigator.clipboard.writeText(resultUrl!);
+          await navigator.clipboard.writeText(shareUrl!);
           alert('운세 결과 링크가 클립보드에 복사되었습니다!');
         }
         return;
+
       case 'home':
         return router.push('/');
     }
@@ -62,10 +65,10 @@ const ResultButtons = ({ fortune, isShared }: ResultButtonsProps) => {
   return (
     <div className='flex gap-[12px] w-full px-6'>
       <button
-        className={BUTTON_STYLES['retry']}
-        onClick={() => onClickHandler('retry')}
+        className={BUTTON_STYLES['retryOrStart']}
+        onClick={() => onClickHandler('retryOrStart')}
       >
-        {BUTTON_LABELS['retry']}
+        {isShared ? BUTTON_LABELS['start'] : BUTTON_LABELS['retry']}
       </button>
       {!isShared && (
         <button

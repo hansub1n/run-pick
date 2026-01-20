@@ -43,7 +43,6 @@ export const fetchVideosFromYoutube = async (distance: string) => {
       )
         .then((res) => res.json())
         .then((data) => {
-          console.log('youtube raw response: ', data);
           return (data.items ?? []).map((item: YoutubeItems) => ({
             ...item,
             category,
@@ -55,14 +54,12 @@ export const fetchVideosFromYoutube = async (distance: string) => {
 
   const allItems = searchResults.flat().filter(Boolean);
 
-  console.log('allItems :', allItems);
   const categoryMap = new Map<string, Category>();
 
   allItems.forEach((item) => {
     if (item.id?.videoId && item.category) categoryMap.set(item.id.videoId, item.category);
   });
   const videoIds = [...categoryMap.keys()].join(',');
-  console.log('videoIds :', videoIds);
   if (!videoIds) {
     return [];
   }
@@ -83,6 +80,5 @@ export const fetchVideosFromYoutube = async (distance: string) => {
       category: categoryMap.get(video.id),
     }));
 
-  console.log('filteredVideos :', filteredVideos);
   return filteredVideos;
 };
