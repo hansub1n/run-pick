@@ -1,5 +1,7 @@
 import { Category, Distance, YoutubeItems, YoutubeVideo } from '@/types/videos.types';
 import { durationToSeconds } from '@/utils/durationToSeconds';
+import { fetchVideos } from './fetchVideos';
+import { fetchRecommendedVideos } from './fetchRecommendedVideos';
 export const YOUTUBE_API_BASE_URL = 'https://www.googleapis.com/youtube/v3';
 export const YOUTUBE_API_KEY = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY;
 
@@ -34,22 +36,11 @@ export const keywordMap: Record<Distance, KeywordMapByCategory> = {
   '10km': keywords10km,
 };
 
-export const fetchVideosFromYoutube = async (distance: string) => {
-  const keywordByCategory = keywordMap[(distance as Distance) ?? '3km'];
-  const fetches = Object.entries(keywordByCategory).flatMap(([category, keywords]) =>
-    keywords.map((keyword) =>
-      fetch(
-        `${YOUTUBE_API_BASE_URL}/search?part=snippet&maxResults=2&q=${encodeURIComponent(keyword)}&type=video&key=${YOUTUBE_API_KEY}`,
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          return (data.items ?? []).map((item: YoutubeItems) => ({
-            ...item,
-            category,
-          }));
-        }),
-    ),
-  );
+export const fetchVideosFromYoutube = async (distance: string, preferredCategory?: Category) => {
+  const fetches = preferredCategory
+    ? await fetchRecommendedVideos(distance, preferredCategory)
+    : await fetchVideos(distance);
+
   const searchResults = await Promise.all(fetches);
 
   const allItems = searchResults.flat().filter(Boolean);

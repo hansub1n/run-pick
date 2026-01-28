@@ -1,13 +1,14 @@
 import { useVideoDetailStore } from '@/stores/useVideoDetailStore';
-import { Behavior, DBVideo } from '@/types/videos.types';
+import { Behavior, DBVideo, RecommendedVideo } from '@/types/videos.types';
 import { useRouter } from 'next/navigation';
 import { RefObject, useEffect, useRef } from 'react';
 import Card from '../Card';
 import { formatVideoDuration } from '@/utils/formatVideoDuration';
 import { FaPersonRunning, FaStar } from 'react-icons/fa6';
+import { MdOutlineRecommend } from 'react-icons/md';
 
 type VideoCardProps = {
-  video: DBVideo;
+  video: DBVideo | RecommendedVideo;
   behaviorStore: RefObject<Record<string, Behavior>>;
   saveHandler: () => void;
 };
@@ -73,7 +74,7 @@ const VideoCard = ({ video, behaviorStore, saveHandler }: VideoCardProps) => {
     };
   }, [videoId]);
 
-  const onClickHandler = (video: DBVideo) => {
+  const onClickHandler = (video: DBVideo | RecommendedVideo) => {
     setVideoDetail(video);
 
     if (!behaviorStore.current[videoId]) {
@@ -91,16 +92,24 @@ const VideoCard = ({ video, behaviorStore, saveHandler }: VideoCardProps) => {
     router.push(`/videos/${videoId}`);
   };
 
+  const isRecommendedVideo = (video: DBVideo | RecommendedVideo): video is RecommendedVideo => {
+    return (video as RecommendedVideo).isRecommended === true;
+  };
+
   return (
     <div ref={targetRef}>
       <Card
         imageUrl={video.thumbnail_url}
         title={video.title}
         subtitle={() => formatVideoDuration(video.duration)}
-        statIcons={[
-          { icon: <FaStar />, label: video.favorite_count },
-          { icon: <FaPersonRunning />, label: video.post_count },
-        ]}
+        statIcons={
+          isRecommendedVideo(video)
+            ? [{ icon: <MdOutlineRecommend />, label: '런픽 추천 영상' }]
+            : [
+                { icon: <FaStar />, label: video.favorite_count },
+                { icon: <FaPersonRunning />, label: video.post_count },
+              ]
+        }
         onClick={() => onClickHandler(video)}
         isOpenModal={false}
       />

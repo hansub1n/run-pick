@@ -53,3 +53,14 @@ export type DBVideo = {
   post_count: number;
   video_category: Category;
 };
+
+export type RecommendedVideo = {
+  id: string;
+  youtube_video_id: string;
+  title: string;
+  thumbnail_url: string;
+  distance_category: number;
+  duration: string;
+  video_category: Category;
+  isRecommended: boolean;
+};

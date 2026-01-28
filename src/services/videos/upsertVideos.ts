@@ -31,7 +31,7 @@ export const upsertVideos = async (videos: YoutubeVideo[], distance: string) => 
         thumbnail_url: video.snippet.thumbnails.medium.url,
         duration: video.contentDetails.duration,
         distance_category: distanceValue,
-        video_category: video.category, // TODO: 바꿔야 됨
+        video_category: video.category,
         updated_at: new Date().toISOString(),
       },
       { onConflict: 'youtube_video_id' },

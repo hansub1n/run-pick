@@ -1,10 +1,13 @@
 'use client';
-import { Distance, SortOption, Behavior } from '@/types/videos.types';
+import { Distance, SortOption, Behavior, YoutubeVideo, DBVideo, RecommendedVideo } from '@/types/videos.types';
 import { useVideoList } from '@/hooks/queries/useVideoList';
 import CardSkeleton from '../skeletons/CardSkeleton';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import VideoCard from './VideoCard';
 import { saveBehaviorStore } from '@/utils/behaviorStorage';
+import { getPreferredCategory } from '@/utils/getPreferredCategory';
+import { fetchVideosFromYoutube } from '@/services/videos/fetchVideosFromYoutube';
+import { convertYoutubeToDBVideo } from '@/services/videos/convertYoutubeToDBVideo';
 
 type VideoListProps = {
   distance: Distance;
@@ -13,11 +16,25 @@ type VideoListProps = {
 
 const VideoList = ({ distance, sortOption }: VideoListProps) => {
   const { videoList, isLoading, fetchNextPage, isFetchingNextPage, hasNextPage } = useVideoList(distance);
+  const [recommended, setRecommended] = useState<RecommendedVideo[]>([]);
   const targetRef = useRef<HTMLDivElement | null>(null);
   const behaviorStore = useRef<Record<string, Behavior>>(
     typeof window !== 'undefined' ? JSON.parse(sessionStorage.getItem('video_behavior') || '{}') : {},
   );
   const saveHandler = () => saveBehaviorStore(behaviorStore);
+
+  useEffect(() => {
+    const load = async () => {
+      const preferred = getPreferredCategory(behaviorStore.current);
+      if (!preferred) return;
+
+      const videos = await fetchVideosFromYoutube(distance, preferred);
+      const converted = videos.map((video: YoutubeVideo) => convertYoutubeToDBVideo(video, distance));
+      setRecommended(converted);
+    };
+
+    load();
+  }, [distance]);
 
   useEffect(() => {
     if (!targetRef.current) return;
@@ -57,6 +74,15 @@ const VideoList = ({ distance, sortOption }: VideoListProps) => {
 
   return (
     <div className='w-[313px]'>
+      {recommended.map((video) => (
+        <VideoCard
+          key={video.id}
+          video={video}
+          behaviorStore={behaviorStore}
+          saveHandler={saveHandler}
+        />
+      ))}
+
       {sortedVidoList.map((video) => (
         <VideoCard
           key={video.id}
