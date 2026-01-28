@@ -1,4 +1,4 @@
-import { DBVideo, Distance, RecommendedVideo, YoutubeVideo } from '@/types/videos.types';
+import { Distance, RecommendedVideo, YoutubeVideo } from '@/types/videos.types';
 import { convertDistanceToNumber } from '@/utils/convertDistanceToNumber';
 
 export const convertYoutubeToDBVideo = (video: YoutubeVideo, distance: Distance): RecommendedVideo => ({

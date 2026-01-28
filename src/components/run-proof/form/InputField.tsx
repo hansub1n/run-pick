@@ -54,7 +54,7 @@ const InputField = ({ content, distance_km, duration, onChange }: InputFieldprop
         :
         <input
           type='number'
-          min={1}
+          min={0}
           max={59}
           maxLength={2}
           name='seconds'

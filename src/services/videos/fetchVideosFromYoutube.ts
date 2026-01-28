@@ -1,4 +1,4 @@
-import { Category, Distance, YoutubeItems, YoutubeVideo } from '@/types/videos.types';
+import { Category, Distance, YoutubeVideo } from '@/types/videos.types';
 import { durationToSeconds } from '@/utils/durationToSeconds';
 import { fetchVideos } from './fetchVideos';
 import { fetchRecommendedVideos } from './fetchRecommendedVideos';

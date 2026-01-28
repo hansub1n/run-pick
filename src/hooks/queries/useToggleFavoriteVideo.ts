@@ -3,14 +3,14 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toggleFavoriteVideo } from '@/services/videos/toggleFavoriteVideo';
 import { QUERY_KEYS } from '@/hooks/queries/queryKeys';
 import { UserFavoriteVideos } from '@/types/userFavoriteVideos.type';
-import { DBVideo } from '@/types/videos.types';
+import { DBVideo, RecommendedVideo } from '@/types/videos.types';
 
 type UseToggleFavoriteVideoProps = {
   userId: string;
   videoId: string;
   isFavorite: boolean;
   userFavoriteVideoList: UserFavoriteVideos;
-  videoDetail: DBVideo;
+  videoDetail: DBVideo | RecommendedVideo;
 };
 
 export const useToggleFavoriteVideo = ({

@@ -1,5 +1,5 @@
 'use client';
-import { Distance, SortOption, Behavior, YoutubeVideo, DBVideo, RecommendedVideo } from '@/types/videos.types';
+import { Distance, SortOption, Behavior, YoutubeVideo, RecommendedVideo } from '@/types/videos.types';
 import { useVideoList } from '@/hooks/queries/useVideoList';
 import CardSkeleton from '../skeletons/CardSkeleton';
 import { useEffect, useRef, useState } from 'react';

@@ -1,6 +1,6 @@
 'use client';
 
-import { DBVideo } from '@/types/videos.types';
+import { DBVideo, RecommendedVideo } from '@/types/videos.types';
 import { createClient } from '@/utils/supabase/client';
 import { getPublicUserInfo } from '@/utils/supabase/client';
 import { updateUserChallenge } from '../challenges/updateUserChallenge';
@@ -8,7 +8,7 @@ import { RunProofFormType } from '@/types/runProofForm.types';
 import { toast } from 'react-toastify';
 
 type insertRunProofFormProps = {
-  videoDetail: DBVideo | null;
+  videoDetail: DBVideo | RecommendedVideo | null;
   runProofForm: RunProofFormType;
 };
 

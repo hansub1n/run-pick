@@ -1,11 +1,11 @@
 'use client';
-import { DBVideo } from '@/types/videos.types';
+import { DBVideo, RecommendedVideo } from '@/types/videos.types';
 import Image from 'next/image';
 import { ChangeEvent, useState } from 'react';
 import { IoMdPhotos } from 'react-icons/io';
 
 type PhotoUploadFieldProps = {
-  videoDetail: DBVideo | null;
+  videoDetail: DBVideo | RecommendedVideo | null;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 const PhotoUploadField = ({ videoDetail, onChange }: PhotoUploadFieldProps) => {
