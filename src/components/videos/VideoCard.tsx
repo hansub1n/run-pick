@@ -107,7 +107,7 @@ const VideoCard = ({ video, behaviorStore, saveHandler }: VideoCardProps) => {
             ? [{ icon: <MdOutlineRecommend />, label: '런픽 추천 영상' }]
             : [
                 { icon: <FaStar />, label: video.favorite_count },
-                { icon: <FaPersonRunning />, label: video.post_count },
+                { icon: <FaPersonRunning />, label: video.proof_count },
               ]
         }
         onClick={() => onClickHandler(video)}

@@ -7,7 +7,7 @@ import { checkAndUpdateChallengeStatus } from '@/services/challenges/checkAndUpd
 const MotivationSection = async () => {
   const isSignedIn = await getIsSignIn();
   const userInfo = isSignedIn ? await getPublicUserInfo() : null;
-  const activeChallenge = isSignedIn ? await checkAndUpdateChallengeStatus(userInfo.id) : null;
+  const activeChallenge = isSignedIn ? await checkAndUpdateChallengeStatus(userInfo?.id) : null;
 
   const hasChallenge = Boolean(activeChallenge);
 

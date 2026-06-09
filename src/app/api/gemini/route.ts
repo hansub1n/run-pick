@@ -10,7 +10,7 @@ export async function POST(req: Request) {
     const { question } = await req.json();
 
     const response = await client.models.generateContent({
-      model: 'gemini-3-flash-preview',
+      model: 'gemini-2.5-flash',
       contents: [
         {
           role: 'user',
@@ -18,9 +18,9 @@ export async function POST(req: Request) {
         },
       ],
     });
+    console.log(JSON.stringify(response, null, 2));
 
     const answer = response.candidates?.[0]?.content?.parts?.[0]?.text || '답변을 생성하지 못했어요.';
-
     return NextResponse.json({ answer });
   } catch (err) {
     console.error(err);

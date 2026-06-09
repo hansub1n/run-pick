@@ -6,7 +6,7 @@ export const fetchTopVideos = async () => {
   let { data, error } = await client
     .from('video_with_counts')
     .select('*')
-    .order('post_count', { ascending: false })
+    .order('proof_count', { ascending: false })
     .limit(3);
 
   if (error) throw error;

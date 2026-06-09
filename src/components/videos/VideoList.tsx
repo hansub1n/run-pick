@@ -51,7 +51,7 @@ const VideoList = ({ distance, sortOption }: VideoListProps) => {
   }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
   const sortedVidoList = [...videoList].sort((a, b) => {
-    if (sortOption === 'proof') return b.post_count - a.post_count;
+    if (sortOption === 'proof') return b.proof_count - a.proof_count;
     if (sortOption === 'favorite') return b.favorite_count - a.favorite_count;
     return 0;
   });

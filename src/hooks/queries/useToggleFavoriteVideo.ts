@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toggleFavoriteVideo } from '@/services/videos/toggleFavoriteVideo';
 import { QUERY_KEYS } from '@/hooks/queries/queryKeys';
 import { UserFavoriteVideos } from '@/types/userFavoriteVideos.type';
-import { DBVideo, RecommendedVideo } from '@/types/videos.types';
+import { DBVideo, Distance, RecommendedVideo } from '@/types/videos.types';
 
 type UseToggleFavoriteVideoProps = {
   userId: string;
@@ -43,6 +43,9 @@ export const useToggleFavoriteVideo = ({
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.userFavoriteVideos(userId) });
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.videos((videoDetail.distance_category + 'km') as Distance),
+      });
     },
   });
 
