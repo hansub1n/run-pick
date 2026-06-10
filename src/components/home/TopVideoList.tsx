@@ -4,9 +4,11 @@ import { FaMedal } from 'react-icons/fa6';
 import TopVideoSkeleton from '../skeletons/TopVideoSkeleton';
 import Link from 'next/link';
 import { useTopVideos } from '@/hooks/queries/useTopVideos';
+import { useVideoDetailStore } from '@/stores/useVideoDetailStore';
 
 const TopVideoList = () => {
   const { topVideoList, isLoading } = useTopVideos();
+  const { setVideoDetail } = useVideoDetailStore();
 
   if (isLoading || !topVideoList) {
     return (
@@ -30,6 +32,7 @@ const TopVideoList = () => {
           <Link
             href={`/videos/${topVideo.youtube_video_id}`}
             className='cursor-pointer'
+            onClick={() => setVideoDetail(topVideo)}
           >
             <Image
               src={topVideo.thumbnail_url}

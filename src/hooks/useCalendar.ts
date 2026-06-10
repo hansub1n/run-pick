@@ -17,5 +17,5 @@ export const useCalendar = () => {
     setCurrentDate(new Date(year, month + 1, 1));
   };
 
-  return { year, month, weeks, goToPrevMonth, goToNextMonth, setCurrentDate };
+  return { year, month: month + 1, weeks, goToPrevMonth, goToNextMonth, setCurrentDate };
 };

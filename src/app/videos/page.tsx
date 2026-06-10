@@ -3,11 +3,15 @@ import DistanceTabs from '@/components/videos/DistanceTabs';
 import DistanceVideoHeader from '@/components/videos/DistanceVideoHeader';
 import VideoList from '@/components/videos/VideoList';
 import { Distance, SortOption } from '@/types/videos.types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const VideosPage = () => {
   const [selectedDistance, setSelectedDistance] = useState<Distance>('3km');
   const [sortOption, setSortOption] = useState<SortOption>('default');
+
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+  }, [selectedDistance, sortOption]);
 
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => setSortOption(e.target.value as SortOption);
 

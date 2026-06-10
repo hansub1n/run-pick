@@ -1,10 +1,10 @@
-import { DBVideo } from '@/types/videos.types';
+import { DBVideo, RecommendedVideo } from '@/types/videos.types';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 type VideoDetailState = {
-  videoDetail: DBVideo | null;
-  setVideoDetail: (video: DBVideo) => void;
+  videoDetail: DBVideo | RecommendedVideo | null;
+  setVideoDetail: (video: DBVideo | RecommendedVideo) => void;
   clearVideoDetail: () => void;
 };
 

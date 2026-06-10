@@ -4,10 +4,13 @@ import { toast } from 'react-toastify';
 export const deleteFriend = async (myId: string, friendId: string) => {
   const client = createClient();
 
-  const { error } = await client.from('friends').delete().eq('user_id', myId).eq('friend_id', friendId);
+  const [result1, result2] = await Promise.all([
+    client.from('friends').delete().eq('user_id', myId).eq('friend_id', friendId),
+    client.from('friends').delete().eq('user_id', friendId).eq('friend_id', myId),
+  ]);
 
-  if (error) {
-    console.error('Failed to delete error: ', error);
+  if (result1.error || result2.error) {
+    console.error('Failed to delete error:', result1.error ?? result2.error);
     return;
   }
 

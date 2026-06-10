@@ -53,18 +53,16 @@ const ChallengeList = ({ level }: ChallengeListProps) => {
 
   return (
     <div className='w-[313px]'>
-      {challengeList.map((challenge) =>
-        challenge.level === level ? (
-          <Card
-            key={challenge.id}
-            imageUrl={challenge.image_url}
-            title={challenge.title}
-            subtitle={challenge.description}
-            statIcons={[{ icon: <FaStamp />, label: '도전하기', onClick: () => onClickhandler(challenge) }]}
-            isOpenModal={false}
-          />
-        ) : null,
-      )}
+      {challengeList.map((challenge) => (
+        <Card
+          key={challenge.id}
+          imageUrl={challenge.image_url}
+          title={challenge.title}
+          subtitle={challenge.description}
+          statIcons={[{ icon: <FaStamp />, label: '도전하기', onClick: () => onClickhandler(challenge) }]}
+          isOpenModal={false}
+        />
+      ))}
 
       {selectedChallenge && (
         <Modal id={'confirm-challenge-register'}>

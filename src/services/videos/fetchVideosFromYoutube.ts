@@ -1,77 +1,75 @@
-import { Distance } from '@/types/videos.types';
-import { NextResponse } from 'next/server';
+import { Category, Distance, YoutubeVideo } from '@/types/videos.types';
+import { durationToSeconds } from '@/utils/durationToSeconds';
+import { fetchVideos } from './fetchVideos';
+import { fetchRecommendedVideos } from './fetchRecommendedVideos';
 export const YOUTUBE_API_BASE_URL = 'https://www.googleapis.com/youtube/v3';
 export const YOUTUBE_API_KEY = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY;
 
-export const keywords3km = [
-  '3km 러닝 브이로그',
-  '조깅 음악 모음',
-  '아이돌 무대 모음',
-  '조깅 할 때 듣는 노래',
-  '가볍게 달릴 때 좋은 음악',
-  '운동 브금 모음',
-  '런닝 입문 브이로그',
-  'Kpop 퍼포먼스 모음',
-];
-export const keywords5km = [
-  '5km 러닝 브이로그',
-  '5km 달리기 음악',
-  '빠른 bpm 러닝 음악',
-  '러닝할 때 듣는 댄스곡',
-  '러닝 메이트 브이로그',
-  '5km 운동 루틴',
-  '살 빼는 달리기',
-  '아이돌 직캠 몰아보기',
-];
+export const keywords3km: KeywordMapByCategory = {
+  music: ['조깅 플레이리스트', '가볍게 달릴 때 듣는 음악'],
+  vlog: ['러닝 입문 브이로그', '첫 러닝 3km 후기'],
+  training: ['러닝 초보 3km 루틴', '조깅 자세 설명'],
+  info: ['러닝화 추천 입문', '조깅 효과'],
+  motivation: [],
+};
 
-export const keywords10km = [
-  '10km 러닝 브금',
-  '장거리 달리기 음악',
-  '런닝머신용 플레이리스트',
-  '에너지 채워주는 아이돌 무대',
-  '러닝 다큐멘터리',
-  '10km 러닝 vlog',
-  '런닝 중 집중 잘 되는 음악',
-  '운동할 때 듣는 감성 노래',
-];
+export const keywords5km: KeywordMapByCategory = {
+  music: ['러닝 bpm 160 음악', '달리기 템포 음악'],
+  vlog: ['5km 러닝 브이로그', '퇴근 후 러닝 브이로그'],
+  training: ['5km 러닝 훈련법', '페이스 유지하는 법'],
+  motivation: ['러닝 동기부여 영상', '살 빼는 러닝 루틴'],
+  info: [],
+};
 
-export const keywordMap: Record<Distance, string[]> = {
+export const keywords10km: KeywordMapByCategory = {
+  music: ['장거리 러닝 플레이리스트', '집중 잘 되는 러닝 음악'],
+  vlog: ['10km 러닝 브이로그', '러닝 다큐멘터리'],
+  training: ['10km 러닝 훈련 계획', '지구력 키우는 러닝'],
+  motivation: ['러닝 멘탈 관리', '포기하고 싶을 때 러닝'],
+  info: [],
+};
+
+export type KeywordMapByCategory = Record<Category, string[]>;
+export const keywordMap: Record<Distance, KeywordMapByCategory> = {
   '3km': keywords3km,
   '5km': keywords5km,
   '10km': keywords10km,
 };
 
-export const fetchVideosFromYoutube = async (distance: string) => {
-  const keywords = keywordMap[(distance as Distance) ?? '3km'];
-  const fetches = keywords.map((keyword) =>
-    fetch(
-      `${YOUTUBE_API_BASE_URL}/search?part=snippet&maxResults=5&q=${encodeURIComponent(keyword)}&type=video&key=${YOUTUBE_API_KEY}`,
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        return data.items ?? [];
-      }),
-  );
+export const fetchVideosFromYoutube = async (distance: string, preferredCategory?: Category) => {
+  const fetches = preferredCategory
+    ? await fetchRecommendedVideos(distance, preferredCategory)
+    : await fetchVideos(distance);
 
   const searchResults = await Promise.all(fetches);
 
   const allItems = searchResults.flat().filter(Boolean);
 
-  const videoIdsSet = new Set();
+  const categoryMap = new Map<string, Category>();
 
   allItems.forEach((item) => {
-    if (item.id?.videoId) videoIdsSet.add(item.id.videoId);
+    if (item.id?.videoId && item.category) categoryMap.set(item.id.videoId, item.category);
   });
-  const videoIds = Array.from(videoIdsSet).join(',');
-
+  const videoIds = [...categoryMap.keys()].join(',');
   if (!videoIds) {
-    return NextResponse.json([]);
+    return [];
   }
 
   const videosRes = await fetch(
     `${YOUTUBE_API_BASE_URL}/videos?part=contentDetails,snippet&id=${videoIds}&key=${YOUTUBE_API_KEY}`,
   );
   const videosData = await videosRes.json();
+  const items = Array.isArray(videosData?.items) ? videosData.items : [];
 
-  return videosData.items ?? [];
+  const filteredVideos = items
+    .filter((video: YoutubeVideo) => {
+      const seconds = durationToSeconds(video.contentDetails.duration);
+      return seconds >= 180;
+    })
+    .map((video: YoutubeVideo) => ({
+      ...video,
+      category: categoryMap.get(video.id),
+    }));
+
+  return filteredVideos;
 };

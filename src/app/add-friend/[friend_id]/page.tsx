@@ -12,7 +12,6 @@ const AddFriendPage = async ({ params }: { params: Promise<{ friend_id: string }
   }
 
   const { status, friendNickname } = await insertFriend(userInfo.id, friend_id);
-
   redirect(
     '/my-page?friend_status=' +
       encodeURIComponent(status) +

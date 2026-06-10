@@ -14,7 +14,7 @@ const ChallengesPage = () => {
       <div className='sticky w-[330px] top-[55px] pt-[7px] bg-[#1a1a1a] z-3'>
         <ChallengesHeader />
         <ChallengeTabs
-          level={selectedLevel}
+          selectedLevel={selectedLevel}
           onLevelChange={handleLevelChange}
         />
       </div>

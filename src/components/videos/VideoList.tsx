@@ -1,12 +1,13 @@
 'use client';
-import { FaPersonRunning, FaStar } from 'react-icons/fa6';
-import Card from '../Card';
-import { useRouter } from 'next/navigation';
-import { Distance, DBVideo, SortOption } from '@/types/videos.types';
+import { Distance, SortOption, Behavior, YoutubeVideo, RecommendedVideo } from '@/types/videos.types';
 import { useVideoList } from '@/hooks/queries/useVideoList';
-import { formatVideoDuration } from '@/utils/formatVideoDuration';
-import { useVideoDetailStore } from '@/stores/useVideoDetailStore';
 import CardSkeleton from '../skeletons/CardSkeleton';
+import { useEffect, useRef, useState } from 'react';
+import VideoCard from './VideoCard';
+import { saveBehaviorStore } from '@/utils/behaviorStorage';
+import { getPreferredCategory } from '@/utils/getPreferredCategory';
+import { fetchVideosFromYoutube } from '@/services/videos/fetchVideosFromYoutube';
+import { convertYoutubeToDBVideo } from '@/services/videos/convertYoutubeToDBVideo';
 
 type VideoListProps = {
   distance: Distance;
@@ -14,20 +15,46 @@ type VideoListProps = {
 };
 
 const VideoList = ({ distance, sortOption }: VideoListProps) => {
-  const { setVideoDetail } = useVideoDetailStore();
-  const router = useRouter();
-  const { videoList, isLoading } = useVideoList(distance);
+  const { videoList, isLoading, fetchNextPage, isFetchingNextPage, hasNextPage } = useVideoList(distance);
+  const [recommended, setRecommended] = useState<RecommendedVideo[]>([]);
+  const targetRef = useRef<HTMLDivElement | null>(null);
+  const behaviorStore = useRef<Record<string, Behavior>>(
+    typeof window !== 'undefined' ? JSON.parse(sessionStorage.getItem('video_behavior') || '{}') : {},
+  );
+  const saveHandler = () => saveBehaviorStore(behaviorStore);
+
+  useEffect(() => {
+    const load = async () => {
+      const preferred = getPreferredCategory(behaviorStore.current);
+      if (!preferred) return;
+
+      const videos = await fetchVideosFromYoutube(distance, preferred);
+      const converted = videos.map((video: YoutubeVideo) => convertYoutubeToDBVideo(video, distance));
+      setRecommended(converted);
+    };
+
+    load();
+  }, [distance]);
+
+  useEffect(() => {
+    if (!targetRef.current) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && hasNextPage && !isFetchingNextPage) {
+        fetchNextPage();
+      }
+    });
+
+    observer.observe(targetRef.current);
+
+    return () => observer.disconnect();
+  }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
   const sortedVidoList = [...videoList].sort((a, b) => {
     if (sortOption === 'proof') return b.proof_count - a.proof_count;
-    if (sortOption === 'favorite') return b.favorite_count - a.proof_count;
+    if (sortOption === 'favorite') return b.favorite_count - a.favorite_count;
     return 0;
   });
-
-  const onClickHandler = (video: DBVideo) => {
-    setVideoDetail(video);
-    router.push(`/videos/${video.youtube_video_id}`);
-  };
 
   if (isLoading) {
     return (
@@ -44,22 +71,36 @@ const VideoList = ({ distance, sortOption }: VideoListProps) => {
       </div>
     );
   }
+
   return (
     <div className='w-[313px]'>
-      {sortedVidoList.map((video) => (
-        <Card
+      {recommended.map((video) => (
+        <VideoCard
           key={video.id}
-          imageUrl={video.thumbnail_url}
-          title={video.title}
-          subtitle={() => formatVideoDuration(video.duration)}
-          statIcons={[
-            { icon: <FaStar />, label: video.favorite_count },
-            { icon: <FaPersonRunning />, label: video.proof_count },
-          ]}
-          onClick={() => onClickHandler(video)}
-          isOpenModal={false}
+          video={video}
+          behaviorStore={behaviorStore}
+          saveHandler={saveHandler}
         />
       ))}
+
+      {sortedVidoList.map((video) => (
+        <VideoCard
+          key={video.id}
+          video={video}
+          behaviorStore={behaviorStore}
+          saveHandler={saveHandler}
+        />
+      ))}
+
+      {isFetchingNextPage && (
+        <CardSkeleton
+          isOpenModal={false}
+          statIconsCount={2}
+          count={3}
+        />
+      )}
+
+      <div ref={targetRef} />
     </div>
   );
 };

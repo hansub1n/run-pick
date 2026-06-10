@@ -6,9 +6,10 @@ import { motion, AnimatePresence, easeInOut } from 'framer-motion';
 type MenubarProps = {
   isOpen: boolean;
   toggleMenu: () => void;
+  isSignedIn: boolean;
 };
 
-const Menubar = ({ isOpen, toggleMenu }: MenubarProps) => {
+const Menubar = ({ isOpen, toggleMenu, isSignedIn }: MenubarProps) => {
   const variants = {
     open: { x: 0, transition: { duration: 0.4, ease: easeInOut } },
     closed: { x: '-100%', transition: { duration: 0.4, ease: easeInOut } },
@@ -47,7 +48,7 @@ const Menubar = ({ isOpen, toggleMenu }: MenubarProps) => {
               onClick={toggleMenu}
               className='py-[20px]'
             >
-              <Navigation />
+              <Navigation isSignedIn={isSignedIn} />
             </nav>
           </motion.div>
         </>

@@ -1,8 +1,10 @@
+import { StaticImageData } from 'next/image';
+
 export type RunProofFormType = {
   content: string;
   distance_km: number;
   duration: Duration;
-  image_url: string;
+  image_url: string | StaticImageData;
   condition: Condition;
 };
 

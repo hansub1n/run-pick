@@ -22,7 +22,7 @@ const VideoActionButtons = ({ videoId }: videoActionButtonsProps) => {
 
   const isFavorite = userFavoriteVideoList?.some((video) => video.info.youtube_video_id == videoId);
 
-  const { mutate: toggleFavoirte } = useToggleFavoriteVideo({
+  const { mutate: toggleFavorite } = useToggleFavoriteVideo({
     userId,
     videoId,
     isFavorite,
@@ -36,7 +36,7 @@ const VideoActionButtons = ({ videoId }: videoActionButtonsProps) => {
       return;
     }
 
-    toggleFavoirte();
+    toggleFavorite();
   };
 
   const handleProofClick = (videoId: string) => {
