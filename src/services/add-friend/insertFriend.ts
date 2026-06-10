@@ -18,16 +18,15 @@ export const insertFriend = async (userId: string, friendId: string) => {
     return { status: 409 };
   }
 
-  const { error } = await client.from('friends').upsert(
-    [
-      { user_id: userId, friend_id: friendId },
-      { user_id: friendId, friend_id: userId },
-    ],
-    { onConflict: 'user_id, friend_id' },
-  );
+  const { error } = await client.from('friends').insert([
+    { user_id: userId, friend_id: friendId },
+    { user_id: friendId, friend_id: userId },
+  ]);
 
   if (error) {
-    console.error('DB insert error: ', error);
+    console.error('error code:', error.code);
+    console.error('error message:', error.message);
+    console.error('error details:', error.details);
 
     if (error.code === '23503') {
       return { status: 404 };
@@ -36,11 +35,8 @@ export const insertFriend = async (userId: string, friendId: string) => {
       return { status: 409 };
     }
 
-    return {
-      status: 500,
-    };
+    return { status: 500 };
   }
-
   const { data } = await client.from('users').select('nickname').eq('id', friendId).single();
 
   return {
