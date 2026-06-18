@@ -1,11 +1,16 @@
 import { Category, Distance, YoutubeItems } from '@/types/videos.types';
+import { fetchWithRetry } from '@/utils/promiseWithConcurrency';
 import { keywordMap, YOUTUBE_API_BASE_URL, YOUTUBE_API_KEY } from './fetchVideosFromYoutube';
 
 export const fetchRecommendedVideos = async (distance: string, preferredCategory: Category) => {
-  const keywordByCategory = keywordMap[(distance as Distance) ?? '3km'][preferredCategory];
+  const keywordByCategory = keywordMap[(distance as Distance) ?? '3km']?.[preferredCategory];
+
+  if (!keywordByCategory || keywordByCategory.length === 0) {
+    return [];
+  }
 
   const fetches = keywordByCategory.map((keyword) =>
-    fetch(
+    fetchWithRetry(
       `${YOUTUBE_API_BASE_URL}/search?part=snippet&maxResults=3&q=${encodeURIComponent(keyword)}&type=video&key=${YOUTUBE_API_KEY}`,
     )
       .then((res) => res.json())

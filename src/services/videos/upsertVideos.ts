@@ -1,10 +1,10 @@
 import { YoutubeVideo } from '@/types/videos.types';
 import { convertDistanceToNumber } from '@/utils/convertDistanceToNumber';
-import { createClient } from '@/utils/supabase/server';
+import { createAdminClient } from '@/utils/supabase/server';
 
 export const upsertVideos = async (videos: YoutubeVideo[], distance: string) => {
   const distanceValue = convertDistanceToNumber(distance);
-  const client = await createClient();
+  const client = createAdminClient();
 
   const videoUpsertPromises = videos.map(async (video) => {
     if (

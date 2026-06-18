@@ -1,4 +1,5 @@
 import { createServerClient } from '@supabase/ssr';
+import { createClient as createSupabaseClient } from '@supabase/supabase-js';
 import { cookies } from 'next/headers';
 
 export async function createClient() {
@@ -21,6 +22,16 @@ export async function createClient() {
     },
   });
 }
+
+/** Service Role Key를 사용하는 Admin 클라이언트 (RLS 우회, 서버 전용) */
+export const createAdminClient = () => {
+  return createSupabaseClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!, {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false,
+    },
+  });
+};
 
 export const getIsSignIn = async () => {
   const client = await createClient();

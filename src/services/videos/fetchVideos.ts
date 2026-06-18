@@ -1,4 +1,5 @@
 import { Distance, YoutubeItems } from '@/types/videos.types';
+import { fetchWithRetry } from '@/utils/promiseWithConcurrency';
 import { keywordMap, YOUTUBE_API_BASE_URL, YOUTUBE_API_KEY } from './fetchVideosFromYoutube';
 
 export const fetchVideos = async (distance: string) => {
@@ -6,7 +7,7 @@ export const fetchVideos = async (distance: string) => {
 
   const fetches = Object.entries(keywordByCategory).flatMap(([category, keywords]) =>
     keywords.map((keyword) =>
-      fetch(
+      fetchWithRetry(
         `${YOUTUBE_API_BASE_URL}/search?part=snippet&maxResults=2&q=${encodeURIComponent(keyword)}&type=video&key=${YOUTUBE_API_KEY}`,
       )
         .then((res) => res.json())

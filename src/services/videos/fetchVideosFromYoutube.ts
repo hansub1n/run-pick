@@ -1,5 +1,6 @@
 import { Category, Distance, YoutubeVideo } from '@/types/videos.types';
 import { durationToSeconds } from '@/utils/durationToSeconds';
+import { promiseWithConcurrency } from '@/utils/promiseWithConcurrency';
 import { fetchVideos } from './fetchVideos';
 import { fetchRecommendedVideos } from './fetchRecommendedVideos';
 export const YOUTUBE_API_BASE_URL = 'https://www.googleapis.com/youtube/v3';
@@ -37,11 +38,25 @@ export const keywordMap: Record<Distance, KeywordMapByCategory> = {
 };
 
 export const fetchVideosFromYoutube = async (distance: string, preferredCategory?: Category) => {
+  console.log(
+    '[fetchVideosFromYoutube] distance:',
+    distance,
+    'preferredCategory:',
+    preferredCategory,
+    'YOUTUBE_API_KEY exists:',
+    !!YOUTUBE_API_KEY,
+  );
+
   const fetches = preferredCategory
     ? await fetchRecommendedVideos(distance, preferredCategory)
     : await fetchVideos(distance);
 
-  const searchResults = await Promise.all(fetches);
+  console.log('[fetchVideosFromYoutube] fetches count:', fetches.length);
+
+  const searchResults = await promiseWithConcurrency(
+    fetches.map((p) => () => p),
+    4,
+  );
 
   const allItems = searchResults.flat().filter(Boolean);
 
